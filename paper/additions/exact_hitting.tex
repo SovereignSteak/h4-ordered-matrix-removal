@@ -1,0 +1,48 @@
+\begin{corollary}[Exact transversal number]\label{cor:exacttransversal}
+For every $h\ge1$, with $m=2^h$, the host satisfies
+\[
+ \tau_{H_4}(A_h)=m<m^2=D_{H_4}(A_h).
+\]
+In particular, the ratio of unrestricted editing distance to the
+minimum number of entries hitting all original copies is exactly $m$.
+\end{corollary}
+\begin{proof}
+Let
+\[
+ \Delta_h=\{(R_h(p),C_h(p)):0\le p<m\}.
+\]
+Both terminal families contain the same-leaf diagonal
+$(R_h(p),C_h(p))$ as their third-row, third-column entry.
+The leaf blocks are singletons, so this is one fixed physical cell
+for every realization of the corresponding terminal tuple.
+Lemma~\ref{lem:classification} therefore gives
+$\tau_{H_4}(A_h)\le|\Delta_h|=m$.
+
+For the reverse inequality, use offsets numbered from zero. For
+each $p<m$, put $t_p=W^-_{h,p\bmod2}$ and choose a type-I copy
+$Q_p$ whose two marker rows, two marker columns and dummy row
+all have offset $p$ in their respective blocks. Use the singleton
+leaf row and column with label $p$, and use offset $p\bmod2$
+in the parent column block $C^-_{h-1}(\lfloor p/2\rfloor)$.
+These choices are valid: the marker and dummy blocks have size $m$,
+and each parent block has size two. They realize an ordered copy
+by the type-I description and Lemma~\ref{lem:quotient}.
+
+The copies $Q_p$ are pairwise disjoint on each axis. Marker
+positions of different modes or groups lie in different blocks;
+within any one such block, different labels $p$ give different
+offsets. The dummy row offsets and leaf labels are also distinct.
+Two selected parent columns could agree only if both
+$\lfloor p/2\rfloor$ and $p\bmod2$ agree, which determines $p$.
+The marker, leaf, dummy and parent categories used on a given axis
+are mutually distinct. Thus the $m$ copies are, in particular,
+pairwise cell-disjoint. Every set hitting all original copies must
+meet each $Q_p$ in a different cell, and hence has size at least $m$.
+Combining the bounds proves the transversal identity; the editing
+identity is Theorem~\ref{thm:main}, and $m\ge2$ gives strictness.
+\end{proof}
+
+The strict gap between hitting original copies and producing a free
+matrix sharpens the distinction already developed in \cite{OAI}.
+A separate Lean supplement formalizes the exact transversal identity,
+using terminal exhaustion from the primary classification theorem.

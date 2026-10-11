@@ -1,0 +1,71 @@
+\section{Reproducible verification and the proof interfaces}
+\label{app:reproduce}
+The formalization has four components: physical block positions and their
+multiplicities; the ordered quotient host; arithmetic classification and
+repaired freeness; and transfer to matrices indexed by
+$\operatorname{Fin}(n_h)$. The theorem
+\code{end_to_end_main_theorem} combines these components with the
+exact-count, arbitrary-edit distance and asymptotic results.
+
+\subsection{Dependencies of the principal statements}
+\begin{center}\small
+\begin{tabular}{p{43mm}p{54mm}p{37mm}}
+\toprule
+Mathematical assertion&Lean declaration or module&Role\\\midrule
+Arithmetic original classification&\code{Arithmetic.classification}&Copy exhaustion\\
+Repaired freeness&\code{Arithmetic.repaired_no_copy}&No new copies\\
+Encoding of physical copies&\code{Arithmetic.encode_copy}&Arithmetic soundness\\
+Terminal decoding&\code{terminal_decodes}&Physical terminal forms\\
+Numeric matrix order&\code{orderedPosition_order_iff}&Order transfer\\
+Protected sampling&\code{XorSampling.lean}&Arbitrary edits\\
+Finite avoidance&\code{FiniteAvoidance.lean}&Untouched witness\\
+Copy multiplicity&\code{CopyFibres}, \code{TerminalCount}&Exact count\\
+Edit distance&\code{EditDistance.lean}&Exact minimum\\
+Asymptotics&\code{Limits.lean}&Removal failure\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The arithmetic classification and repair derivations contain 266 and
+243 source segments, respectively. The encoding checks all eight
+validity conditions, twelve axis-order comparisons and sixteen pattern
+entries. The quotient-to-physical correspondence and the numeric-order
+bijections complete the passage to the ordinary indexed matrix.
+The proof segments and every imported Lean module are distributed as
+source files in the accompanying verification archive.
+
+\subsection{Rebuild and axiom audit}
+The project uses Lean 4.24.0 and pins Mathlib to revision
+\begin{center}\code{f897ebcf72cd16f89ab4577d0c826cd14afaafc7}.\end{center}
+From the \code{formal_verification/} directory, execute
+\begin{quote}\ttfamily\small
+bash verify\_all.sh
+\end{quote}
+The script retrieves the pinned dependency cache, builds the primary
+library, checks the main theorem and its axiom audit, then rebuilds the
+isolated structural-extension and exact-transversal projects. The main
+library is complete with all arithmetic certificates, which are needed
+for the terminal classification and canonical freeness results.
+The compiled dependency audits permit only \code{propext},
+\code{Classical.choice} and \code{Quot.sound}.
+
+The archived primary build record reports a compilation of
+550 project modules, with 116,338 declarations (93,189 theorems)
+in the strict declaration audit. The independent extension-core
+build record covers 34 library modules and 1,570 declarations
+(991 theorems). The exact-transversal supplement records 49 declarations,
+including 32 theorems, and derives terminal exhaustion from the primary
+global classification theorem. The corresponding run reports and source
+identities are retained under \code{evidence/} and in the supplemental
+project directories. The archived records identify the source and environment of earlier
+compilations; the command above performs a new build on the recipient's machine.
+
+\subsection{Mathematical cross-checks}
+A direct check of the construction first verifies block-constant entries
+and the four increasing forcing frames. The encoding implication then
+maps every physical copy to the arithmetic host. The classification
+certificate excludes all nonterminal copies; the repair certificate
+excludes every copy after the canonical edit. Finally, weighted terminal
+multiplicities give the exact number of original copies. The main
+Lean theorem assembles these facts with the arbitrary-edit lower bound
+and the asymptotic comparison.

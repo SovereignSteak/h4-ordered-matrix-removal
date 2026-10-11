@@ -1,0 +1,515 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=26mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,array,enumitem,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
+  pdftitle={A Four-by-Four Obstruction to Polynomial Removal for Ordered Binary Matrices},
+  pdfauthor={Zinan Wang},pdfsubject={Ordered binary matrix removal}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\Copy}{N_{H_4}}
+\newcommand{\ind}{\mathbf1}
+\newcommand{\code}[1]{{\small\nolinkurl{#1}}}
+\setlength{\emergencystretch}{2em}
+\title{A Four-by-Four Obstruction to Polynomial Removal for Ordered Binary Matrices}
+\author{Zinan Wang}
+\date{October 11, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We exhibit a fixed $4\times4$ binary matrix with no polynomial induced
+ordered removal bound. At depth $h$, write $m=2^h$. Our explicit host has
+order $(14h+2)m$, exactly $2m^6+\frac12(m-2)m^5$ induced copies,
+and exact editing distance $m^2$ cells. Consequently its normalized
+edit distance is $\Theta(h^{-2})$, while its copy density is
+$\Theta(4^{-h}h^{-8})$. The lower bound holds against arbitrary cell
+edits by an injective family of $m^2$ protected selections; an
+arithmetic classification identifies every copy and certifies that a
+matching canonical repair creates none. The original-copy transversal
+number is exactly $m$, establishing an unbounded gap between hitting
+existing copies and eliminating all copies. The identities and the
+all-depth obstruction are formalized in Lean, with complete certificate
+sources and reproducible verification procedures.
+\end{abstract}
+
+\section{Introduction and main results}
+Let $H$ be a binary $k\times k$ matrix and let $A$ be a binary $n\times n$
+matrix. An induced ordered copy of $H$ in $A$ is a pair of strictly
+increasing $k$-tuples of row and column indices whose induced submatrix
+agrees with $H$ in every entry. Write $N_H(A)$ for the number of such
+copies. Let $D_H(A)$ be the minimum number of cell changes that turn $A$
+into an $H$-free matrix, allowing both $0\to1$ and $1\to0$ changes, and
+write $\dist_H(A)=D_H(A)/n^2$.
+A polynomial induced removal bound for $H$ is an inequality of the form
+\begin{equation}\label{eq:removal-bound}
+ N_H(A)\ge c\,\dist_H(A)^C n^{2k}
+\end{equation}
+with constants $c,C>0$ independent of $A$ and $n$. Ordered removal lemmas
+and their property-testing consequences are studied in \cite{ABF,ABE20}.
+The earlier construction of \cite{OAI} exhibited a $66\times66$
+obstruction to polynomial removal. Here the forbidden pattern is
+$4\times4$ and remains fixed at every depth. We determine its exact
+copy count and unrestricted editing distance, and identify the original-copy
+transversal number. Unlike an original-copy hitting set, an editing set
+must leave a matrix free of all copies, including those created by the
+edits (see \cite{ABE20}). The smaller forcing frame and its terminal
+classification provide the principal new quantitative results.
+
+We consider the pattern
+\begin{equation}\label{eq:pattern}
+ H_4=\begin{pmatrix}
+ 0&1&1&0\\
+ 1&0&0&1\\
+ 1&0&1&0\\
+ 0&1&1&1
+ \end{pmatrix}
+ =\begin{pmatrix}J_2-I_2&I_2\\I_2&P\end{pmatrix},
+ \qquad P=\begin{pmatrix}1&0\\1&1\end{pmatrix}.
+\end{equation}
+The rows of $H_4$ are pairwise distinct, as are its columns. Hence physical
+copies can be counted by weighted block tuples (Lemma~\ref{lem:quotient}).
+
+\begin{theorem}[Main theorem]\label{thm:main}
+For every integer $h\ge1$, put $m=2^h$ and $n_h=(14h+2)m$. Let $A_h$ be
+the binary matrix constructed in Section~\ref{sec:host}. Then
+\begin{equation}\label{eq:main}
+ D_{H_4}(A_h)=m^2,\qquad
+ \dist_{H_4}(A_h)=\frac{1}{(14h+2)^2},\qquad
+ \Copy(A_h)=2m^6+\frac{m-2}{2}m^5.
+\end{equation}
+Moreover, the canonical repair $B_h$ is $H_4$-free, and every induced
+ordered copy in $A_h$ belongs to exactly one of the two terminal families
+described in Section~\ref{sec:classification}.
+\end{theorem}
+
+\begin{corollary}[Failure of polynomial removal]\label{cor:failure}
+The pattern $H_4$ admits no polynomial induced ordered binary matrix removal
+bound. More precisely, if
+\[
+ \epsilon_h=(14h+2)^{-2},\qquad
+ \delta_h=\frac{\Copy(A_h)}{n_h^8},
+\]
+then
+\[
+ n_h\longrightarrow\infty,\qquad \epsilon_h\longrightarrow0,
+ \qquad \frac{\delta_h}{\epsilon_h^C}\longrightarrow0
+ \quad\text{for every fixed }C\in\mathbb R.
+\]
+\end{corollary}
+\begin{proof}
+The theorem gives, with $d_h=14h+2$,
+\[
+ \delta_h=\frac{5/2-2^{-h}}{d_h^8 4^h}\le\frac{3}{4^h}.
+\]
+Since $d_h\to\infty$ and $n_h=d_h2^h$, we have $n_h\to\infty$ and
+$\epsilon_h\to0$.
+Fix $C\in\mathbb R$ and choose a natural number $k>C$. Since
+$0<\epsilon_h\le1$, we have
+\[
+ 0\le\frac{\delta_h}{\epsilon_h^C}
+ \le\frac{\delta_h}{\epsilon_h^k}
+ \le\frac{3d_h^{2k}}{4^h}\longrightarrow0.
+\]
+The last limit is the standard comparison of polynomial growth with
+geometric growth. Given $c,C>0$, the inequality
+$\delta_h<c\epsilon_h^C$ therefore holds for all sufficiently large $h$,
+which contradicts \eqref{eq:removal-bound} along the family $A_h$.
+\end{proof}
+
+The proof separates the unrestricted editing problem from the enumeration
+of copies. Section~\ref{sec:host} defines the block-constant host and its
+canonical repair. Section~\ref{sec:distance} constructs $m^2$ protected
+selections and proves the lower bound for arbitrary edits. The terminal
+classification and repaired freeness appear in
+Section~\ref{sec:classification}; Section~\ref{sec:count} then closes the
+main theorem by counting the physical copies with their block
+multiplicities. The exact transversal number and the quantitative density
+profile follow in subsequent sections. Structural details, complementary
+proofs, arithmetic certificates and verification instructions are collected
+in the appendices. The tree-propagation mechanism follows the general
+approach of \cite{OAI}; the forcing frame and the exact classifications
+here are specific to $H_4$.
+
+\section{The host construction}\label{sec:host}
+Fix $h\ge1$ and write $m=2^h$. For each internal level $0\le i<h$ and
+node $0\le p<2^i$, introduce row blocks $R_i^\pm(p)$ and column blocks
+$C_i^\pm(p)$, each of size $2^{h-i}$. At level $h$ the two signs are
+identified: a leaf label $p<m$ determines one row position $R_h(p)$ and
+one column position $C_h(p)$. Finally, add an $m$-element dummy block on
+each axis, denoted by $R_*$ and $C_*$.
+
+The variable blocks form binary trees. On the row axis the minus block at a
+node precedes the two child subtrees and the plus block follows them; on
+the column axis these two positions are reversed. In both trees the left
+child subtree precedes the right child subtree. The row dummy block follows
+the tree, whereas the column dummy block precedes it.
+
+For each $1\le i\le h$ we add six marker modes
+\[
+ V_i^+,\ V_i^-,\ W_{i,0}^+,\ W_{i,1}^+,
+ \ W_{i,0}^-,\ W_{i,1}^-.
+\]
+Each mode $t$ has marker row blocks $A_1(t),A_2(t)$ and marker column
+blocks $B_1(t),B_2(t)$, all of size $m$. The two marker
+groups interact with the following non-marker classes:
+\begin{center}\small
+\begin{tabular}{c|cc|cc}\toprule
+Mode&Row role 1&Row role 2&Column role 1&Column role 2\\\midrule
+$V_i^+$&$R_i^+$&$R_{i-1}^+$&$C_*$&$C_{i-1}^+$\\
+$V_i^-$&$R_{i-1}^-$&$R_i^-$&$C_*$&$C_{i-1}^-$\\
+$W_{i,b}^+$&$R_{i,b}^+$&$R_*$&$C_{i-1}^+$&$C_{i,b}^+$\\
+$W_{i,b}^-$&$R_{i,b}^-$&$R_*$&$C_{i,b}^-$&$C_{i-1}^-$\\\bottomrule
+\end{tabular}
+\end{center}
+Here $R_i^\pm$ and $C_i^\pm$ denote the unions of all blocks at the
+indicated level and sign; a subscript $b$ restricts the union to nodes of
+parity $b$. At level $h$, a leaf
+belongs to the class determined by its parity for either sign.
+
+All marker blocks precede the variable and dummy blocks. The marker prefix
+starts with
+\[
+ W_{1,0}^-,W_{1,1}^-,\ldots,W_{h,0}^-,W_{h,1}^-;
+\]
+the remaining modes occur in increasing level order as
+$V_i^+,V_i^-,W_{i,0}^+,W_{i,1}^+$. Within each mode, group 1 precedes
+group 2. These orders are used separately on the row and column axes.
+
+The entry rule is constant on every product of two blocks. Two marker
+blocks have entry one exactly when their modes agree and their group
+indices differ. The support of a group-$u$ marker row on non-marker columns
+is exactly column role $u$ of its mode; the support of a group-$u$ marker
+column on non-marker rows is exactly row role $u$. Every dummy--non-marker
+entry is one. The remaining
+variable--variable entries are
+\begin{align}\label{eq:values}
+ A_h(R_i^+(p),C_i^+(q))&=\ind[p\le q] &&(i<h),\nonumber\\
+ A_h(R_i^-(p),C_i^-(q))&=\ind[p<q] &&(i<h),\nonumber\\
+ A_h(R_h(p),C_h(q))&=\ind[p\le q],\\
+ A_h(R_i^+(p),C_{i-1}^+(q))&=\ind[\lfloor p/2\rfloor\le q],\nonumber\\
+ A_h(R_i^-(p),C_{i-1}^-(q))&=\ind[\lfloor p/2\rfloor<q].\nonumber
+\end{align}
+In the last two identities $1\le i\le h$, and a leaf row at $i=h$ is
+treated as either signed row. The indicator $\ind[S]$ is one when $S$
+holds and zero otherwise.
+All other variable--variable entries are zero.
+
+The canonical repair $B_h$ changes precisely the entries in
+\[
+ R_*\times\{C_h(p):0\le p<m\}
+\]
+from one to zero and leaves all other entries unchanged.
+
+\begin{lemma}[Physical size and order]\label{lem:size}
+Each axis contains exactly $(14h+2)m$ positions. After ordering the
+positions within every block by their offsets, the resulting block order
+extends to a strict total order. Consequently each axis is order-isomorphic
+to $\{0,\ldots,n_h-1\}$ with its usual order.
+\end{lemma}
+\begin{proof}
+The marker blocks contribute $6h\cdot2m=12hm$ positions. At each internal
+depth, the $2^i$ nodes on either sign have multiplicity $2^{h-i}$, hence
+contribute $m$ positions; the two signs contribute $2hm$ in total. The
+leaves and the dummy block contribute $m$ positions each. This gives
+$(14h+2)m$. Ordering offsets increasingly inside each block gives the
+required total order and the order-preserving bijections. We use these
+bijections to regard $A_h$ and $B_h$ as numerically indexed matrices.
+\end{proof}
+
+\begin{lemma}[Block quotient and multiplicity]\label{lem:quotient}
+An induced ordered copy of $H_4$ in either host uses four distinct row
+blocks and four distinct column blocks. The ordered block tuples whose
+entry table equals $H_4$ are precisely the block projections of physical
+copies. A tuple has exactly the product of its eight block sizes as
+physical realizations.
+\end{lemma}
+\begin{proof}
+Two rows from one block agree on every column, so their signatures in a
+copy would be equal. The distinct rows of $H_4$ exclude this possibility;
+the distinct columns give the same conclusion on the other axis. Each
+block is an interval in its axis order. Conversely, choosing one position
+from each block of an ordered tuple preserves its order and all entries,
+because the entry rules are block-constant. The choices are independent
+and have the stated product as their number.
+\end{proof}
+
+\section{The edit-distance lower bound}\label{sec:distance}
+A \emph{marker frame} is an ordered choice of four rows and four columns
+whose twelve entries outside the lower-right $2\times2$ block agree with
+$H_4$. Its lower-right block is a copy of $P$ exactly when the frame is a
+copy of $H_4$.
+
+\subsection{Protected selections}
+Index a family of selections by pairs $(a,b)\in\{0,\ldots,m-1\}^2$.
+Set $z=a\mathbin{\oplus}b$, with $\oplus$ denoting bitwise XOR, and at
+depth $d\le h$ select the node
+\[
+ p_d=\left\lfloor\frac{z}{2^{h-d}}\right\rfloor.
+\]
+Then $p_0=0$, $p_h=z$ and $p_{d-1}=\lfloor p_d/2\rfloor$ for
+$1\le d\le h$.
+In a signed row block on this path choose the offset
+$a\bmod2^{h-d}$; in the corresponding signed column block choose
+$b\bmod2^{h-d}$. In each marker block and in the dummy block use offset
+$a$ on rows and offset $b$ on columns. At depth $h$, the two signed paths
+meet at the same leaf on each axis.
+
+Call a cell in the product of the selected rows and columns protected
+when at least one endpoint is a marker or dummy position, or when both
+endpoints are root variable positions. Thus every
+selected frame contributes its twelve prescribed entries, together with
+the dummy incidences and root entries used in the propagation argument.
+
+\begin{lemma}[Injectivity of protection]\label{lem:injective}
+Every physical cell is protected by at most one of the $m^2$ selections.
+\end{lemma}
+\begin{proof}
+If both endpoints are marker or dummy positions, their offsets recover
+$(a,b)$. Suppose instead that the row endpoint is a variable position at
+depth $d$ and the column endpoint is a marker or dummy position. The
+column offset recovers $b$. The row node recovers
+$\lfloor z/2^{h-d}\rfloor$, while the row offset recovers
+$a\bmod2^{h-d}$. Since XOR commutes with truncation of the lower $h-d$
+bits,
+\[
+ \left\lfloor\frac a{2^{h-d}}\right\rfloor
+ =p_d\mathbin{\oplus}
+ \left\lfloor\frac b{2^{h-d}}\right\rfloor.
+\]
+The quotient and remainder therefore determine $a$. When the row is a
+marker or dummy and the column is variable, the row offset gives $a$,
+the column node gives $p_d$, and the identity
+$\lfloor b/2^{h-d}\rfloor=p_d\mathbin{\oplus}\lfloor a/2^{h-d}\rfloor$
+recovers the quotient of $b$; its column offset supplies the remainder.
+A protected cell with two variable
+endpoints occurs at the roots, where its two offsets directly recover
+$(a,b)$. At a leaf $d=h$, the offset is zero and $p_h=z$, so the mixed
+endpoint cases reduce to $a=z\mathbin{\oplus}b$ or
+$b=z\mathbin{\oplus}a$, respectively.
+\end{proof}
+
+\begin{corollary}[An untouched protected selection]\label{cor:avoid}
+If fewer than $m^2$ cells are changed, some selection has all its protected
+cells unchanged.
+\end{corollary}
+\begin{proof}
+By Lemma~\ref{lem:injective}, each changed cell affects at most one
+selection. Fewer than $m^2$ changed cells can therefore affect fewer than
+$m^2$ selections.
+\end{proof}
+
+\subsection{Propagation along a protected path}
+Fix a selection whose protected cells remain unchanged, and let $D$ be an
+$H_4$-free matrix obtained from $A_h$ by editing cells. Let $x_i$ and $y_i$
+be the selected plus and minus diagonal entries at depth $i$, respectively.
+Thus $x_i=D(r_i^+,c_i^+)$ and $y_i=D(r_i^-,c_i^-)$, where lower-case
+letters denote the selected positions in the corresponding blocks. The protected
+root entries give $x_0=1$ and $y_0=0$. Put
+$\alpha_i=D(r_i^+,c_{i-1}^+)$ and
+$\beta_i=D(r_i^-,c_{i-1}^-)$. The four selected marker frames have bodies
+\begin{center}
+\begin{tabular}{c|c|l}\toprule
+Mode&Body&Consequence of $H_4$-freeness\\\midrule
+$V_i^+$&$\left(\begin{smallmatrix}1&\alpha_i\\1&x_{i-1}\end{smallmatrix}\right)$
+ &$x_{i-1}=1\ \Longrightarrow\ \alpha_i=1$\\[7pt]
+$V_i^-$&$\left(\begin{smallmatrix}1&y_{i-1}\\1&\beta_i\end{smallmatrix}\right)$
+ &$y_{i-1}=0\ \Longrightarrow\ \beta_i=0$\\[7pt]
+$W_{i,p_i\bmod2}^+$&$\left(\begin{smallmatrix}\alpha_i&x_i\\1&1\end{smallmatrix}\right)$
+ &$\alpha_i=1\ \Longrightarrow\ x_i=1$\\[7pt]
+$W_{i,p_i\bmod2}^-$&$\left(\begin{smallmatrix}y_i&\beta_i\\1&1\end{smallmatrix}\right)$
+ &$\beta_i=0\ \Longrightarrow\ y_i=0$\\\bottomrule
+\end{tabular}
+\end{center}
+The ordered non-marker rows and columns of these frames are
+\begin{center}\small
+\begin{tabular}{c|cc|cc}\toprule
+Mode&First row&Second row&First column&Second column\\\midrule
+$V_i^+$&$R_i^+(p_i)$&$R_{i-1}^+(p_{i-1})$&$C_*$&$C_{i-1}^+(p_{i-1})$\\
+$V_i^-$&$R_{i-1}^-(p_{i-1})$&$R_i^-(p_i)$&$C_*$&$C_{i-1}^-(p_{i-1})$\\
+$W_{i,p_i\bmod2}^+$&$R_i^+(p_i)$&$R_*$&$C_{i-1}^+(p_{i-1})$&$C_i^+(p_i)$\\
+$W_{i,p_i\bmod2}^-$&$R_i^-(p_i)$&$R_*$&$C_i^-(p_i)$&$C_{i-1}^-(p_{i-1})$\\\bottomrule
+\end{tabular}
+\end{center}
+Each pair is preceded by the two marker groups of its mode. In the row
+tree a plus descendant precedes its plus ancestor, whereas a minus ancestor
+precedes its minus descendant. In the column tree these relations are
+reversed. The column dummy precedes all variables and the row dummy follows
+them. These four observations give the strict orders in every row of the
+table, including the terminal level. The twelve marker entries and all
+displayed dummy entries are protected. Induction on $i$
+now gives
+\[
+ x_{i-1}=1\Longrightarrow\alpha_i=1\Longrightarrow x_i=1,
+ \qquad
+ y_{i-1}=0\Longrightarrow\beta_i=0\Longrightarrow y_i=0.
+\]
+Starting from $x_0=1$ and $y_0=0$, these implications give $x_i=1$ and
+$y_i=0$ for every $i\le h$. At depth $h$ the signed row positions are
+identified, and so are the signed column positions. Thus $x_h$ and $y_h$
+are the same physical cell, which would have to equal both $1$ and $0$.
+
+\begin{proposition}[Arbitrary-edit lower bound]\label{prop:lower}
+Every binary $H_4$-free matrix obtained from $A_h$ by cell edits differs
+from $A_h$ in at least $m^2$ cells.
+\end{proposition}
+\begin{proof}
+If fewer than $m^2$ cells were changed, Corollary~\ref{cor:avoid} would
+provide an untouched protected selection. The propagation argument above
+would then produce a contradiction.
+\end{proof}
+
+\section{Terminal classification and canonical repair}\label{sec:classification}
+For a leaf label $p<m$, put $t=W^-_{h,p\bmod2}$. The two terminal forms use the common row
+tuple
+\[
+ A_1(t),\quad A_2(t),\quad R_h(p),\quad R_*.
+\]
+Their column tuples are
+\begin{align*}
+ \mathrm{I}:\quad&B_1(t),\ B_2(t),\ C_h(p),\ C^-_{h-1}(\lfloor p/2\rfloor),\\
+ \mathrm{II}:\quad&B_1(t),\ C_h(q),\ C_h(p),
+ C^-_{h-1}(\lfloor p/2\rfloor),
+ \quad q<p,\ q\equiv p\pmod2.
+\end{align*}
+The row tuple is ordered because the marker groups precede the leaf and
+the dummy row follows it. The leaf column $C_h(p)$ precedes its minus
+parent in the column tree.
+For form II, the conditions $q<p$ and $q\equiv p\pmod2$ imply
+$\lfloor q/2\rfloor<\lfloor p/2\rfloor$, so $C_h(q)$ also precedes
+that parent and precedes $C_h(p)$. Thus both displayed tuples are ordered.
+The entry table gives the four row vectors
+\[
+ (0,1,1,0),\quad(1,0,0,1),\quad(1,0,1,0),\quad(0,1,1,1).
+\]
+In form II, the same parity makes $C_h(q)$ a column-role-1 leaf for
+$t$, and $q<p$ makes its entry against $R_h(p)$ zero. These give
+the same second-column signature as the second marker in form I.
+
+\begin{lemma}[Exhaustive terminal classification]\label{lem:classification}
+A valid ordered block tuple forms an induced ordered copy of $H_4$ in
+$A_h$ if and only if it has terminal form I or terminal form II.
+\end{lemma}
+\begin{proof}
+Let $r_1<\cdots<r_4$ and $c_1<\cdots<c_4$ be the selected block
+types. By Lemma~\ref{lem:encoding}, their integer encodings satisfy the
+original copy predicate $\mathcal C_h^0$. The first implication of
+Lemma~\ref{lem:arithmetic} places them in the integer terminal family.
+
+The terminal predicate identifies the first three rows as two level-$h$
+$W^-$ marker rows followed by a terminal leaf, the fourth row as the dummy,
+and the third column as the same terminal leaf. The fourth column is the
+minus parent of that leaf. The entry between the leaf row and the first
+marker column is $(H_4)_{31}=1$. By the role table it forces the marker
+parity to equal $p\bmod2$. The second column is
+then either the second marker of the same mode or an earlier terminal leaf
+with the same parity. Physical block validity restores $0\le p<m$;
+in the second alternative it also gives $0\le q<p$. These are precisely
+forms I and II. The leaf row determines $p$, and the kind of the second
+column distinguishes the alternatives. In form II that column also
+determines $q$, proving uniqueness of the parameters.
+
+The ordered tuples and their entries were checked above, giving the
+converse.
+\end{proof}
+
+\begin{lemma}[Freeness of the canonical repair]\label{lem:repair}
+For every $h\ge1$, the repaired matrix $B_h$ is $H_4$-free.
+\end{lemma}
+\begin{proof}
+Suppose a copy exists in $B_h$. Lemma~\ref{lem:quotient} gives an ordered
+block tuple realizing it, and Lemma~\ref{lem:encoding} sends that tuple
+to a witness for $\mathcal C_h^1$. The second implication of
+Lemma~\ref{lem:arithmetic} excludes such a witness. This argument applies
+to the entire repaired entry table. The bijections in
+Lemma~\ref{lem:size} identify the conclusion with freeness in the usual
+numerical matrix.
+\end{proof}
+
+\section{Exact count and distance}\label{sec:count}
+By Lemma~\ref{lem:quotient}, each terminal tuple contributes the product of
+its block multiplicities. For form I this product is $2m^5$: the four
+marker blocks and the dummy row each have size $m$, the parent column has
+size two, and the leaf row and column each have size one. For form II there
+are three marker blocks, a dummy row, three leaf positions and a parent
+column, giving $2m^4$. The contributions are summarized by
+\begin{center}
+\begin{tabular}{c|c|c|c}\toprule
+Family&Number of parameters&Copies per parameter&Contribution\\\midrule
+I&$m$&$2m^5$&$2m^6$\\
+II&$m(m-2)/4$&$2m^4$&$(m-2)m^5/2$\\\bottomrule
+\end{tabular}
+\end{center}
+
+Indeed, the admissible pairs for form II are the strictly ordered pairs
+within each of the two parity classes, each of size $m/2$. Hence
+\[
+ \#\{(q,p):0\le q<p<m,\ q\equiv p\pmod2\}
+ =2\binom{m/2}{2}=\frac{m(m-2)}4.
+\]
+For $h=1$, $m=2$ and the second family is empty, as the formula gives.
+The two families are disjoint and their parameters are uniquely recovered
+from the selected blocks. The classification lemma therefore yields
+\[
+ \Copy(A_h)=2m^6+\frac{m-2}{2}m^5.
+\]
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Lemma~\ref{lem:size} gives $n_h=(14h+2)m$, and the preceding count gives
+the last identity in \eqref{eq:main}. The canonical repair changes exactly
+the $m^2$ cells in
+$R_*\times\{C_h(p):p<m\}$ and is $H_4$-free. Proposition~\ref{prop:lower}
+shows that no repair can use fewer cells. Thus $D_{H_4}(A_h)=m^2$,
+and dividing by $n_h^2$ gives the stated normalized distance. The two
+remaining assertions are Lemmas~\ref{lem:classification} and
+\ref{lem:repair}.
+\end{proof}
+
+\section{Hitting original copies versus eliminating all copies}\label{sec:hitting}
+\input{additions/exact_hitting}
+\input{additions/parameters}
+\appendix
+\input{additions/context}
+\input{additions/structure}
+\input{additions/alternate_lower}
+\input{additions/robust}
+\input{additions/repair_spectrum}
+\input{formalization}
+\input{additions/compression}
+\input{additions/verify}
+
+\begin{thebibliography}{99}
+\bibitem{AFN07} N. Alon, E. Fischer, and I. Newman,
+\emph{Efficient testing of bipartite graphs for forbidden induced subgraphs},
+SIAM Journal on Computing 37 (2007), 959--976,
+DOI:10.1137/050627915.
+\bibitem{ABF} N. Alon, O. Ben-Eliezer, and E. Fischer,
+\emph{Testing hereditary properties of ordered graphs and matrices},
+FOCS 2017, 848--858, DOI:10.1109/FOCS.2017.83;
+full version arXiv:1704.02367v1.
+\bibitem{ABE20} N. Alon and O. Ben-Eliezer,
+\emph{Efficient Removal Lemmas for Matrices}, Order 37 (2020), 83--101,
+DOI:10.1007/s11083-019-09494-3; full version arXiv:1609.04235v3.
+\bibitem{Towsner} H. Towsner, \emph{A removal lemma for ordered hypergraphs},
+Proceedings of the London Mathematical Society 130 (2025), e70015,
+DOI:10.1112/plms.70015.
+\bibitem{GS25} L. Gishboliner and A. Shapira,
+\emph{Polynomial property testing}, Computer Science Review 58 (2025),
+100806, DOI:10.1016/j.cosrev.2025.100806; arXiv:2508.16878v1,
+August 23, 2025, especially Conjecture~4.5 in that version.
+\bibitem{OAI} OpenAI, \emph{Polynomial removal fails for ordered binary matrices},
+OpenAI Math Release preprint, manuscript dated September 25, 2026.
+Repository: \url{https://github.com/openai/math},
+commit \code{adc7f1241b42e322a6451854ab7e4b4c146bf78a} (October 6, 2026).
+
+\bibitem{LeanBook} J. Avigad, L. de Moura, S. Kong, and S. Ullrich,
+\emph{Theorem Proving in Lean 4}, Lean community documentation,
+\url{https://docs.lean-lang.org/theorem_proving_in_lean4/}.
+\end{thebibliography}
+\end{document}

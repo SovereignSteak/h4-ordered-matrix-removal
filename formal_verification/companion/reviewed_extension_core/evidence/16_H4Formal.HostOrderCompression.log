@@ -1,0 +1,8 @@
+H4Formal/HostOrderCompression.lean:25:65: warning: This simp argument is unused:
+  hq
+
+Hint: Omit it from the simp argument list.
+  simp [hostVariableBefore, variableBefore, hl, hlt, hp, hq̵,̵ ̵h̵n,
+  ̵  ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ ̵ancestorSignBefore, signCode]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

@@ -1,0 +1,889 @@
+--- formalized_extensions/H4Formal/FiniteHost.lean
++++ reviewed_extension_core/H4Formal/FiniteMultiplicity.lean
+@@ -2,196 +2,8 @@
+ 
+ namespace H4Formal
+ 
+-/-!
+-# Finite quotient host
+-
+-This module is an executable Lean model of the two-group quotient used by
+-the H4 construction. It deliberately uses the ordered block lists themselves,
+-so the finite checks below do not depend on the Python implementation or on
+-an SMT solver transcript.
+--/
+-
+-def modeAt (d : Nat) : List Mode :=
+-  [ { family := .v, depth := d, parity := 0, sign := .plus }
+-  , { family := .v, depth := d, parity := 0, sign := .minus }
+-  , { family := .w, depth := d, parity := 0, sign := .plus }
+-  , { family := .w, depth := d, parity := 1, sign := .plus }
+-  , { family := .w, depth := d, parity := 0, sign := .minus }
+-  , { family := .w, depth := d, parity := 1, sign := .minus } ]
+-
+-def modesUpTo : Nat → List Mode
+-  | 0 => []
+-  | n + 1 => modesUpTo n ++ modeAt (n + 1)
+-
+-def isWMinus (m : Mode) : Bool :=
+-  m.family == .w && m.sign == .minus
+-
+-def orderedModes (h : Nat) : List Mode :=
+-  let ms := modesUpTo h
+-  ms.filter isWMinus ++ ms.filter (fun m => !isWMinus m)
+-
+-def groups (s : Nat) : List Nat :=
+-  (List.range s).map (fun g => g + 1)
+-
+-def anchorTypes (h s : Nat) : List Block :=
+-  (orderedModes h).flatMap (fun m =>
+-    (groups s).map (fun g => Block.anchor m g))
+-
+-def treeAux (axis : Axis) : Nat → Nat → Nat → List Block
+-  | 0, d, node => [Block.variable d node .leaf]
+-  | remaining + 1, d, node =>
+-      let inner :=
+-        treeAux axis remaining (d + 1) (node * 2) ++
+-        treeAux axis remaining (d + 1) (node * 2 + 1)
+-      let low := [Block.variable d node .minus]
+-      let high := [Block.variable d node .plus]
+-      if axis == .row then low ++ inner ++ high else high ++ inner ++ low
+-
+-def treeTypes (axis : Axis) (h : Nat) : List Block :=
+-  treeAux axis h 0 0
+-
+-def quotientTypes (h : Nat) (axis : Axis) (s : Nat := 2) : List Block :=
+-  let anchors := anchorTypes h s
+-  let tree := treeTypes axis h
+-  if axis == .row then anchors ++ tree ++ [.dummy]
+-  else anchors ++ [.dummy] ++ tree
+-
+-def listAt : List Block → Nat → Block
+-  | [], _ => .dummy
+-  | x :: _, 0 => x
+-  | _ :: xs, n + 1 => listAt xs n
+-
+-def entryAt (repair : Bool) (h : Nat)
+-    (rows cols : List Block) (i j : Nat) : Bool :=
+-  let r := listAt rows i
+-  let c := listAt cols j
+-  if repair then repairedValue h r c else hostValue h r c
+-
+-def indexPairs (rows cols : List Block) : List (Nat × Nat) :=
+-  (List.range rows.length).flatMap (fun i =>
+-    (List.range cols.length).map (fun j => (i, j)))
+-
+-def isZeroPair (repair : Bool) (h : Nat)
+-    (rows cols : List Block) (p : Nat × Nat) : Bool :=
+-  entryAt repair h rows cols p.1 p.2 == false
+-
+-def completesH4 (repair : Bool) (h : Nat)
+-    (rows cols : List Block) (p q : Nat × Nat) : Bool :=
+-  let i := p.1
+-  let j := p.2
+-  let ii := q.1
+-  let jj := q.2
+-  if !(i < ii && j < jj) then false
+-  else if entryAt repair h rows cols i jj != true then false
+-  else if entryAt repair h rows cols ii j != true then false
+-  else
+-    let rowTwo := (List.range rows.length).filter (fun k =>
+-      ii < k && entryAt repair h rows cols k j == true &&
+-      entryAt repair h rows cols k jj == false)
+-    let rowThree := (List.range rows.length).filter (fun k =>
+-      ii < k && entryAt repair h rows cols k j == false &&
+-      entryAt repair h rows cols k jj == true)
+-    let colTwo := (List.range cols.length).filter (fun k =>
+-      jj < k && entryAt repair h rows cols i k == true &&
+-      entryAt repair h rows cols ii k == false)
+-    let colThree := (List.range cols.length).filter (fun k =>
+-      jj < k && entryAt repair h rows cols i k == false &&
+-      entryAt repair h rows cols ii k == true)
+-    rowTwo.any (fun k => rowThree.any (fun l =>
+-      k < l && colTwo.any (fun x => colThree.any (fun y =>
+-        x < y &&
+-        entryAt repair h rows cols k x == true &&
+-        entryAt repair h rows cols l x == true &&
+-        entryAt repair h rows cols k y == false &&
+-        entryAt repair h rows cols l y == true))))
+-
+-def hasH4 (repair : Bool) (h : Nat) : Bool :=
+-  let rows := quotientTypes h .row
+-  let cols := quotientTypes h .column
+-  let zeros := (indexPairs rows cols).filter (isZeroPair repair h rows cols)
+-  zeros.any (fun p =>
+-    zeros.any (fun q => completesH4 repair h rows cols p q))
+-
+-def hostMatrix (repair : Bool) (h : Nat) : Array (Array Bool) :=
+-  let rows := quotientTypes h .row
+-  let cols := quotientTypes h .column
+-  (List.range rows.length).toArray.map (fun i =>
+-    (List.range cols.length).toArray.map (fun j =>
+-      entryAt repair h rows cols i j))
+-
+-def matrixAt (m : Array (Array Bool)) (i j : Nat) : Bool :=
+-  (m.get! i).get! j
+-
+-def matrixPairs (m : Array (Array Bool)) : List (Nat × Nat) :=
+-  (List.range m.size).flatMap (fun i =>
+-    (List.range (m.get! i).size).filter (fun j => matrixAt m i j == false)
+-      |>.map (fun j => (i, j)))
+-
+-def completesMatrix (m : Array (Array Bool)) (p q : Nat × Nat) : Bool :=
+-  let i := p.1
+-  let j := p.2
+-  let ii := q.1
+-  let jj := q.2
+-  if !(i < ii && j < jj) then false
+-  else if matrixAt m i jj != true then false
+-  else if matrixAt m ii j != true then false
+-  else
+-    let rowTwo := (List.range m.size).filter (fun k =>
+-      ii < k && matrixAt m k j == true && matrixAt m k jj == false)
+-    let rowThree := (List.range m.size).filter (fun k =>
+-      ii < k && matrixAt m k j == false && matrixAt m k jj == true)
+-    let colTwo := (List.range (m.get! 0).size).filter (fun k =>
+-      jj < k && matrixAt m i k == true && matrixAt m ii k == false)
+-    let colThree := (List.range (m.get! 0).size).filter (fun k =>
+-      jj < k && matrixAt m i k == false && matrixAt m ii k == true)
+-    rowTwo.any (fun k => rowThree.any (fun l =>
+-      k < l && colTwo.any (fun x => colThree.any (fun y =>
+-        x < y &&
+-        matrixAt m k x == true &&
+-        matrixAt m l x == true &&
+-        matrixAt m k y == false &&
+-        matrixAt m l y == true))))
+-
+-def hasH4Fast (repair : Bool) (h : Nat) : Bool :=
+-  let matrix := hostMatrix repair h
+-  let zeros := matrixPairs matrix
+-  zeros.any (fun p => zeros.any (fun q => completesMatrix matrix p q))
+-
+-def countCompletions (m : Array (Array Bool)) (p q : Nat × Nat) : Nat :=
+-  let i := p.1
+-  let j := p.2
+-  let ii := q.1
+-  let jj := q.2
+-  if !(i < ii && j < jj) then 0
+-  else if matrixAt m i jj != true then 0
+-  else if matrixAt m ii j != true then 0
+-  else
+-    let rowTwo := (List.range m.size).filter (fun k =>
+-      ii < k && matrixAt m k j == true && matrixAt m k jj == false)
+-    let rowThree := (List.range m.size).filter (fun k =>
+-      ii < k && matrixAt m k j == false && matrixAt m k jj == true)
+-    let colTwo := (List.range (m.get! 0).size).filter (fun k =>
+-      jj < k && matrixAt m i k == true && matrixAt m ii k == false)
+-    let colThree := (List.range (m.get! 0).size).filter (fun k =>
+-      jj < k && matrixAt m i k == false && matrixAt m ii k == true)
+-    rowTwo.foldl (fun total k =>
+-      rowThree.foldl (fun total' l =>
+-        if k < l then
+-          colTwo.foldl (fun total'' x =>
+-            colThree.foldl (fun total''' y =>
+-              if x < y &&
+-                  matrixAt m k x == true &&
+-                  matrixAt m l x == true &&
+-                  matrixAt m k y == false &&
+-                  matrixAt m l y == true then total''' + 1
+-              else total''') total'') total
+-        else total') total) 0
+-
+-def countH4Fast (repair : Bool) (h : Nat) : Nat :=
+-  let matrix := hostMatrix repair h
+-  let zeros := matrixPairs matrix
+-  zeros.foldl (fun total p =>
+-    zeros.foldl (fun total' q => total' + countCompletions matrix p q) total) 0
++set_option maxRecDepth 32768
++set_option maxHeartbeats 0
+ 
+ def multiplicity (h : Nat) : Block → Nat
+   | .anchor _ _ => 2 ^ h
+@@ -202,68 +14,4 @@
+       | .plus => 2 ^ (h - depth)
+       | .minus => 2 ^ (h - depth)
+ 
+-def weightedCompletions (m : Array (Array Bool))
+-    (rows cols : List Block) (h : Nat) (p q : Nat × Nat) : Nat :=
+-  let i := p.1
+-  let j := p.2
+-  let ii := q.1
+-  let jj := q.2
+-  if !(i < ii && j < jj) then 0
+-  else if matrixAt m i jj != true then 0
+-  else if matrixAt m ii j != true then 0
+-  else
+-    let rowTwo := (List.range m.size).filter (fun k =>
+-      ii < k && matrixAt m k j == true && matrixAt m k jj == false)
+-    let rowThree := (List.range m.size).filter (fun k =>
+-      ii < k && matrixAt m k j == false && matrixAt m k jj == true)
+-    let colTwo := (List.range (m.get! 0).size).filter (fun k =>
+-      jj < k && matrixAt m i k == true && matrixAt m ii k == false)
+-    let colThree := (List.range (m.get! 0).size).filter (fun k =>
+-      jj < k && matrixAt m i k == false && matrixAt m ii k == true)
+-    rowTwo.foldl (fun total k =>
+-      rowThree.foldl (fun total' l =>
+-        if k < l then
+-          colTwo.foldl (fun total'' x =>
+-            colThree.foldl (fun total''' y =>
+-              if x < y &&
+-                  matrixAt m k x == true &&
+-                  matrixAt m l x == true &&
+-                  matrixAt m k y == false &&
+-                  matrixAt m l y == true then
+-                total''' +
+-                  multiplicity h (listAt rows i) *
+-                  multiplicity h (listAt rows ii) *
+-                  multiplicity h (listAt rows k) *
+-                  multiplicity h (listAt rows l) *
+-                  multiplicity h (listAt cols j) *
+-                  multiplicity h (listAt cols jj) *
+-                  multiplicity h (listAt cols x) *
+-                  multiplicity h (listAt cols y)
+-              else total''') total'') total
+-        else total') total) 0
+-
+-def weightedCountH4 (repair : Bool) (h : Nat) : Nat :=
+-  let rows := quotientTypes h .row
+-  let cols := quotientTypes h .column
+-  let matrix := hostMatrix repair h
+-  let zeros := matrixPairs matrix
+-  zeros.foldl (fun total p =>
+-    zeros.foldl (fun total' q =>
+-      total' + weightedCompletions matrix rows cols h p q) total) 0
+-
+-theorem repaired_free_h1 : hasH4Fast true 1 = false := by native_decide
+-theorem repaired_free_h2 : hasH4Fast true 2 = false := by native_decide
+-theorem repaired_free_h3 : hasH4Fast true 3 = false := by native_decide
+-theorem repaired_free_h4 : hasH4Fast true 4 = false := by native_decide
+-
+-theorem original_type_count_h1 : countH4Fast false 1 = 2 := by native_decide
+-theorem original_type_count_h2 : countH4Fast false 2 = 6 := by native_decide
+-theorem original_type_count_h3 : countH4Fast false 3 = 20 := by native_decide
+-theorem original_type_count_h4 : countH4Fast false 4 = 72 := by native_decide
+-
+-theorem original_weighted_count_h1 : weightedCountH4 false 1 = 128 := by native_decide
+-theorem original_weighted_count_h2 : weightedCountH4 false 2 = 9216 := by native_decide
+-theorem original_weighted_count_h3 : weightedCountH4 false 3 = 622592 := by native_decide
+-theorem original_weighted_count_h4 : weightedCountH4 false 4 = 40894464 := by native_decide
+-
+ end H4Formal
+--- formalized_extensions/H4Formal/GeneralPhysicalCompression.lean
++++ reviewed_extension_core/H4Formal/GeneralPhysicalCompression.lean
+@@ -1,5 +1,5 @@
+ import H4Formal.GeneralCompression
+-import H4Formal.IndexedMatrix
++import H4Formal.IndexedMatrixCore
+ 
+ namespace H4Formal
+ 
+--- formalized_extensions/H4Formal/GeneralPhysicalCounting.lean
++++ reviewed_extension_core/H4Formal/GeneralPhysicalCounting.lean
+@@ -1,5 +1,5 @@
+ import H4Formal.GeneralPhysicalCompression
+-import H4Formal.FiniteHost
++import H4Formal.FiniteMultiplicity
+ 
+ namespace H4Formal
+ 
+--- formalized_extensions/H4Formal/GlobalClaims.lean
++++ reviewed_extension_core/H4Formal/HostSizes.lean
+@@ -2,15 +2,8 @@
+ 
+ namespace H4Formal
+ 
+-/-!
+-# Global arithmetic claims and fixed-query inventory
+-
+-The host construction has a small arithmetic layer which is independent of
+-the finite solver decisions.  This module records that layer explicitly.  A
+-separate record below retains a legacy abstract certificate interface.
+-Production finite-depth claims are proved by the 72 LRAT-backed modules
+-under Certificates and aggregated by CertifiedQueries.
+--/
++set_option maxRecDepth 32768
++set_option maxHeartbeats 0
+ 
+ def branchFactor (h : Nat) : Nat := 2 ^ h
+ 
+@@ -18,215 +11,9 @@
+ 
+ def canonicalRepairCellCount (h : Nat) : Nat := branchFactor h ^ 2
+ 
+-def originalTypeCopyCount (h : Nat) : Nat :=
+-  branchFactor h +
+-    (branchFactor h / 2) * ((branchFactor h - 2) / 2)
+-
+-def terminalTypeOneWeight (h : Nat) : Nat :=
+-  2 * branchFactor h ^ 5
+-
+-def terminalTypeTwoWeight (h : Nat) : Nat :=
+-  2 * branchFactor h ^ 4
+-
+-def terminalTypeOneCount (h : Nat) : Nat :=
+-  branchFactor h * terminalTypeOneWeight h
+-
+-def terminalTypeTwoPairCount (h : Nat) : Nat :=
+-  (branchFactor h / 2) * ((branchFactor h - 2) / 2)
+-
+-def terminalTypeTwoCount (h : Nat) : Nat :=
+-  terminalTypeTwoPairCount h * terminalTypeTwoWeight h
+-
+-def originalWeightedCopyCount (h : Nat) : Nat :=
+-  terminalTypeOneCount h + terminalTypeTwoCount h
+-
+-def hostCellCount (h : Nat) : Nat :=
+-  hostSideLength h ^ 2
+-
+-def canonicalRepairCellCountScaled (h : Nat) : Nat :=
+-  canonicalRepairCellCount h * (14 * h + 2) ^ 2
+-
+-theorem branchFactor_pos (h : Nat) : 0 < branchFactor h := by
+-  simp [branchFactor, Nat.two_pow_pos]
+-
+-theorem branchFactor_one_or_more (h : Nat) : 1 ≤ branchFactor h := by
+-  exact Nat.succ_le_of_lt (branchFactor_pos h)
+-
+ theorem canonicalRepairCellCount_eq_power (h : Nat) :
+     canonicalRepairCellCount h = 2 ^ (2 * h) := by
+   unfold canonicalRepairCellCount branchFactor
+   simpa [Nat.mul_comm] using (Nat.pow_mul 2 h 2).symm
+ 
+-theorem hostSideLength_eq_construction (h : Nat) :
+-    hostSideLength h = (14 * h + 2) * 2 ^ h := by
+-  rfl
+-
+-theorem terminalTypeOneCount_eq_formula (h : Nat) :
+-    terminalTypeOneCount h = 2 * branchFactor h ^ 6 := by
+-  unfold terminalTypeOneCount terminalTypeOneWeight
+-  simp [Nat.pow_succ, Nat.mul_assoc, Nat.mul_comm, Nat.mul_left_comm]
+-
+-theorem terminalTypeTwoCount_eq_formula (h : Nat) :
+-    terminalTypeTwoCount h =
+-      ((branchFactor h - 2) / 2) * branchFactor h ^ 5 := by
+-  cases h with
+-  | zero => native_decide
+-  | succ k =>
+-      let n := 2 ^ k
+-      have hn : 1 ≤ n := by
+-        dsimp [n]
+-        exact Nat.succ_le_of_lt (Nat.two_pow_pos k)
+-      have hm : branchFactor (k + 1) = 2 * n := by
+-        simp [branchFactor, n, Nat.pow_succ, Nat.mul_comm]
+-      have hhalf : branchFactor (k + 1) / 2 = n := by
+-        rw [hm]
+-        exact Nat.mul_div_cancel_left n (by decide)
+-      have hminus : branchFactor (k + 1) - 2 = 2 * (n - 1) := by
+-        rw [hm]
+-        omega
+-      have hminusHalf :
+-          (branchFactor (k + 1) - 2) / 2 = n - 1 := by
+-        rw [hminus]
+-        exact Nat.mul_div_cancel_left (n - 1) (by decide)
+-      rw [terminalTypeTwoCount, terminalTypeTwoPairCount,
+-        terminalTypeTwoWeight, hhalf, hminusHalf]
+-      simp [n, branchFactor, hm, Nat.pow_succ, Nat.mul_assoc,
+-        Nat.mul_comm, Nat.mul_left_comm]
+-
+-theorem originalWeightedCopyCount_eq_formula (h : Nat) :
+-    originalWeightedCopyCount h =
+-      2 * branchFactor h ^ 6 +
+-        ((branchFactor h - 2) / 2) * branchFactor h ^ 5 := by
+-  rw [originalWeightedCopyCount, terminalTypeOneCount_eq_formula,
+-    terminalTypeTwoCount_eq_formula]
+-
+-theorem canonicalRepairCellCount_scaled_eq_hostCellCount (h : Nat) :
+-    canonicalRepairCellCountScaled h = hostCellCount h := by
+-  simp [canonicalRepairCellCountScaled, hostCellCount, canonicalRepairCellCount,
+-    hostSideLength, branchFactor, Nat.pow_two, Nat.mul_assoc, Nat.mul_comm,
+-    Nat.mul_left_comm]
+-
+-theorem weighted_count_factor_identity (x y : Nat)
+-    (hx : 2 ≤ x) (hy : 2 * y = x - 2) :
+-    2 * (2 * x ^ 6 + y * x ^ 5) = (5 * x - 2) * x ^ 5 := by
+-  have hcoef : 2 * (2 * x + y) = 5 * x - 2 := by omega
+-  have hpow : x ^ 6 = x * x ^ 5 := by
+-    rw [show 6 = 5 + 1 by omega, Nat.pow_succ, Nat.mul_comm]
+-  have hsum : 2 * (x * x ^ 5) + y * x ^ 5 =
+-      (2 * x + y) * x ^ 5 := by
+-    calc
+-      2 * (x * x ^ 5) + y * x ^ 5 =
+-          (2 * x) * x ^ 5 + y * x ^ 5 := by
+-            rw [Nat.mul_assoc]
+-      _ = (2 * x + y) * x ^ 5 := by rw [Nat.add_mul]
+-  calc
+-    2 * (2 * x ^ 6 + y * x ^ 5) =
+-        2 * (2 * (x * x ^ 5) + y * x ^ 5) := by rw [hpow]
+-    _ = 2 * ((2 * x + y) * x ^ 5) := by rw [hsum]
+-    _ = (2 * (2 * x + y)) * x ^ 5 := by rw [Nat.mul_assoc]
+-    _ = (5 * x - 2) * x ^ 5 := by rw [hcoef]
+-
+-theorem originalWeightedCopyCount_mul_two_eq_paper_formula
+-    (h : Nat) (hh : 1 ≤ h) :
+-    2 * originalWeightedCopyCount h =
+-      (5 * branchFactor h - 2) * branchFactor h ^ 5 := by
+-  cases h with
+-  | zero => omega
+-  | succ k =>
+-      let n := 2 ^ k
+-      have hn : 1 ≤ n := by
+-        dsimp [n]
+-        exact Nat.succ_le_of_lt (Nat.two_pow_pos k)
+-      have hm : branchFactor (k + 1) = 2 * n := by
+-        simp [branchFactor, n, Nat.pow_succ, Nat.mul_comm]
+-      have hminus : branchFactor (k + 1) - 2 = 2 * (n - 1) := by
+-        rw [hm]
+-        omega
+-      have hminusHalf :
+-          (branchFactor (k + 1) - 2) / 2 = n - 1 := by
+-        rw [hminus]
+-        exact Nat.mul_div_cancel_left (n - 1) (by decide)
+-      rw [originalWeightedCopyCount_eq_formula, hminusHalf]
+-      exact weighted_count_factor_identity (branchFactor (k + 1)) (n - 1)
+-        (by rw [hm]; omega)
+-        (by rw [hminus])
+-
+-theorem originalTypeCopyCount_h1 : originalTypeCopyCount 1 = 2 := by
+-  native_decide
+-
+-theorem originalTypeCopyCount_h2 : originalTypeCopyCount 2 = 6 := by
+-  native_decide
+-
+-theorem originalTypeCopyCount_h3 : originalTypeCopyCount 3 = 20 := by
+-  native_decide
+-
+-theorem originalTypeCopyCount_h4 : originalTypeCopyCount 4 = 72 := by
+-  native_decide
+-
+-theorem originalWeightedCopyCount_h1 : originalWeightedCopyCount 1 = 128 := by
+-  native_decide
+-
+-theorem originalWeightedCopyCount_h2 : originalWeightedCopyCount 2 = 9216 := by
+-  native_decide
+-
+-theorem originalWeightedCopyCount_h3 : originalWeightedCopyCount 3 = 622592 := by
+-  native_decide
+-
+-theorem originalWeightedCopyCount_h4 : originalWeightedCopyCount 4 = 40894464 := by
+-  native_decide
+-
+-theorem canonicalRepairCellCount_h1 : canonicalRepairCellCount 1 = 4 := by
+-  native_decide
+-
+-theorem canonicalRepairCellCount_h4 : canonicalRepairCellCount 4 = 256 := by
+-  native_decide
+-
+-inductive QueryKind where
+-  | repairFree
+-  | originalHasDiagonal
+-  | originalNonstandard
+-  deriving DecidableEq, BEq, Repr
+-
+-structure FixedQuery where
+-  depth : Nat
+-  kind : QueryKind
+-  deriving DecidableEq, Repr
+-
+-def queryKinds : List QueryKind :=
+-  [.repairFree, .originalHasDiagonal, .originalNonstandard]
+-
+-def fixedQueryInventory : List FixedQuery :=
+-  (List.range 24).flatMap (fun i =>
+-    queryKinds.map (fun kind => { depth := i + 1, kind := kind }))
+-
+-theorem fixedQueryInventory_length : fixedQueryInventory.length = 72 := by
+-  native_decide
+-
+-theorem fixedQueryInventory_repairFree_count :
+-    (fixedQueryInventory.filter (fun q => q.kind == QueryKind.repairFree)).length = 24 := by
+-  native_decide
+-
+-theorem fixedQueryInventory_diagonal_count :
+-    (fixedQueryInventory.filter
+-      (fun q => q.kind == .originalHasDiagonal)).length = 24 := by
+-  native_decide
+-
+-theorem fixedQueryInventory_nonstandard_count :
+-    (fixedQueryInventory.filter
+-      (fun q => q.kind == .originalNonstandard)).length = 24 := by
+-  native_decide
+-
+-theorem fixedQueryInventory_depth_bounds :
+-    ∀ q ∈ fixedQueryInventory, 1 ≤ q.depth ∧ q.depth ≤ 24 := by
+-  native_decide
+-
+-/-!
+-The next structure is a retained abstract interface. Production all-depth
+-theorems use the concrete LRAT-backed unsat proofs in CertifiedQueries and
+-require no value of this record as an additional hypothesis.
+--/
+-structure FixedQueryCertificate where
+-  provesUnsat : FixedQuery → Prop
+-  allQueries : ∀ q ∈ fixedQueryInventory, provesUnsat q
+-
+ end H4Formal
+--- formalized_extensions/H4Formal/IndexedMatrix.lean
++++ reviewed_extension_core/H4Formal/IndexedMatrixCore.lean
+@@ -1,6 +1,6 @@
+ import H4Formal.PhysicalOrder
+-import H4Formal.PhysicalCounting
+-import H4Formal.EditDistance
++import H4Formal.EditForcing
++import Mathlib.Algebra.Field.Rat
+ 
+ namespace H4Formal
+ 
+@@ -121,46 +121,4 @@
+     ((Equiv.prodCongr (physicalIndex h .row) (physicalIndex h .column)).subtypeEquiv
+       (fun _ => Iff.rfl))
+ 
+-theorem indexed_minimum_edit_count (h : Nat) (hh : 0 < h) :
+-    minimumMatrixEditCount (indexPhysicalMatrix h (physicalMatrix h false)) = (2 ^ h) ^ 2 := by
+-  apply Nat.le_antisymm
+-  · apply Nat.find_le
+-    refine ⟨indexPhysicalMatrix h (physicalMatrix h true), ?_, ?_⟩
+-    · exact (indexPhysicalMatrix_free_iff h _).mpr (repaired_physical_free_all_depth h hh)
+-    · rw [indexPhysicalMatrix_edit_count, canonical_edit_count]
+-  · obtain ⟨matrix, hf, he⟩ :=
+-      minimumMatrixEditCount_spec (indexPhysicalMatrix h (physicalMatrix h false))
+-    rw [← he, ← indexPhysicalMatrix_physicalize h matrix, indexPhysicalMatrix_edit_count]
+-    exact arbitrary_edit_lower_bound h hh _ ((indexPhysicalMatrix_free_iff h _).mp (by simpa using hf))
+-
+-noncomputable def originalMatrix (h : Nat) : BinaryMatrix (hostSideLength h) :=
+-  indexPhysicalMatrix h (physicalMatrix h false)
+-
+-noncomputable def repairedMatrix (h : Nat) : BinaryMatrix (hostSideLength h) :=
+-  indexPhysicalMatrix h (physicalMatrix h true)
+-
+-theorem repaired_matrix_free (h : Nat) (hh : 0 < h) : IsMatrixFree (repairedMatrix h) :=
+-  (indexPhysicalMatrix_free_iff h _).mpr (repaired_physical_free_all_depth h hh)
+-
+-theorem original_matrix_copy_count (h : Nat) (hh : 0 < h) :
+-    matrixCopyCount (originalMatrix h) = originalWeightedCopyCount h := by
+-  rw [originalMatrix, indexPhysicalMatrix_copy_count, original_physical_copy_count h hh]
+-
+-theorem original_matrix_copy_count_formula (h : Nat) (hh : 0 < h) :
+-    2 * matrixCopyCount (originalMatrix h) = (5 * 2 ^ h - 2) * (2 ^ h) ^ 5 := by
+-  rw [originalMatrix, indexPhysicalMatrix_copy_count]
+-  exact original_physical_copy_count_formula h hh
+-
+-theorem original_matrix_minimum_edit_count (h : Nat) (hh : 0 < h) :
+-    minimumMatrixEditCount (originalMatrix h) = 2 ^ (2 * h) := by
+-  rw [originalMatrix, indexed_minimum_edit_count h hh]
+-  exact canonicalRepairCellCount_eq_power h
+-
+-theorem original_matrix_distance_exact (h : Nat) (hh : 0 < h) :
+-    matrixDistanceRat (originalMatrix h) = 1 / ((14 * h + 2 : Nat) : Rat) ^ 2 := by
+-  change (minimumMatrixEditCount (originalMatrix h) : Rat) / (hostSideLength h : Rat) ^ 2 = _
+-  rw [show minimumMatrixEditCount (originalMatrix h) = minimumEditCount h hh by
+-    rw [minimum_edit_count_exact, originalMatrix, indexed_minimum_edit_count h hh]]
+-  exact normalized_edit_distance_exact h hh
+-
+ end H4Formal
+--- formalized_extensions/H4Formal/MarkerPermutation.lean
++++ reviewed_extension_core/H4Formal/MarkerPermutation.lean
+@@ -1,4 +1,4 @@
+-import H4Formal.IndexedMatrix
++import H4Formal.IndexedMatrixCore
+ 
+ namespace H4Formal
+ 
+--- formalized_extensions/H4Formal/PhysicalHost.lean
++++ reviewed_extension_core/H4Formal/PhysicalHostCore.lean
+@@ -1,5 +1,5 @@
+-import H4Formal.TerminalClassification
+-import H4Formal.GlobalClaims
++import H4Formal.HostOrderCompression
++import H4Formal.HostSizes
+ import Mathlib.Data.Fintype.Pi
+ import Mathlib.Data.Fintype.BigOperators
+ import Mathlib.Data.Fintype.Sum
+@@ -154,15 +154,4 @@
+         (fun i => physicalBlock h (cols i)) :=
+   ⟨physical_copy_to_quotient h repair rows cols, quotient_copy_realizes h repair rows cols⟩
+ 
+-theorem repaired_physical_free_all_depth (h : Nat) (hh : 0 < h) :
+-    IsPhysicalFree h (physicalMatrix h true) := by
+-  intro rows cols hc
+-  exact repaired_free_all_depth h hh _ _ (physical_copy_to_quotient h true rows cols hc)
+-
+-theorem original_physical_terminal_all_depth (h : Nat) (hh : 0 < h)
+-    (rows cols : Fin 4 → PhysicalPosition h)
+-    (hc : IsPhysicalCopy h (physicalMatrix h false) rows cols) :
+-    TerminalForm h (fun i => physicalBlock h (rows i)) (fun i => physicalBlock h (cols i)) :=
+-  original_terminal_all_depth h hh _ _ (physical_copy_to_quotient h false rows cols hc)
+-
+ end H4Formal
+--- formalized_extensions/H4Formal/PhysicalOrder.lean
++++ reviewed_extension_core/H4Formal/PhysicalOrder.lean
+@@ -1,4 +1,4 @@
+-import H4Formal.PhysicalHost
++import H4Formal.PhysicalHostCore
+ import H4Formal.WordOrder
+ import Mathlib.Data.Prod.Lex
+ import Mathlib.Data.Fintype.Sort
+--- formalized_extensions/H4Formal/PhysicalRepresentatives.lean
++++ reviewed_extension_core/H4Formal/PhysicalRepresentatives.lean
+@@ -1,4 +1,5 @@
+-import H4Formal.PhysicalHost
++import H4Formal.PhysicalHostCore
++import H4Formal.TerminalTypes
+ 
+ namespace H4Formal
+ 
+--- formalized_extensions/H4Formal/TerminalClassification.lean
++++ reviewed_extension_core/H4Formal/TerminalTypes.lean
+@@ -1,4 +1,4 @@
+-import H4Formal.CertificateBridge
++import H4Formal.Host
+ 
+ namespace H4Formal
+ 
+@@ -19,247 +19,4 @@
+     (cols 1 = .anchor (terminalMode h parity) 2 ∨
+       ∃ q, q < p ∧ q % 2 = p % 2 ∧ cols 1 = .variable h q .leaf)
+ 
+-theorem block_eq_anchor_of_fields (h : Nat) (b : Block) (hv : validBlock h b = true)
+-    (hk : (encode b).kind = 0) :
+-    b = .anchor (modeFromCode (encode b).mode (encode b).level) (encode b).group := by
+-  exact (decode_encode h b hv).symm.trans (by simp [decode, hk])
+-
+-theorem block_eq_variable_of_fields (h : Nat) (b : Block) (hv : validBlock h b = true)
+-    (hk : (encode b).kind = 1) :
+-    b = .variable (encode b).depth (encode b).node (signFromCode (encode b).sign) := by
+-  exact (decode_encode h b hv).symm.trans (by simp [decode, hk])
+-
+-theorem block_eq_dummy_of_fields (h : Nat) (b : Block) (hv : validBlock h b = true)
+-    (hk : (encode b).kind = 2) : b = .dummy := by
+-  exact (decode_encode h b hv).symm.trans (by simp [decode, hk])
+-
+-theorem block_eq_leaf_of_fields (h : Nat) (b : Block) (hv : validBlock h b = true)
+-    (hk : (encode b).kind = 1) (hd : (encode b).depth = h) :
+-    b = .variable h (encode b).node .leaf := by
+-  cases b with
+-  | anchor _ _ => simp [encode] at hk
+-  | dummy => simp [encode] at hk
+-  | «variable» d p s =>
+-      simp only [encode] at hd
+-      subst d
+-      have hs : s = .leaf := by
+-        cases s <;> simp [validBlock] at hv <;> first | rfl | cases hv.2
+-      simp [encode, hs]
+-
+-theorem standardForm_implies_terminal (h : Nat) (rows cols : Fin 4 → Block)
+-    (hc : IsValidCopy h false rows cols)
+-    (hs : NatSemantics.standardForm h (encode (rows 0)) (encode (rows 1))
+-      (encode (rows 2)) (encode (rows 3)) (encode (cols 0)) (encode (cols 1))
+-      (encode (cols 2)) (encode (cols 3)) = true) : TerminalForm h rows cols := by
+-  have vr (i : Fin 4) := hc.1 _ (row_mem_selectedRecords rows cols i)
+-  have vc (i : Fin 4) := hc.1 _ (col_mem_selectedRecords rows cols i)
+-  simp only [NatSemantics.standardForm, NatSemantics.isA, NatSemantics.isD,
+-    NatSemantics.isLeaf, NatSemantics.isV, Bool.and_eq_true, Bool.or_eq_true,
+-    beq_iff_eq, decide_eq_true_eq, and_assoc] at hs
+-  rcases hs with ⟨ra0, ra1, ca0, hm, hm1, hmc, hl0, hl1, hlc,
+-    hg0, hg1, hgc, rv2, rd2, rdd, cv2, cd2, hp2, cv3, cd3, cs3, cp3, hsecond⟩
+-  let p := (encode (rows 2)).node
+-  have hr2 := block_eq_leaf_of_fields h (rows 2) (vr 2) rv2 rd2
+-  have hc2 := block_eq_leaf_of_fields h (cols 2) (vc 2) cv2 cd2
+-  rw [← hp2] at hc2
+-  have hr3 := block_eq_dummy_of_fields h (rows 3) (vr 3) rdd
+-  have hc3 := block_eq_variable_of_fields h (cols 3) (vc 3) cv3
+-  rw [cd3, cs3, cp3] at hc3
+-  simp only [signFromCode, Nat.pow_one] at hc3
+-  have hr0 := block_eq_anchor_of_fields h (rows 0) (vr 0) ra0
+-  have hr1 := block_eq_anchor_of_fields h (rows 1) (vr 1) ra1
+-  have hc0 := block_eq_anchor_of_fields h (cols 0) (vc 0) ca0
+-  rw [hl0, hg0] at hr0
+-  rw [← hm1, hl1, hg1] at hr1
+-  rw [← hmc, hlc, hgc] at hc0
+-  have hp : p < 2 ^ h := by
+-    have v := vr 2
+-    rw [hr2] at v
+-    simp [validBlock] at v
+-    exact v.1
+-  have he : hostValue h (rows 2) (cols 0) = true := hc.2.2.2 2 0
+-  have build (parity : Nat) (hpar : parity < 2)
+-      (hmode : modeFromCode (encode (rows 0)).mode h = terminalMode h parity) :
+-      TerminalForm h rows cols := by
+-    rw [hmode] at hr0 hr1 hc0
+-    have hparity : p % 2 = parity := by
+-      rw [hr2, hc0] at he
+-      simpa [hostValue, role, terminalMode, matchesBlock, p] using he
+-    refine ⟨parity, p, hpar, hp, hparity, hr0, hr1, hr2, hr3, hc0, hc2, hc3, ?_⟩
+-    rcases hsecond with ha | hv
+-    · rcases ha with ⟨ha, hmode', hlevel, hgroup⟩
+-      have hc1 := block_eq_anchor_of_fields h (cols 1) (vc 1) ha
+-      rw [hmode', hlevel, hgroup, hmode] at hc1
+-      exact Or.inl hc1
+-    · rcases hv with ⟨hv, hd, hlt, hpar⟩
+-      have hc1 := block_eq_leaf_of_fields h (cols 1) (vc 1) hv hd
+-      exact Or.inr ⟨(encode (cols 1)).node, hlt, hpar, hc1⟩
+-  rcases hm with hm | hm
+-  · apply build 0 (by decide)
+-    simp [hm, modeFromCode, terminalMode]
+-  · apply build 1 (by decide)
+-    simp [hm, modeFromCode, terminalMode]
+-
+-theorem original_terminal_bounded (h : Nat) (hlo : 1 ≤ h) (hh : h ≤ 24)
+-    (rows cols : Fin 4 → Block) (hc : IsValidCopy h false rows cols) :
+-    TerminalForm h rows cols :=
+-  standardForm_implies_terminal h rows cols hc (original_standard_bounded h hlo hh rows cols hc)
+-
+-theorem compressed_terminal_anchor_reflect (h : Nat) (selected : List Block)
+-    {b : Block} (hb : b ∈ selected) (parity group : Nat)
+-    (he : compressBlock (compressionLevels h selected) b =
+-      .anchor (terminalMode (retainedDepth (compressionLevels h selected) h) parity) group) :
+-    b = .anchor (terminalMode h parity) group := by
+-  cases b with
+-  | dummy => simp [compressBlock] at he
+-  | «variable» _ _ _ => simp [compressBlock] at he
+-  | anchor m g =>
+-      have hd := defining_mem_compressionLevels h selected (blockLevels_mem_anchor hb)
+-      have ht := endpoint_mem_compressionLevels h selected
+-      have hi := projectCount_eq_iff_of_mem (compressionLevels h selected) hd ht
+-      change (retainedDepth (compressionLevels h selected) m.depth =
+-        retainedDepth (compressionLevels h selected) h ↔ m.depth = h) at hi
+-      cases m with
+-      | mk family d par sign =>
+-          simp only [compressBlock, compressMode, terminalMode, Block.anchor.injEq,
+-            Mode.mk.injEq] at he
+-          rcases he with ⟨⟨hf, hd', hp, hs⟩, hg⟩
+-          have hd'' : d = h := hi.mp hd'
+-          simp [terminalMode, hf, hd'', hp, hs, hg]
+-
+-theorem compressed_terminal_leaf_reflect (h : Nat) (selected : List Block)
+-    {b : Block} (hb : b ∈ selected) (p' : Nat)
+-    (he : compressBlock (compressionLevels h selected) b =
+-      .variable (retainedDepth (compressionLevels h selected) h) p' .leaf) :
+-    ∃ p, b = .variable h p .leaf ∧ compressedNode (compressionLevels h selected) h p = p' := by
+-  cases b with
+-  | dummy => simp [compressBlock] at he
+-  | anchor _ _ => simp [compressBlock] at he
+-  | «variable» d p s =>
+-      have hd := defining_mem_compressionLevels h selected (blockLevels_mem_variable hb)
+-      have ht := endpoint_mem_compressionLevels h selected
+-      have hi := projectCount_eq_iff_of_mem (compressionLevels h selected) hd ht
+-      change (retainedDepth (compressionLevels h selected) d =
+-        retainedDepth (compressionLevels h selected) h ↔ d = h) at hi
+-      simp only [compressBlock, Block.variable.injEq] at he
+-      have hd' := hi.mp he.1
+-      subst d
+-      exact ⟨p, by rw [he.2.2], he.2.1⟩
+-
+-theorem compressedNode_eq_iff (h : Nat) (selected : List Block)
+-    (hv : ∀ b ∈ selected, validBlock h b = true) {d p q : Nat} {s t : Sign}
+-    (hp : Block.variable d p s ∈ selected) (hq : Block.variable d q t ∈ selected) :
+-    compressedNode (compressionLevels h selected) d p =
+-      compressedNode (compressionLevels h selected) d q ↔ p = q := by
+-  have hle := (compressedNode_compare h selected hv hp hq rfl).2
+-  have hge := (compressedNode_compare h selected hv hq hp rfl).2
+-  omega
+-
+-theorem compressed_terminal_parent_reflect (h : Nat) (selected : List Block)
+-    (hv : ∀ b ∈ selected, validBlock h b = true) (hh : 0 < h)
+-    {p : Nat} (hp : Block.variable h p .leaf ∈ selected)
+-    {b : Block} (hb : b ∈ selected)
+-    (he : compressBlock (compressionLevels h selected) b =
+-      .variable (retainedDepth (compressionLevels h selected) h - 1)
+-        (compressedNode (compressionLevels h selected) h p / 2) .minus) :
+-    b = .variable (h - 1) (p / 2) .minus := by
+-  cases b with
+-  | dummy => simp [compressBlock] at he
+-  | anchor _ _ => simp [compressBlock] at he
+-  | «variable» d q s =>
+-      let levels := compressionLevels h selected
+-      have hd := defining_mem_compressionLevels h selected (blockLevels_mem_variable hb)
+-      have ht := endpoint_mem_compressionLevels h selected
+-      have hpre := predecessor_mem_compressionLevels h selected (blockLevels_mem_variable hp)
+-      have hi := retainedDepth_adjacent_iff levels ht hd (fun _ => hpre)
+-      have hk : 0 < retainedDepth levels h := actualRetainedDepth_pos h _ _ hh
+-      simp only [compressBlock, Block.variable.injEq] at he
+-      change (retainedDepth levels d = retainedDepth levels h - 1 ∧
+-        compressedNode levels d q = compressedNode levels h p / 2 ∧ s = .minus) at he
+-      have hnext : retainedDepth levels h = retainedDepth levels d + 1 := by omega
+-      have hdepth : h = d + 1 := hi.mp hnext
+-      have hcomp := compressedNode_parent_compare h selected hv hp hb hdepth
+-      change (compressedNode levels h p / 2 < compressedNode levels d q ↔ p / 2 < q) ∧
+-        (compressedNode levels h p / 2 ≤ compressedNode levels d q ↔ p / 2 ≤ q) at hcomp
+-      have hnode : p / 2 = q := by omega
+-      have hd' : d = h - 1 := by omega
+-      simp [hd', ← hnode, he.2.2]
+-
+-theorem terminalForm_reflect (h : Nat) (rows cols : Fin 4 → Block)
+-    (hh : 0 < h) (hv : ∀ b ∈ selectedRecords rows cols, validBlock h b = true)
+-    (hs : TerminalForm (retainedDepth (compressionLevels h (selectedRecords rows cols)) h)
+-      (fun i => compressBlock (compressionLevels h (selectedRecords rows cols)) (rows i))
+-      (fun i => compressBlock (compressionLevels h (selectedRecords rows cols)) (cols i))) :
+-    TerminalForm h rows cols := by
+-  let selected := selectedRecords rows cols
+-  let levels := compressionLevels h selected
+-  rcases hs with ⟨parity, p', hpar, _, hparity', hr0', hr1', hr2', hr3', hc0', hc2', hc3', hsecond⟩
+-  rcases compressed_terminal_leaf_reflect h selected
+-    (row_mem_selectedRecords rows cols 2) p' hr2' with ⟨p, hr2, hn⟩
+-  rcases compressed_terminal_leaf_reflect h selected
+-    (col_mem_selectedRecords rows cols 2) p' hc2' with ⟨q, hc2, hq⟩
+-  have mr2 : Block.variable h p .leaf ∈ selected := by
+-    rw [← hr2]; exact row_mem_selectedRecords rows cols 2
+-  have mc2 : Block.variable h q .leaf ∈ selected := by
+-    rw [← hc2]; exact col_mem_selectedRecords rows cols 2
+-  have hpeq : p = q := (compressedNode_eq_iff h selected hv mr2 mc2).mp (hn.trans hq.symm)
+-  subst q
+-  have hp : p < 2 ^ h := by
+-    have v := hv _ mr2
+-    simp [validBlock] at v
+-    exact v.1
+-  have hparity : p % 2 = parity := by
+-    have ht := compressedNode_parity levels h p (endpoint_mem_compressionLevels h selected) hp
+-    rw [hn] at ht
+-    exact ht.symm.trans hparity'
+-  have hr0 := compressed_terminal_anchor_reflect h selected
+-    (row_mem_selectedRecords rows cols 0) parity 1 hr0'
+-  have hr1 := compressed_terminal_anchor_reflect h selected
+-    (row_mem_selectedRecords rows cols 1) parity 2 hr1'
+-  have hc0 := compressed_terminal_anchor_reflect h selected
+-    (col_mem_selectedRecords rows cols 0) parity 1 hc0'
+-  have hr3 := (compressBlock_dummy_iff levels (rows 3)).mp hr3'
+-  have hc3 := compressed_terminal_parent_reflect h selected hv hh mr2
+-    (col_mem_selectedRecords rows cols 3) (by simpa [hn] using hc3')
+-  refine ⟨parity, p, hpar, hp, hparity, hr0, hr1, hr2, hr3, hc0, hc2, hc3, ?_⟩
+-  rcases hsecond with ha | hl
+-  · exact Or.inl (compressed_terminal_anchor_reflect h selected
+-      (col_mem_selectedRecords rows cols 1) parity 2 ha)
+-  · rcases hl with ⟨q', hlt', hpar', hc1'⟩
+-    rcases compressed_terminal_leaf_reflect h selected
+-      (col_mem_selectedRecords rows cols 1) q' hc1' with ⟨q, hc1, hqn⟩
+-    have mc1 : Block.variable h q .leaf ∈ selected := by
+-      rw [← hc1]; exact col_mem_selectedRecords rows cols 1
+-    have hlt : q < p := (compressedNode_compare h selected hv mc1 mr2 rfl).1.mp
+-      (by rw [hqn, hn]; exact hlt')
+-    have hparq : q % 2 = p % 2 := by
+-      have ht := endpoint_mem_compressionLevels h selected
+-      have hqvalid : q < 2 ^ h := by
+-        have v := hv _ mc1
+-        simp [validBlock] at v
+-        exact v.1
+-      have hqpar := compressedNode_parity levels h q ht hqvalid
+-      have hppar := compressedNode_parity levels h p ht hp
+-      rw [hqn] at hqpar
+-      rw [hn] at hppar
+-      exact hqpar.symm.trans (hpar'.trans hppar)
+-    exact Or.inr ⟨q, hlt, hparq, hc1⟩
+-
+-theorem original_terminal_all_depth (h : Nat) (hh : 0 < h)
+-    (rows cols : Fin 4 → Block) (hc : IsValidCopy h false rows cols) :
+-    TerminalForm h rows cols := by
+-  let levels := compressionLevels h (selectedRecords rows cols)
+-  have hk := compressionDepth_bounds h rows cols hh
+-  have hcopy := isValidCopy_compress h false rows cols hc
+-  have hs := original_terminal_bounded (retainedDepth levels h) hk.1 hk.2
+-    (fun i => compressBlock levels (rows i)) (fun i => compressBlock levels (cols i)) hcopy
+-  exact terminalForm_reflect h rows cols hh hc.1 hs
+-
+-theorem original_leaf_diagonal_all_depth (h : Nat) (hh : 0 < h)
+-    (rows cols : Fin 4 → Block) (hc : IsValidCopy h false rows cols) :
+-    ∃ p, p < 2 ^ h ∧ rows 2 = .variable h p .leaf ∧ cols 2 = .variable h p .leaf := by
+-  rcases original_terminal_all_depth h hh rows cols hc with
+-    ⟨_, p, _, hp, _, _, _, hr, _, _, hc, _, _⟩
+-  exact ⟨p, hp, hr, hc⟩
+-
+ end H4Formal

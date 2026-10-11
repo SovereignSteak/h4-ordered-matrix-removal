@@ -1,0 +1,204 @@
+\section{Arithmetic certificates and formalization}\label{app:formalization}
+This appendix specifies the integer model used in the classification and
+repair proofs. Its domain and entry rules are uniform in $h$, so the two
+certificate lemmas have a single depth parameter.
+
+\subsection{The integer block domain}\label{app:integer}
+For an integer $h\ge1$, the admissible records are of three kinds:
+\begin{align*}
+ M(j,i,g)&=(0,j,i,g,0,0,0),\\
+ U(d,p,s)&=(1,0,0,0,d,p,s),\\
+ D_*&=(2,0,0,0,0,0,0).
+\end{align*}
+The seven fields are, in order, kind, mode, marker level, marker group,
+variable depth, node, and sign. A marker satisfies
+$0\le j<6$, $1\le i\le h$ and $g\in\{1,2\}$. The mode codes are
+\[
+ 0=V^+,\quad 1=V^-,\quad 2=W_0^+,\quad 3=W_1^+,
+ \quad 4=W_0^-,\quad 5=W_1^-.
+\]
+A variable satisfies $0\le d\le h$, $p\ge0$, and $d=0\Rightarrow p=0$.
+Its sign is $s=2$ when $d=h$, and $s\in\{0,1\}$ when $d<h$, with
+$0,1,2$ denoting plus, minus and leaf, respectively.
+
+The physical encoding assigns the appropriate mode code to a marker,
+copies the depth, node and sign of a variable, and sends the dummy to
+$D_*$. Thus every physical block gives an admissible record. The integer
+domain relaxes physical validity by omitting the bound $p<2^d$.
+
+\subsection{Comparison and entry predicates}
+For markers, comparison is lexicographic on
+\[
+ \bigl(\ind[j<4],i,j,g\bigr).
+\]
+This places modes 4 and 5 first, in precisely the marker order of
+Section~\ref{sec:host}. Every marker precedes every non-marker. Among
+non-markers the dummy follows variables on rows and precedes them on
+columns.
+
+For variable records, write $(o_r,c_r)=(1,0)$ and
+$(o_c,c_c)=(0,1)$ for the opening and closing signs on the two axes.
+Put $q'=\lfloor q/2\rfloor$ and $p'=\lfloor p/2\rfloor$. The integer
+comparison $\prec_a$, for $a\in\{r,c\}$, is defined by
+\begin{equation}\label{eq:integer-order}
+ U(d,p,s)\prec_a U(e,q,t)\ \Longleftrightarrow\
+ \begin{cases}
+ p<q\ \lor\ (p=q\land s=o_a\land t=c_a),&d=e,\\
+ p<q'\ \lor\ (p=q'\land s=o_a),&e=d+1,\\
+ p'<q\ \lor\ (p'=q\land t=c_a),&d=e+1,\\
+ \mathrm{true},&|d-e|\ge2.
+ \end{cases}
+\end{equation}
+At equal depths and adjacent depths these are the exact comparisons of
+the tree blocks. At larger depth gaps the relation permits every pair.
+
+Let $E_h^0$ be the original integer entry function. Its marker--marker
+rule is
+\[
+ E_h^0(M(j,i,g),M(k,\ell,u))=\ind[j=k\land i=\ell\land g\ne u].
+\]
+The marker roles are those of the table in Section~\ref{sec:host}, with
+level and parity tested on the records. In a signed role, $U(d,p,2)$
+belongs to either sign when $d=h$. Entries with a dummy and a non-marker
+are one. The variable entries are exactly \eqref{eq:values}, with the
+depth and sign conventions above. Let $E_h^1$ have the same rules, except
+\[
+ E_h^1(D_*,U(h,p,2))=0\qquad(p\ge0).
+\]
+These definitions retain every entry rule while relaxing node ranges and
+some comparisons.
+
+For $\eta\in\{0,1\}$, define $\mathcal C_h^\eta(r,c)$ for two
+four-tuples of records by the following conditions: all eight records are
+admissible, $r_i\prec_r r_j$ and $c_i\prec_c c_j$ for every
+$1\le i<j\le4$, and
+\[
+ E_h^\eta(r_i,c_j)=(H_4)_{ij}\qquad(1\le i,j\le4).
+\]
+In particular, all six comparisons on each axis are part of the copy
+predicate.
+
+\begin{lemma}[Encoding a physical copy]\label{lem:encoding}
+The physical block encoding maps every ordered block copy in $A_h$ to
+a witness for $\mathcal C_h^0$, and every ordered block copy in $B_h$ to
+a witness for $\mathcal C_h^1$.
+\end{lemma}
+\begin{proof}
+Physical marker levels and groups satisfy the integer ranges. For a
+variable, physical validity gives its depth and sign, the nonnegative
+node label, and the root condition. Thus the encoding preserves validity.
+
+For comparisons, a marker pair has the same lexicographic key on both
+axes. A marker--non-marker pair and a dummy--variable pair follow the
+stated axis rules. For two variables at equal depth, node order and the
+opening and closing signs give the first clause of
+\eqref{eq:integer-order}. At adjacent depths the ancestor node is the
+integer quotient by two, giving the second and third clauses. At a gap
+of at least two levels the relaxed clause is satisfied. Hence all physical
+comparisons imply their integer counterparts, separately for rows and
+columns.
+
+Finally, marker pairs use the same mode and group test, mixed marker
+pairs use the same role test, and the non-marker entries use the same
+dummy and variable rules. The canonical change is precisely on the
+encoded dummy-row--leaf-column products. All sixteen entry equalities
+are therefore preserved. These arguments are the encoding lemmas
+\code{encode_valid}, \code{encode_before},
+\code{encode_original_entry} and \code{encode_repaired_entry}; together
+they give \code{encode_copy}.
+\end{proof}
+
+\subsection{The certificate statements}
+Define $T_h(r,c)$ to mean that there exist $j\in\{4,5\}$ and $p\ge0$
+such that
+\begin{align*}
+ r&=\bigl(M(j,h,1),M(j,h,2),U(h,p,2),D_*\bigr),\\
+ c&=\bigl(M(j,h,1),v,U(h,p,2),U(h-1,\lfloor p/2\rfloor,1)\bigr),
+\end{align*}
+where either $v=M(j,h,2)$, or $v=U(h,q,2)$ with
+$0\le q<p$ and $q\equiv p\pmod2$. The marker parity is recovered
+from the entry conditions when this predicate is decoded in the physical
+host.
+
+\begin{lemma}[Arithmetic classification and repair]\label{lem:arithmetic}
+For every integer $h\ge1$ and every pair of four-tuples $r,c$ of integer
+records,
+\begin{equation}\label{eq:certificate-claims}
+ \mathcal C_h^0(r,c)\ \Longrightarrow\ T_h(r,c),
+ \qquad
+ \mathcal C_h^1(r,c)\ \Longrightarrow\ \bot.
+\end{equation}
+\end{lemma}
+\begin{proof}[Certificate proof]
+The first implication is the Lean theorem
+\code{Arithmetic.classification}, and the second is
+\code{Arithmetic.repaired_no_copy}. The classification derivation has
+266 source segments and the repair derivation has 243. Their steps are
+propositional inferences, linear integer arithmetic lemmas, and
+congruence proofs. The transparent formula abbreviations express the
+admissibility, comparison and entry predicates specified above.
+
+The two bridge modules instantiate the final derivations with the fields
+of $r$ and $c$. Both copy predicates supply eight validity conditions,
+twelve pairwise comparisons and all sixteen entry conditions. The
+classification derivation needs only fifteen of the entry conditions:
+it does not use the condition at $(0,0)$ (with zero-based indices).
+The repair derivation uses all sixteen. For classification the negation
+of $T_h$ gives the counterexample premise; for repair the premises are
+the repaired copy conditions themselves. Thus the omitted classification
+premise strengthens that certificate without weakening the definition
+of an induced copy.
+The resulting contradictions establish \eqref{eq:certificate-claims}.
+The derivations and the bridge proofs are checked by the Lean kernel.
+\end{proof}
+
+To decode the first conclusion, the leaf-row entry against the first
+marker column is one. The role test consequently gives
+$j=4+(p\bmod2)$. Physical validity then supplies $p<2^h$ and the valid
+minus parent. This is the theorem \code{terminal_decodes}, which yields
+the terminal families in Section~\ref{sec:classification}.
+
+\subsection{Formal statements and verification}
+The matrix family \code{standardHost} uses the usual order on
+$\operatorname{Fin}(n_h)$ on both axes. Its copy predicate
+uses increasing four-tuples and all sixteen Boolean equalities. Its
+edit distance is the attained minimum Hamming cost over pattern-free
+binary matrices. The principal mathematical interfaces are
+\begin{center}\small
+\begin{tabular}{p{47mm}p{99mm}}\toprule
+Result&Lean declaration\\\midrule
+Physical size and order&\code{physicalPairs_length}, \code{orderedPosition_order_iff}\\
+Matrix copy bridge&\code{standard_copy_iff}\\
+Terminal classification&\code{classification_iff}\\
+Repaired freeness&\code{canonical_standard_free}\\
+Exact copy count&\code{exact_copy_count}\\
+Arbitrary-edit lower bound&\code{arbitrary_edit_lower_bound}\\
+Exact edit distance&\code{exact_edit_distance}, \code{exact_normalized_distance}\\
+Asymptotic ratio&\code{normalized_copy_ratio_tendsto}\\
+Removal obstruction&\code{no_polynomial_removal_bound}\\
+Main theorem&\code{end_to_end_main_theorem}\\\bottomrule
+\end{tabular}
+\end{center}
+
+The XOR construction is developed in \code{XorSampling.lean}; its counting
+argument is in \code{FiniteAvoidance.lean}. Terminal parameters are counted
+in \code{TerminalCount.lean}, and their physical realizations are
+enumerated in \code{CopyFibres.lean}. The module \code{GlobalCounting.lean}
+identifies their disjoint union with the full copy enumeration.
+\code{EditDistance.lean} transports Hamming cost through the
+order-preserving bijections and proves attainment of the minimum.
+
+The project pins Lean 4.24.0 and Mathlib at revision
+\begin{center}\code{f897ebcf72cd16f89ab4577d0c826cd14afaafc7}.\end{center}
+The clean verification procedure is run from the project root by
+\begin{quote}\ttfamily\small
+bash verify\_all.sh
+\end{quote}
+Its declaration audit selects every definition and theorem by its defining
+project module, including private and anonymous declarations, and checks
+the complete axiom dependency closure. Only \code{propext},
+\code{Classical.choice} and \code{Quot.sound} are allowed. Current run
+records, exact source and artifact hashes, and dependency provenance are
+under \code{evidence/strict_build/}; supplied older logs are preserved
+separately as historical evidence. Appendix~\ref{app:reproduce} describes
+the build procedure, proof dependencies and retained verification records.

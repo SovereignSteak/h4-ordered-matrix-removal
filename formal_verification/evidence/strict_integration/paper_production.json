@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "started_at_utc": "2026-10-10T18:50:07.473237+00:00",
+  "source_sha256": {
+    "paper/additions/alternate_lower.tex": "9007cad6f755ca206e8d2b8731fef05a8c2c5e17830d03f5092585ef464eb097",
+    "paper/additions/compression.tex": "25f3c9bb56d09273a32844b580964675f9eac492b794f7c475a3af670f960c71",
+    "paper/additions/context.tex": "c8295c967c04ae9efb288deb9e9cbc8ec8c763e3738b7bd87e17b418ae98a326",
+    "paper/additions/exact_hitting.tex": "fef666d8bf811821798a99467fbedd90b3478f530817fa559891cbe96266115f",
+    "paper/additions/parameters.tex": "98235c39390686fc378306a314ab4c93abd1e7baca8bbbb9191297decbc2ea5d",
+    "paper/additions/repair_spectrum.tex": "db9c4c13b7d39c424e0a26dae5c66e69f89dc4902ad62d94c72e6893d5e05a6e",
+    "paper/additions/robust.tex": "34cc42fae24aa02d92b86c00d2238c181ee0395d61a68413c6ec29babd8ab853",
+    "paper/additions/structure.tex": "0a7295866fb87cbf319f402e11861b4b64964a8912493b9b5ab9103fa4bc16df",
+    "paper/additions/verify.tex": "61e7886cbb129c1509f0a86f9b4313b540b45e2f0a092fcd3593967308c963bb",
+    "paper/formalization.tex": "bc40bec4f741b54330618f4ff30011d3c28baf636ee326a08d107e08096b7f8f",
+    "paper/main.tex": "9a2e8ea8f282d1fa0d08f46b15fba1060663dc9eca1f670591b665db95dc58e3"
+  },
+  "exit_code": 0,
+  "issues": [],
+  "finished_at_utc": "2026-10-10T18:50:12.521118+00:00",
+  "output": [
+    "Output written on ../.build/paper/main.pdf (23 pages, 480479 bytes)."
+  ],
+  "log_sha256": "9ffde7d9a88124aa14e89a3f1e8f1e521bf6ab9e6987d5c627c3da43765d6340",
+  "pdf_sha256": "cc5fa9f390f22c478d60f5cc51c52d302b309b0dcb613eaa0c93a6a3e6ea4baf"
+}

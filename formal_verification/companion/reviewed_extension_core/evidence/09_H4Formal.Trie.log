@@ -1,0 +1,7 @@
+H4Formal/Trie.lean:40:37: warning: This simp argument is unused:
+  Nat.add_left_comm
+
+Hint: Omit it from the simp argument list.
+  simp [BinaryTrie.branchLabels, BinaryTrie.branchCount, ihl, ihr, Nat.add_assoc, N̵a̵t̵.̵a̵d̵d̵_̵c̵o̵m̵m̵,̵ ̵N̵a̵t̵.̵a̵d̵d̵_̵l̵e̵f̵t̵_̵c̵o̵m̵m̵]̵N̲a̲t̲.̲a̲d̲d̲_̲c̲o̲m̲m̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

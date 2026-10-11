@@ -1,0 +1,70 @@
+\section{Quantitative consequences of the exact formulas}\label{sec:quantitative}
+The main theorem determines the obstruction at three scales: tree
+depth $h$, matrix order $n_h$, and normalized edit distance
+$\epsilon_h$.  Explicit changes of scale sharpen the comparison
+with polynomial removal inequalities.
+
+\begin{proposition}[Stretched-exponential copy-density profile]
+\label{prop:stretched}
+At the exact values $\epsilon_h=(14h+2)^{-2}$, the copy density is
+\begin{equation}\label{eq:stretched}
+ \delta_h=\biggl(\frac52-2^{-h}\biggr)\epsilon_h^4
+    \exp\biggl[-\frac{\log 4}{14}
+                   \bigl(\epsilon_h^{-1/2}-2\bigr)\biggr].
+\end{equation}
+In particular, the largest valid lower-bound function for the
+individual pattern $H_4$ cannot exceed the right-hand side along
+this sequence of edit parameters.
+\end{proposition}
+\begin{proof}
+By Theorem~\ref{thm:main},
+$\delta_h=(5/2-2^{-h})/((14h+2)^8 4^h)$.
+The relation $\epsilon_h^{-1/2}=14h+2$ gives
+$h=(\epsilon_h^{-1/2}-2)/14$. Substitution yields
+\eqref{eq:stretched}. For any function $g(\epsilon)$ satisfying
+$N_{H_4}(A)\ge g(\dist_{H_4}(A))n^8$ for all finite $A$,
+applying the bound to $A_h$ gives $g(\epsilon_h)\le\delta_h$.
+\end{proof}
+
+\begin{proposition}[Profile by matrix order]\label{prop:byorder}
+As $h\to\infty$, the constructed orders and copy counts satisfy
+\[
+ \epsilon_h=\Theta((\log n_h)^{-2}),\qquad
+ \delta_h=\Theta\!\left(\frac1{n_h^2(\log n_h)^6}\right),
+ \qquad
+ N_{H_4}(A_h)=\Theta\!\left(\frac{n_h^6}{(\log n_h)^6}\right).
+\]
+\end{proposition}
+\begin{proof}
+Writing $d_h=14h+2$ and $m=2^h$ gives
+$\log n_h=h\log2+\log d_h=\Theta(h)$, so
+$d_h=\Theta(\log n_h)$ and $m=n_h/d_h$.
+The exact copy formula may be rearranged as
+\[
+ N_{H_4}(A_h)=\biggl(\frac52-\frac1m\biggr)
+                    \frac{n_h^6}{d_h^6}.
+\]
+The coefficient lies in $[2,5/2)$ because $m\ge2$.
+Dividing by $n_h^8$ and using the distance identity gives the three
+assertions.
+\end{proof}
+
+\subsection{A small-depth consistency table}
+The exact formulas provide convenient integer-valued checks of the
+terminal enumeration. They require no asymptotic approximation.
+\begin{center}\small
+\begin{tabular}{r|r|r|r|r|r}
+\toprule
+$h$ & $m$ & $n_h$ & family I & family II & $N_{H_4}(A_h)$\\\midrule
+1&2&32&128&0&128\\
+2&4&120&8192&1024&9216\\
+3&8&352&524288&98304&622592\\
+4&16&928&33554432&7340032&40894464\\
+\bottomrule
+\end{tabular}
+\end{center}
+The two contributions follow by substituting $m=2^h$ into the
+form-I and form-II expressions. At depth one, family II is absent;
+at higher depths, its share rises toward one fifth of the total.
+The table illustrates why a search that detects only the single
+explicit propagation family cannot certify the complete copy count.

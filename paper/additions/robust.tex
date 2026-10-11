@@ -1,0 +1,100 @@
+\section{Robustness of the edit obstruction under marker permutations}
+\label{sec:robust}
+Only a small part of the complete marker order enters the edit-distance
+argument.  The original host places the two groups of each marker
+mode consecutively and uses a particular ordering of all $6h$ modes.
+The forcing argument itself requires only that the two groups of a
+single mode occur in their given order and that the entire marker
+prefix precede the variable and dummy blocks. This gives a useful
+separation between the mechanism responsible for distance and the
+mechanism responsible for terminal localization.
+
+For each depth $h$, let $\pi_r$ and $\pi_c$ be two arbitrary
+permutations of its $6h$ complete marker modes. Define
+$A_h^{\pi_r,\pi_c}$ by permuting the marker \emph{row} blocks in
+accordance with $\pi_r$ and marker \emph{column} blocks in
+accordance with $\pi_c$, preserving the order of the two groups
+inside each mode. Keep every block-constant entry, the two signed
+tree orders, and the positions of the row and column dummy blocks
+relative to the variable tree. The result is again a square matrix
+of order $(14h+2)2^h$.
+
+\begin{proposition}[Order-independent forcing lower bound]
+\label{prop:permuted}
+For every $h\ge1$ and every pair of complete-mode permutations,
+\[
+ D_{H_4}(A_h^{\pi_r,\pi_c})\ge 4^h.
+\]
+In particular, the lower bound holds against arbitrary binary edits
+under independently reordered marker prefixes.
+\end{proposition}
+\begin{proof}
+Use exactly the $m^2$ XOR-indexed selections from
+Section~\ref{sec:distance}. The definition and injectivity of the
+protected cells depend on physical block labels, their offsets,
+the chosen tree path and the fact that marker and dummy blocks have
+size $m$; permutation of whole marker modes changes none of these.
+Therefore any edit set of size below $m^2$ misses the protected cells
+of one selection.
+
+For a fixed mode $t$, its two marker row groups appear in the order
+$A_1(t)<A_2(t)$ and its marker column groups in the order
+$B_1(t)<B_2(t)$. All four groups precede every variable and dummy
+position, regardless of the position of other complete modes in the
+prefix. The four forcing frames use only the two marker groups of
+their own mode. Their increasing order and all the relevant
+incidences therefore remain unchanged. The implications in the
+forcing table again propagate $x_0=1$ and $y_0=0$ to the common leaf
+cell, contradicting freeness. Thus any eliminating edit set has
+size at least $m^2$.
+\end{proof}
+
+The upper bound $D_{H_4}(A_h)\le m^2$ and the exact copy count were
+proved for the canonical mode order in Section~\ref{sec:host}.
+Proposition~\ref{prop:permuted} records the broader range of the
+forcing mechanism itself. The separately supplied Lean extension
+contains the corresponding concrete-index theorem
+\texttt{permuted\_matrix\_edit\_lower\_bound}; the primary
+submission project retains its canonical order in the global
+classification and removal statements.
+
+\section{The selection map as an injective coding device}
+\label{sec:selectionmap}
+The XOR choice can be characterized without mentioning the particular
+marker rules. Fix a word length $h$, and for each pair
+$(a,b)\in\{0,\dots,2^h-1\}^2$ place a selected representative in
+every signed variable block on the ancestral path of $a\oplus b$.
+At a depth $d$, the selected node is the high-$d$-bit prefix of the
+XOR, and the selected offset on the row axis (respectively column
+axis) is the low $h-d$ bits of $a$ (respectively $b$).
+
+\begin{lemma}[One-endpoint recovery]\label{lem:recovery}
+Suppose the selected variable row at depth $d$ is known and the
+selected marker-column offset is known. Then the pair $(a,b)$ is
+uniquely determined. The analogous assertion holds with the two
+axes reversed. A pair of selected root-variable positions also
+uniquely determines $(a,b)$.
+\end{lemma}
+\begin{proof}
+The marker-column offset equals $b$. The variable row determines
+its node prefix $p_d$ and row offset $u=a\bmod2^{h-d}$. Since
+bitwise XOR commutes with taking high-bit prefixes,
+\[
+ \lfloor a/2^{h-d}\rfloor
+     =p_d\oplus\lfloor b/2^{h-d}\rfloor.
+\]
+The quotient on the left and remainder $u$ recover $a$. This
+also holds for $d=h$, when the row offset is zero. Reversing the
+axes recovers $b$ by the same equation. At $d=0$, the root node
+is zero and the row and column offsets are exactly $a$ and $b$.
+\end{proof}
+
+This coding interpretation makes the protected-cell injectivity
+transparent. Each protected cell contains at least one such
+recoverable configuration; hence it belongs to at most one selected
+path. The proof uses all $m^2$ labels simultaneously. Independent
+choices of a random leaf and unrelated row and column offsets would
+not provide this exact disjointness, even though some marginal
+probabilities would still be uniform. The deterministic injection
+also eliminates the need to estimate correlations among the
+successive forcing gadgets.

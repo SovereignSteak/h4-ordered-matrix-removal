@@ -1,0 +1,186 @@
+⚠ [23/178] Replayed H4Formal.ArithmeticHost
+warning: H4Formal/ArithmeticHost.lean:154:75: This simp argument is unused:
+  he
+
+Hint: Omit it from the simp argument list.
+  simp [valid, encode, encodeSign, pIf,̵ ̵h̵e̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: H4Formal/ArithmeticHost.lean:178:29: This simp argument is unused:
+  ← Int.natCast_emod
+
+Hint: Omit it from the simp argument list.
+  simp [signature, atSign, atParity, encode, modeNumber, pIf, role, matchesBlock, encodeSign,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲ ̲← h̵e̵q̵,̵ ̵←̵ ̵I̵n̵t̵.̵n̵a̵t̵C̵a̵s̵t̵_̵e̵m̵o̵d̵]̵h̲e̲q̲]̲
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: H4Formal/ArithmeticHost.lean:185:64: This simp argument is unused:
+  ← Int.natCast_ediv
+
+Hint: Omit it from the simp argument list.
+  simp [hostValue, variableEntry, encode, encodeSign, he, hn, ← I̵n̵t̵.̵n̵a̵t̵C̵a̵s̵t̵_̵e̵d̵i̵v̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵←̵ ̵Int.natCast_add]
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: H4Formal/ArithmeticHost.lean:186:6: This simp argument is unused:
+  ← Int.natCast_add
+
+Hint: Omit it from the simp argument list.
+  simp [hostValue, variableEntry, encode, encodeSign, he, hn, ← Int.natCast_ediv,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵←̵ ̵I̵n̵t̵.̵n̵a̵t̵C̵a̵s̵t̵_̵a̵d̵d̵]
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+✔ [3488/3635] Built H4Formal.Certificates.CheckedClassification.Classification177 (19s)
+✔ [3489/3635] Built H4Formal.Certificates.CheckedClassification.Classification178 (29s)
+✔ [3490/3635] Built H4Formal.Certificates.CheckedRepair.Repair189 (49s)
+✔ [3491/3635] Built H4Formal.Certificates.CheckedRepair.Repair190 (14s)
+✔ [3492/3635] Built H4Formal.Certificates.CheckedClassification.Classification179 (35s)
+✔ [3493/3635] Built H4Formal.Certificates.CheckedClassification.Classification180 (20s)
+✔ [3494/3635] Built H4Formal.Certificates.CheckedRepair.Repair191 (45s)
+✔ [3495/3635] Built H4Formal.Certificates.CheckedClassification.Classification181 (39s)
+✔ [3496/3635] Built H4Formal.Certificates.CheckedRepair.Repair192 (52s)
+✔ [3497/3635] Built H4Formal.Certificates.CheckedClassification.Classification182 (31s)
+✔ [3498/3635] Built H4Formal.Certificates.CheckedClassification.Classification183 (26s)
+✔ [3499/3635] Built H4Formal.Certificates.CheckedRepair.Repair193 (50s)
+✔ [3500/3635] Built H4Formal.Certificates.CheckedRepair.Repair194 (23s)
+✔ [3501/3635] Built H4Formal.Certificates.CheckedRepair.Repair195 (10s)
+✔ [3502/3635] Built H4Formal.Certificates.CheckedClassification.Classification184 (61s)
+✔ [3503/3635] Built H4Formal.Certificates.CheckedRepair.Repair196 (23s)
+✔ [3504/3635] Built H4Formal.Certificates.CheckedClassification.Classification185 (32s)
+✔ [3505/3635] Built H4Formal.Certificates.CheckedRepair.Repair197 (44s)
+✔ [3506/3635] Built H4Formal.Certificates.CheckedClassification.Classification186 (49s)
+✔ [3507/3635] Built H4Formal.Certificates.CheckedRepair.Repair198 (62s)
+✔ [3508/3635] Built H4Formal.Certificates.CheckedClassification.Classification187 (43s)
+✔ [3509/3635] Built H4Formal.Certificates.CheckedClassification.Classification188 (50s)
+✔ [3510/3635] Built H4Formal.Certificates.CheckedRepair.Repair199 (62s)
+✔ [3511/3635] Built H4Formal.Certificates.CheckedRepair.Repair200 (55s)
+✔ [3512/3635] Built H4Formal.Certificates.CheckedClassification.Classification189 (86s)
+✔ [3513/3635] Built H4Formal.Certificates.CheckedRepair.Repair201 (55s)
+✔ [3514/3635] Built H4Formal.Certificates.CheckedClassification.Classification190 (41s)
+✔ [3515/3635] Built H4Formal.Certificates.CheckedClassification.Classification191 (35s)
+✔ [3516/3635] Built H4Formal.Certificates.CheckedRepair.Repair202 (54s)
+✔ [3517/3635] Built H4Formal.Certificates.CheckedClassification.Classification192 (15s)
+✔ [3518/3635] Built H4Formal.Certificates.CheckedRepair.Repair203 (42s)
+✔ [3519/3635] Built H4Formal.Certificates.CheckedClassification.Classification193 (32s)
+✔ [3520/3635] Built H4Formal.Certificates.CheckedRepair.Repair204 (17s)
+✔ [3521/3635] Built H4Formal.Certificates.CheckedClassification.Classification194 (34s)
+✔ [3522/3635] Built H4Formal.Certificates.CheckedRepair.Repair205 (31s)
+✔ [3523/3635] Built H4Formal.Certificates.CheckedClassification.Classification195 (19s)
+✔ [3524/3635] Built H4Formal.Certificates.CheckedClassification.Classification196 (17s)
+✔ [3525/3635] Built H4Formal.Certificates.CheckedRepair.Repair206 (41s)
+✔ [3526/3635] Built H4Formal.Certificates.CheckedClassification.Classification197 (44s)
+✔ [3527/3635] Built H4Formal.Certificates.CheckedRepair.Repair207 (48s)
+✔ [3528/3635] Built H4Formal.Certificates.CheckedRepair.Repair208 (19s)
+✔ [3529/3635] Built H4Formal.Certificates.CheckedRepair.Repair209 (9.2s)
+✔ [3530/3635] Built H4Formal.Certificates.CheckedClassification.Classification198 (50s)
+✔ [3531/3635] Built H4Formal.Certificates.CheckedRepair.Repair210 (17s)
+✔ [3532/3635] Built H4Formal.Certificates.CheckedClassification.Classification199 (20s)
+✔ [3533/3635] Built H4Formal.Certificates.CheckedRepair.Repair211 (15s)
+✔ [3534/3635] Built H4Formal.Certificates.CheckedClassification.Classification200 (14s)
+✔ [3535/3635] Built H4Formal.Certificates.CheckedClassification.Classification201 (14s)
+✔ [3536/3635] Built H4Formal.Certificates.CheckedRepair.Repair212 (22s)
+✔ [3537/3635] Built H4Formal.Certificates.CheckedClassification.Classification202 (12s)
+✔ [3538/3635] Built H4Formal.Certificates.CheckedRepair.Repair213 (49s)
+✔ [3539/3635] Built H4Formal.Certificates.CheckedClassification.Classification203 (39s)
+✔ [3540/3635] Built H4Formal.Certificates.CheckedRepair.Repair214 (27s)
+✔ [3541/3635] Built H4Formal.Certificates.CheckedClassification.Classification204 (37s)
+✔ [3542/3635] Built H4Formal.Certificates.CheckedRepair.Repair215 (33s)
+✔ [3543/3635] Built H4Formal.Certificates.CheckedRepair.Repair216 (11s)
+✔ [3544/3635] Built H4Formal.Certificates.CheckedClassification.Classification205 (51s)
+✔ [3545/3635] Built H4Formal.Certificates.CheckedRepair.Repair217 (24s)
+✔ [3546/3635] Built H4Formal.Certificates.CheckedRepair.Repair218 (18s)
+✔ [3547/3635] Built H4Formal.Certificates.CheckedClassification.Classification206 (41s)
+✔ [3548/3635] Built H4Formal.Certificates.CheckedRepair.Repair219 (41s)
+✔ [3549/3635] Built H4Formal.Certificates.CheckedClassification.Classification207 (60s)
+✔ [3550/3635] Built H4Formal.Certificates.CheckedRepair.Repair220 (38s)
+✔ [3551/3635] Built H4Formal.Certificates.CheckedClassification.Classification208 (27s)
+✔ [3552/3635] Built H4Formal.Certificates.CheckedRepair.Repair221 (37s)
+✔ [3553/3635] Built H4Formal.Certificates.CheckedClassification.Classification209 (49s)
+✔ [3554/3635] Built H4Formal.Certificates.CheckedRepair.Repair222 (37s)
+✔ [3555/3635] Built H4Formal.Certificates.CheckedClassification.Classification210 (39s)
+✔ [3556/3635] Built H4Formal.Certificates.CheckedRepair.Repair223 (40s)
+✔ [3557/3635] Built H4Formal.Certificates.CheckedClassification.Classification211 (38s)
+✔ [3558/3635] Built H4Formal.Certificates.CheckedRepair.Repair224 (44s)
+✔ [3559/3635] Built H4Formal.Certificates.CheckedClassification.Classification212 (48s)
+✔ [3560/3635] Built H4Formal.Certificates.CheckedRepair.Repair225 (57s)
+✔ [3561/3635] Built H4Formal.Certificates.CheckedClassification.Classification213 (62s)
+✔ [3562/3635] Built H4Formal.Certificates.CheckedRepair.Repair226 (60s)
+✔ [3563/3635] Built H4Formal.Certificates.CheckedClassification.Classification214 (30s)
+✔ [3564/3635] Built H4Formal.Certificates.CheckedClassification.Classification215 (24s)
+✔ [3565/3635] Built H4Formal.Certificates.CheckedRepair.Repair227 (46s)
+✔ [3566/3635] Built H4Formal.Certificates.CheckedClassification.Classification216 (42s)
+✔ [3567/3635] Built H4Formal.Certificates.CheckedRepair.Repair228 (38s)
+✔ [3568/3635] Built H4Formal.Certificates.CheckedRepair.Repair229 (56s)
+✔ [3569/3635] Built H4Formal.Certificates.CheckedClassification.Classification217 (70s)
+✔ [3570/3635] Built H4Formal.Certificates.CheckedRepair.Repair230 (60s)
+✔ [3571/3635] Built H4Formal.Certificates.CheckedClassification.Classification218 (62s)
+✔ [3572/3635] Built H4Formal.Certificates.CheckedRepair.Repair231 (20s)
+✔ [3573/3635] Built H4Formal.Certificates.CheckedClassification.Classification219 (31s)
+✔ [3574/3635] Built H4Formal.Certificates.CheckedRepair.Repair232 (60s)
+✔ [3575/3635] Built H4Formal.Certificates.CheckedClassification.Classification220 (34s)
+✔ [3576/3635] Built H4Formal.Certificates.CheckedClassification.Classification221 (30s)
+✔ [3577/3635] Built H4Formal.Certificates.CheckedClassification.Classification222 (14s)
+✔ [3578/3635] Built H4Formal.Certificates.CheckedRepair.Repair233 (53s)
+✔ [3579/3635] Built H4Formal.Certificates.CheckedClassification.Classification223 (12s)
+✔ [3580/3635] Built H4Formal.Certificates.CheckedClassification.Classification224 (18s)
+✔ [3581/3635] Built H4Formal.Certificates.CheckedRepair.Repair234 (32s)
+✔ [3582/3635] Built H4Formal.Certificates.CheckedClassification.Classification225 (23s)
+✔ [3583/3635] Built H4Formal.Certificates.CheckedRepair.Repair235 (23s)
+✔ [3584/3635] Built H4Formal.Certificates.CheckedClassification.Classification226 (21s)
+✔ [3585/3635] Built H4Formal.Certificates.CheckedRepair.Repair236 (54s)
+✔ [3586/3635] Built H4Formal.Certificates.CheckedClassification.Classification227 (44s)
+✔ [3587/3635] Built H4Formal.Certificates.CheckedClassification.Classification228 (20s)
+✔ [3588/3635] Built H4Formal.Certificates.CheckedClassification.Classification229 (25s)
+✔ [3589/3635] Built H4Formal.Certificates.CheckedRepair.Repair237 (62s)
+✔ [3590/3635] Built H4Formal.Certificates.CheckedClassification.Classification230 (28s)
+✔ [3591/3635] Built H4Formal.Certificates.CheckedRepair.Repair238 (42s)
+✔ [3592/3635] Built H4Formal.Certificates.CheckedClassification.Classification231 (56s)
+✔ [3593/3635] Built H4Formal.Certificates.CheckedRepair.Repair239 (55s)
+✔ [3594/3635] Built H4Formal.Certificates.CheckedClassification.Classification232 (73s)
+✔ [3595/3635] Built H4Formal.Certificates.CheckedRepair.Repair240 (59s)
+✔ [3596/3635] Built H4Formal.Certificates.CheckedRepair.Repair241 (59s)
+✔ [3597/3635] Built H4Formal.Certificates.CheckedClassification.Classification233 (73s)
+✔ [3598/3635] Built H4Formal.Certificates.CheckedRepair.Repair242 (19s)
+✔ [3599/3635] Built H4Formal.Certificates.RepairBridge (4.9s)
+✔ [3600/3635] Built H4Formal.Certificates.CheckedClassification.Classification234 (60s)
+✔ [3601/3635] Built H4Formal.Certificates.CheckedClassification.Classification235 (45s)
+✔ [3602/3635] Built H4Formal.Certificates.CheckedClassification.Classification236 (39s)
+✔ [3603/3635] Built H4Formal.Certificates.CheckedClassification.Classification237 (35s)
+✔ [3604/3635] Built H4Formal.Certificates.CheckedClassification.Classification238 (42s)
+✔ [3605/3635] Built H4Formal.Certificates.CheckedClassification.Classification239 (38s)
+✔ [3606/3635] Built H4Formal.Certificates.CheckedClassification.Classification240 (67s)
+✔ [3607/3635] Built H4Formal.Certificates.CheckedClassification.Classification241 (87s)
+✔ [3608/3635] Built H4Formal.Certificates.CheckedClassification.Classification242 (85s)
+✔ [3609/3635] Built H4Formal.Certificates.CheckedClassification.Classification243 (60s)
+✔ [3610/3635] Built H4Formal.Certificates.CheckedClassification.Classification244 (46s)
+✔ [3611/3635] Built H4Formal.Certificates.CheckedClassification.Classification245 (67s)
+✔ [3612/3635] Built H4Formal.Certificates.CheckedClassification.Classification246 (54s)
+✔ [3613/3635] Built H4Formal.Certificates.CheckedClassification.Classification247 (49s)
+✔ [3614/3635] Built H4Formal.Certificates.CheckedClassification.Classification248 (84s)
+✔ [3615/3635] Built H4Formal.Certificates.CheckedClassification.Classification249 (67s)
+✔ [3616/3635] Built H4Formal.Certificates.CheckedClassification.Classification250 (66s)
+✔ [3617/3635] Built H4Formal.Certificates.CheckedClassification.Classification251 (62s)
+✔ [3618/3635] Built H4Formal.Certificates.CheckedClassification.Classification252 (64s)
+✔ [3619/3635] Built H4Formal.Certificates.CheckedClassification.Classification253 (41s)
+✔ [3620/3635] Built H4Formal.Certificates.CheckedClassification.Classification254 (61s)
+✔ [3621/3635] Built H4Formal.Certificates.CheckedClassification.Classification255 (62s)
+✔ [3622/3635] Built H4Formal.Certificates.CheckedClassification.Classification256 (64s)
+✔ [3623/3635] Built H4Formal.Certificates.CheckedClassification.Classification257 (60s)
+✔ [3624/3635] Built H4Formal.Certificates.CheckedClassification.Classification258 (41s)
+✔ [3625/3635] Built H4Formal.Certificates.CheckedClassification.Classification259 (32s)
+✔ [3626/3635] Built H4Formal.Certificates.CheckedClassification.Classification260 (49s)
+✔ [3627/3635] Built H4Formal.Certificates.CheckedClassification.Classification261 (47s)
+✔ [3628/3635] Built H4Formal.Certificates.CheckedClassification.Classification262 (56s)
+✔ [3629/3635] Built H4Formal.Certificates.CheckedClassification.Classification263 (43s)
+✔ [3630/3635] Built H4Formal.Certificates.CheckedClassification.Classification264 (58s)
+✔ [3631/3635] Built H4Formal.Certificates.CheckedClassification.Classification265 (31s)
+✔ [3632/3635] Built H4Formal.Certificates.ClassificationBridge (4.7s)
+✔ [3633/3635] Built H4Formal.GlobalTheorems (17s)
+✔ [3634/3635] Built H4Formal (7.7s)
+Build completed successfully (3635 jobs).

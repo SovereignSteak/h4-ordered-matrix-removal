@@ -1,0 +1,135 @@
+\section{A uniform finite-witness principle for the host family}
+\label{app:smallwitness}
+The integer certificate in Appendix~\ref{app:formalization} handles
+arbitrary depths directly. The same host also admits a finite-depth
+reduction that is useful for independent specification checks.
+We give its combinatorial proof in the notation of the present paper.
+The statement applies to any square pattern whose row signatures and
+column signatures are individually distinct. This structural result
+is logically separate from the arithmetic certificate proof of
+Theorem~\ref{thm:main}.
+
+\begin{lemma}[Number of binary branching levels]\label{lem:branchlevels}
+For a family of $v\ge1$ finite binary words, at most $v-1$ different
+bit positions are the first divergence position of some pair before
+either word terminates.
+\end{lemma}
+\begin{proof}
+Form the trie of the given words, regarding a word that is a proper
+prefix of another as a marked internal vertex. A first divergence
+occurs only at a vertex with two nonempty child branches. A rooted
+tree with $v$ distinct marked word endpoints has at most $v-1$ such
+branching vertices: each branching vertex separates at least two
+components containing marked endpoints, and contracting all degree-one
+vertices yields a rooted tree with at most $v$ leaves after marked
+internal vertices are represented as terminal branches. Consequently
+the number of distinct branching depths is at most $v-1$.
+\end{proof}
+
+\begin{lemma}[Retained-level preservation]\label{lem:retention}
+Choose at most $2k$ row or column quotient types from the host at
+height $h$. Let $S\subseteq\{0,\dots,h\}$ contain $0,h$, the
+defining depth of each selected marker or variable type, the
+immediately preceding depth of each such positive defining depth,
+and every first-divergence level of a pair of selected variable
+words. Write $S=\{s_0=0<s_1<\cdots<s_{h'}=h\}$. Replace every
+selected defining depth $s_i$ by $i$ and every selected node word
+by its bits in retained positive positions. Then the compressed
+types preserve all required block comparisons and entries of both
+the original host and its canonical repair.
+\end{lemma}
+\begin{proof}
+The rank map preserves comparisons and equality of selected depths.
+The predecessor of every selected positive depth is retained.
+Therefore two selected depths are consecutive precisely when their
+images are consecutive; a gap of length at least two retains a point
+strictly between the endpoints. The first-divergence bit of every
+pair is retained, so lexicographic order and the proper-prefix
+relation are preserved. Since the final bit at any defining variable
+depth is retained, so is its parity. Parent comparison at adjacent
+depths is preserved because the relevant predecessor bit is retained.
+
+These are exactly the relations appearing in the host rules:
+marker pairs test equality of mode and inequality of group;
+marker--variable pairs test family, sign, depth adjacency, and
+parity; variable pairs test equal or adjacent depths with their
+lexicographic or parent comparison. The dummy incidence depends
+only on type; the repair tests dummy row against a terminal leaf
+column. Every selected type survives, its sign and marker group are
+unchanged, and these Boolean tests have the same values after
+compression. Lemma~\ref{lem:wordorder} gives preservation of the
+signed tree order. The marker mode order depends on family, retained
+depth and group, so its relevant comparisons are preserved as well.
+For equal node words at an internal level, the two signs remain
+distinct and their opening-before-closing order is unchanged.
+\end{proof}
+
+\begin{theorem}[General $6k$-level small-witness theorem]
+\label{thm:sixk}
+Fix $k\ge1$ and a binary $k\times k$ matrix $F$ with pairwise
+distinct rows and pairwise distinct columns. If $F$ occurs as an
+induced ordered copy in $A_h$ or $B_h$ for some $h\ge1$, then it
+occurs in the corresponding host at some depth
+$1\le d\le\min\{h,6k\}$. Consequently, the whole original
+(resp. repaired) host family is $F$-free if and only if its depths
+$1,\dots,6k$ are all $F$-free.
+\end{theorem}
+\begin{proof}
+By Proposition~\ref{prop:uniformquotient}, the given physical copy
+projects to $2k$ types, distinct among the selected row types and
+among the selected column types. Retain their defining levels and
+predecessors, as well as $0,h$ and every first-divergence bit level
+of the selected variable words. If $v\ge1$ is the number of
+variable types, Lemma~\ref{lem:branchlevels} bounds the number of
+first-divergence levels by $v-1\le2k-1$. Thus
+\[
+ |S|\le 2+2k+2k+(2k-1)=6k+1.
+\]
+If $v=0$, the still stronger bound $|S|\le2+4k$ holds. Since both
+endpoints $0,h$ are in $S$, the reduced height
+$d=|S|-1$ satisfies $1\le d\le\min\{h,6k\}$.
+By Lemma~\ref{lem:retention}, the compressed types retain each
+of the $k^2$ prescribed entries and the two increasing orders.
+They remain distinct within either axis: different defining kinds,
+levels or signs remain different, and distinct node words remain
+different because their first divergence is retained. Every
+compressed block has positive multiplicity, so representatives of
+the new types furnish a physical copy of $F$ at depth $d$.
+The converse direction of the final equivalence is immediate;
+if some larger depth contained a copy, the first assertion would
+supply a copy at one of the finitely many depths.
+\end{proof}
+
+\begin{corollary}[Twenty-four levels suffice for a copy witness]
+\label{cor:twentyfour}
+Any $H_4$ copy in $A_h$ or $B_h$ at arbitrary depth yields an
+$H_4$ copy in a host of the same kind at depth at most $24$.
+\end{corollary}
+\begin{proof}
+Apply Theorem~\ref{thm:sixk} with $k=4$.
+\end{proof}
+
+\begin{remark}[Proof scope]
+The finite-witness theorem is available in the separately supplied
+Lean development in the declarations
+\code{physical_pattern_copy_has_small_witness}
+and \code{matrix_pattern_copy_has_small_witness}. These exported
+interfaces certify $1\le d\le6k$. The additional bound $d\le h$
+in the paper statement follows from $S\subseteq\{0,\dots,h\}$ in
+the displayed combinatorial construction; it is not part of those
+exported Lean conclusions.
+The main theorem of this article uses the arithmetic-classification
+and arithmetic-repair route in the primary formal source release.
+\end{remark}
+
+\subsection{Finite decision and its precise meaning}
+Theorem~\ref{thm:sixk} supplies an exact finite decision procedure
+for the assertion that \emph{every depth} of the specified host family
+is $F$-free. For each of the $6k$ allowed depths, enumerate ordered
+quotient tuples with $k$ distinct row and $k$ distinct column types
+and evaluate all $k^2$ entries. Absence at all these depths implies
+absence in every larger host. The statement concerns a fixed explicit
+family of hosts, rather than arbitrary $n\times n$ matrices; its
+finite reduction does not impose a polynomial running-time bound in
+$k$.  For $H_4$, the arithmetic approach provides a direct all-depth
+proof without the need to run the finite enumerator.

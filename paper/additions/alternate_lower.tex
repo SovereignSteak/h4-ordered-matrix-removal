@@ -1,0 +1,106 @@
+\section{A second proof of the editing lower bound}\label{sec:probmethod}
+The exact disjointness of protected sets under the XOR selection is a
+convenient deterministic proof. A probabilistic argument reaches the
+same editing threshold using only one-coordinate uniformity. This
+formulation shows which feature is intrinsic to the tree host and
+which feature is special to the XOR coupling.
+The marginal-exposure and union-bound method adapts the edit-distance
+argument of \cite{OAI} to the smaller marker frame used here. It is
+included to explain the construction and to compare it with the
+deterministic packing, rather than as a new probabilistic method.
+
+Choose a leaf label $Z$ uniformly from $\{0,\dots,m-1\}$. At every
+depth $d$ select the node $\lfloor Z/2^{h-d}\rfloor$ and, in each
+signed block at that node, sample one physical row and one physical
+column uniformly from its $2^{h-d}$ offsets. Sample the row and
+column representatives in the marker and dummy blocks uniformly
+and independently of each other and of the tree representatives.
+The two signed paths meet at the same selected physical leaf
+because a leaf block consists of a single position.
+
+\begin{lemma}[Single-position marginal]\label{lem:marginal}
+For any fixed variable row position at depth $d$ and sign, its
+probability of selection is $m^{-1}$. The same is true for a fixed
+variable column position, marker position, or dummy position.
+\end{lemma}
+\begin{proof}
+A depth-$d$ node is reached with probability $2^{-d}$.
+Conditional on reaching it, a given offset is sampled with
+probability $2^{-(h-d)}$. Multiplying gives $2^{-h}=m^{-1}$.
+At the leaf depth the selection probability is $2^{-h}$ because
+there is one representative per node. Marker and dummy blocks have
+exactly $m$ positions and are sampled uniformly.
+\end{proof}
+
+Protect all selected cells for which at least one endpoint is a
+marker or dummy position, together with the two selected
+root-variable diagonal cells. No other variable--variable cells
+are protected. In particular, the shared terminal cell, whose
+value will be forced by the propagation, need not be protected.
+
+\begin{lemma}[Two-coordinate exposure]\label{lem:twocoord}
+For every fixed physical matrix cell $e$, the probability that $e$
+is protected by the random selection is at most $m^{-2}$.
+\end{lemma}
+\begin{proof}
+If either endpoint of $e$ is a marker or dummy position, that
+endpoint is chosen independently of the tree-path and variable
+offset choices on the other axis. Each endpoint has marginal
+probability $m^{-1}$ by Lemma~\ref{lem:marginal}, and the two
+events are independent, giving $m^{-2}$. If both endpoints are
+variable positions at the root, their offsets are sampled
+independently from the two root blocks of size $m$, giving the
+same product. All other cells have protection probability zero.
+\end{proof}
+
+\begin{proposition}[Probabilistic lower bound]
+\label{prop:problower}
+Every edit set that turns $A_h$ into an $H_4$-free binary matrix
+contains at least $m^2$ cells.
+\end{proposition}
+\begin{proof}
+Let $E$ be an arbitrary set of changed cells with $|E|<m^2$.
+By Lemma~\ref{lem:twocoord} and the union bound,
+\[
+ \mathbb P\bigl(E\cap\mathrm{Protected}\ne\varnothing\bigr)
+ \le \sum_{e\in E}\mathbb P(e\in\mathrm{Protected})
+ \le |E|m^{-2}<1.
+\]
+A selection therefore exists whose protected cells avoid every
+edit. The forcing frames along its common path are valid and have
+all twelve marker incidences unchanged. The same four implications
+as in Section~\ref{sec:distance} propagate the root value one
+through the plus chain and the root value zero through the minus
+chain. Both implications concern the same selected terminal cell;
+they are inconsistent in an $H_4$-free edited matrix. Thus $E$
+cannot eliminate all copies.
+\end{proof}
+
+The probabilistic argument uses independence \emph{between axes}
+whenever one position is in a marker or dummy block. It does not
+require independence of the variable representatives on different
+levels of the same axis, nor of the two terminal path labels.
+The deterministic XOR proof goes further: each individual protected
+cell identifies at most one of the $m^2$ selections. This is an exact
+combinatorial packing statement, while the probabilistic proof
+controls the probability of hitting each required cell. Both yield
+the sharp integer threshold $m^2$.
+
+\subsection{Boolean verification of the four implications}
+The lower-right body $P$ is
+$\left(\begin{smallmatrix}1&0\\1&1\end{smallmatrix}\right)$.
+Each of the four forcing frames has three of its four body entries
+fixed by the choice of mode or by the current inductive hypothesis.
+The remaining entry is constrained by the absence of a completed
+copy. The four exact incompatibilities are
+\begin{align*}
+ V_i^+:&\quad (x_{i-1},\alpha_i)=(1,0),\\
+ V_i^-:&\quad (y_{i-1},\beta_i)=(0,1),\\
+ W_{i,p_i\bmod2}^+:&\quad (\alpha_i,x_i)=(1,0),\\
+ W_{i,p_i\bmod2}^-:&\quad (\beta_i,y_i)=(0,1).
+\end{align*}
+Each forbidden pair would complete the body $P$ and therefore
+produce $H_4$ with the protected frame. The complement of each
+pair yields exactly the implication in the forcing table. This
+explicit truth-table reduction is independent of the arithmetic
+classification certificates used for the upper bound.

@@ -1,0 +1,127 @@
+\section{Background and interpretation}\label{sec:context}
+The quantitative issue for ordered matrices is the dependence on the edit
+parameter.  The row and column orders are independent: an occurrence of a
+pattern $F\in\{0,1\}^{s\times t}$ is a pair of increasing injections
+$[s]\hookrightarrow[n]$ and $[t]\hookrightarrow[n]$, and all $st$ entries,
+including the zeros, are prescribed. The corresponding hereditary
+property consists of matrices avoiding $F$ as an induced ordered
+submatrix.  A removal bound supplies a lower bound on the number of
+occurrences whenever one must change a prescribed fraction of all
+entries to obtain a member of this hereditary property.
+
+For an individual fixed $F$, a polynomial bound means the existence of
+$c_F,C_F>0$ such that the right side of \eqref{eq:removal-bound} holds
+for \emph{every} size and \emph{every} matrix.  Failure is witnessed by
+one fixed pattern and a sequence of arbitrarily large hosts.  The
+quantifiers matter: choosing a different forbidden pattern as the
+accuracy parameter decreases would address a different question.
+The present family uses the same $H_4$ at every depth; the pattern is
+independent of $h$, $m$ and $n_h$.
+
+
+We normalize occurrences by $n^{2k}$, as in
+\eqref{eq:removal-bound}, and count increasing injections, so a copy
+has no additional factorial multiplicity. For a fixed $k$, using
+$\binom{n}{k}^2$ instead changes the density only by a factor bounded
+above and below by positive constants for $n\ge k$. Thus the failure
+of a polynomial bound is independent of these two common conventions.
+
+Alon, Ben-Eliezer and Fischer \cite{ABF} proved qualitative testing
+results for hereditary properties of ordered graphs and matrices.
+Alon and Ben-Eliezer \cite{ABE20} obtained a polynomial dependence for
+a \emph{hitting} formulation: a small set of entries may intersect all
+copies present in the original matrix. Hitting the original copies
+need not produce a free matrix after entry changes, because a changed
+zero or one can complete a new induced copy.  The relevant full removal
+problem minimizes changes over the resulting, genuinely $F$-free
+matrices.  This distinction is particularly significant for an induced
+pattern, whose constraints include prescribed zeros as well as ones.
+Alon and Ben-Eliezer also establish a full polynomial removal lemma
+for every fixed finite family of binary matrices closed under row
+permutations \cite[Theorem~1.5]{ABE20}, and hence, by transposition,
+for families closed under column permutations. The singleton
+$\{H_4\}$ has neither closure property, so this positive result does
+not apply to the present obstruction. Gishboliner and Shapira
+\cite[Conjecture~4.5]{GS25} formulate the full polynomial removal
+conjecture for a single fixed ordered binary matrix.
+Towsner\'s ordered-hypergraph removal lemma provides a further
+point of comparison at the level of qualitative removal \cite{Towsner}.
+Earlier work on unordered bipartite matrices and conditional regularity
+provided the polynomial-query comparison \cite{AFN07}; the ordering
+requirement removes the row-and-column permutation freedom used in that
+setting.
+
+The 2026 construction of \cite{OAI} gave a fixed $66\times66$ binary
+obstruction. Its tree-based construction showed that forcing gadgets can
+make edit distance persist over successive levels, while an order
+constraint can confine complete copies to terminal locations.  Our
+pattern \eqref{eq:pattern} has four rows and four columns; its top-left
+$2\times2$ anti-diagonal marker and the two identity coupling blocks
+provide a smaller frame for the same kind of propagation.  The
+sharper size is accompanied here by exact distance and copy-count
+identities.  We isolate the roles of the order, the two signs, and
+terminal identification in subsequent sections.
+
+The tree-based propagation and terminal-sign identification build on
+\cite{OAI}. The additional results here are the explicit $4\times4$
+pattern, its exact physical copy count, its optimal unrestricted
+repair and the formal certification of these identities.
+
+\subsection{Three quantities that must be kept separate}
+Let $\mathcal C_H(A)$ be the set of increasing row/column tuples
+realizing $H$. Define the \emph{transversal number}
+\[
+ \tau_H(A)=\min\{|S|: S\subseteq[n]\times[n],\;
+                 S\cap\operatorname{cells}(Q)\ne\varnothing
+                 \ \forall Q\in\mathcal C_H(A)\}.
+\]
+Every edit set turning $A$ into an $H$-free matrix intersects every
+copy originally in $A$; consequently
+\begin{equation}\label{eq:hitting_le}
+ \tau_H(A)\le D_H(A).
+\end{equation}
+Equality does not follow from the definition: a hitting set has no
+obligation to avoid copies created by its own edits.  For our host,
+the protected-selection argument establishes the stronger lower bound
+$D_{H_4}(A_h)\ge m^2$ \emph{for all resulting matrices}.  The
+canonical repair gives a matching upper bound by an explicit final
+$H_4$-free matrix.  Neither step is supplied merely by counting
+original occurrences.
+
+Indeed, the terminal classification below shows a concrete gap between
+the two quantities. The $m$ leaf-diagonal cells
+$\{(R_h(p),C_h(p)):0\le p<m\}$ intersect every original copy,
+so $\tau_{H_4}(A_h)\le m<m^2=D_{H_4}(A_h)$.
+Corollary~\ref{cor:exacttransversal} proves that the hitting bound is exact.
+Every terminal copy contains its same-leaf diagonal as its
+third-row, third-column cell. This is the hitting-versus-removal
+phenomenon emphasized in \cite{OAI}, here retained by the smaller
+pattern; it is not a new general separation principle.
+
+It is also useful to distinguish physical copies from type-level
+copies. In a block-constant host, quotient rows and columns encode
+signatures and ordering, whereas block multiplicities control the
+physical number of realizations. The quotient alone has no absolute
+copy count unless its tuples are weighted by those multiplicities.
+This separation is essential in the terminal enumeration.
+
+\subsection{The four-by-four pattern as a forcing frame}
+Partition $H_4$ after the second row and the second column. The
+four component blocks are respectively $J_2-I_2$, $I_2$, $I_2$,
+and the asymmetric body $P$. Thus two marker rows and columns
+fix twelve entries of a potential induced copy; the residual body
+has only four entries. If the residual body has the form
+$\left(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\right)$,
+forbidding $H_4$ imposes the single constraint
+\[
+ (a,b,c,d)\ne(1,0,1,1).
+\]
+The construction uses this exact negative constraint in four
+orientations.  Two orientations push a value from level $i-1$ to
+a cross-level cell, and two push it from that cell to the diagonal
+at level $i$.  The plus chain propagates the value one; the minus
+chain propagates zero.  Their terminal positions coincide.  The
+gadget constraints therefore become inconsistent unless an entry
+required by a selected frame has been changed.  The XOR choice of
+physical representatives makes those required entries disjoint
+across $m^2$ choices.

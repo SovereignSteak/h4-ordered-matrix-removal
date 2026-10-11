@@ -1,0 +1,38 @@
+H4Formal/ConcreteWordCompression.lean:81:4: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+H4Formal/ConcreteWordCompression.lean:110:35: warning: This simp argument is unused:
+  Nat.add_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [projectFrom, hp, ih, N̵a̵t̵.̵a̵d̵d̵_̵a̵s̵s̵o̵c̵,̵ ̵Nat.add_comm, Nat.add_left_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/ConcreteWordCompression.lean:111:35: warning: This simp argument is unused:
+  Nat.add_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [projectFrom, hp, ih, N̵a̵t̵.̵a̵d̵d̵_̵a̵s̵s̵o̵c̵,̵ ̵Nat.add_comm, Nat.add_left_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/ConcreteWordCompression.lean:162:35: warning: This simp argument is unused:
+  Nat.add_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [hlen, hde,̵ ̵N̵a̵t̵.̵a̵d̵d̵_̵a̵s̵s̵o̵c̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/ConcreteWordCompression.lean:163:28: warning: This simp argument is unused:
+  Nat.add_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [hu,̵ ̵N̵a̵t̵.̵a̵d̵d̵_̵a̵s̵s̵o̵c̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/ConcreteWordCompression.lean:164:28: warning: This simp argument is unused:
+  Nat.add_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [hv,̵ ̵N̵a̵t̵.̵a̵d̵d̵_̵a̵s̵s̵o̵c̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

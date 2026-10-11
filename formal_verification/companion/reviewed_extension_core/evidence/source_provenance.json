@@ -1,0 +1,340 @@
+{
+  "scope": "Derived certificate-free extension core; original companion is unchanged; not the full companion/global H4 route.",
+  "original_root": "../formalized_extensions",
+  "namespace_policy": "Original H4Formal names preserved in a separately compiled project; no main-project H4Formal olean may be reused.",
+  "roots": [
+    "GeneralPhysicalCompression",
+    "MarkerPermutation",
+    "GeneralPhysicalCounting"
+  ],
+  "retained_project_modules": 34,
+  "files": [
+    {
+      "derived": "H4Formal/ActualRetention.lean",
+      "original": "H4Formal/ActualRetention.lean",
+      "original_sha256": "1782e86ea291c54450c8e3e2ef50ee82698615f6567cf58469028e9e4599a158",
+      "derived_sha256": "1782e86ea291c54450c8e3e2ef50ee82698615f6567cf58469028e9e4599a158",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/BinaryWords.lean",
+      "original": "H4Formal/BinaryWords.lean",
+      "original_sha256": "39421149a5de8005690cbc9ed25e63aa6e399f84124f3a1f8e2d53658199fb5a",
+      "derived_sha256": "39421149a5de8005690cbc9ed25e63aa6e399f84124f3a1f8e2d53658199fb5a",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/Compression.lean",
+      "original": "H4Formal/Compression.lean",
+      "original_sha256": "055a561255373dbaebe4eab325b9f680548cc5293c052cffc7dcb90aa7e97f12",
+      "derived_sha256": "055a561255373dbaebe4eab325b9f680548cc5293c052cffc7dcb90aa7e97f12",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/CompressionRelations.lean",
+      "original": "H4Formal/CompressionRelations.lean",
+      "original_sha256": "bb11ee7a40609bc2250168381f91efeb5bdda49f73c37a20008bf7d900b4717f",
+      "derived_sha256": "bb11ee7a40609bc2250168381f91efeb5bdda49f73c37a20008bf7d900b4717f",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/ConcreteCompression.lean",
+      "original": "H4Formal/ConcreteCompression.lean",
+      "original_sha256": "aa45a0fa75d24986d7895dda98a2f10da726aea97487ea46182ee54186c312d2",
+      "derived_sha256": "aa45a0fa75d24986d7895dda98a2f10da726aea97487ea46182ee54186c312d2",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/ConcreteWordCompression.lean",
+      "original": "H4Formal/ConcreteWordCompression.lean",
+      "original_sha256": "83017d75e79c7ed4305558f016afe93c15c96c46cf8a762d0869ab4050a2e205",
+      "derived_sha256": "83017d75e79c7ed4305558f016afe93c15c96c46cf8a762d0869ab4050a2e205",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/CopyGadgets.lean",
+      "original": "H4Formal/CopyGadgets.lean",
+      "original_sha256": "ace857c694f686d0dd9b9130695db40524d6bc5051cbd8ff5a8f08d03ac14e14",
+      "derived_sha256": "ace857c694f686d0dd9b9130695db40524d6bc5051cbd8ff5a8f08d03ac14e14",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/EditForcing.lean",
+      "original": "H4Formal/EditForcing.lean",
+      "original_sha256": "f66921a6e75623705a2cdd4e4758635d9ab085a5a03010affa9b1018ad969daa",
+      "derived_sha256": "f66921a6e75623705a2cdd4e4758635d9ab085a5a03010affa9b1018ad969daa",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/EncodedSemantics.lean",
+      "original": "H4Formal/EncodedSemantics.lean",
+      "original_sha256": "55d7c34acfbe6fdf41499e16bc77020a51c46b1fa8ce89b31423ed9619a46927",
+      "derived_sha256": "55d7c34acfbe6fdf41499e16bc77020a51c46b1fa8ce89b31423ed9619a46927",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/FiniteMultiplicity.lean",
+      "original": "H4Formal/FiniteHost.lean",
+      "original_sha256": "c5a4a331a2348825867a7571e8ca749a8f8ae4e3db2be6879600b6da930833ce",
+      "derived_sha256": "a362a488aaa82070d4cd06da3be15e912cc1c4aa2ed2dd7ce373164ebc168726",
+      "change_kind": "Extract only the multiplicity definition required by general fiber counting; exclude unrelated native_decide finite regressions.",
+      "preserved_segments": [
+        {
+          "start": "def multiplicity",
+          "before": "def weightedCompletions",
+          "original_start_line": 196,
+          "original_end_line": 204,
+          "segment_sha256": "76c360159dd4837cf59ee887abcd87baafb4b2101cd3e030f7251618e993c4ea"
+        }
+      ]
+    },
+    {
+      "derived": "H4Formal/FourTuple.lean",
+      "original": "H4Formal/FourTuple.lean",
+      "original_sha256": "f46bfc3cd34f918b32a7ce455095e1f0d2e75e8cbfb7e1f04eec78ab31fa9740",
+      "derived_sha256": "f46bfc3cd34f918b32a7ce455095e1f0d2e75e8cbfb7e1f04eec78ab31fa9740",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/GeneralCompression.lean",
+      "original": "H4Formal/GeneralCompression.lean",
+      "original_sha256": "9481a5712d2b59aac1a759600438e6aa6b888c948e933696b31cf4b2b5e1682d",
+      "derived_sha256": "9481a5712d2b59aac1a759600438e6aa6b888c948e933696b31cf4b2b5e1682d",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/GeneralPhysicalCompression.lean",
+      "original": "H4Formal/GeneralPhysicalCompression.lean",
+      "original_sha256": "40ada511ae50010854a08b05fc1c8a8ebd9c864ab856e0aba3888326ed560e28",
+      "derived_sha256": "52f3b4d89a806fa1248f7d44b4d17136b7b4104bdcc01f795aabf6e245743ab5",
+      "change_kind": "Imports only; every namespace declaration, theorem statement and proof body byte-identical.",
+      "preserved_segments": [
+        {
+          "declaration_body_sha256": "6e27fc5dbcc6dc270a4630685b994f64a4641053923ca70c2fa6caf4709ea3f0"
+        }
+      ]
+    },
+    {
+      "derived": "H4Formal/GeneralPhysicalCounting.lean",
+      "original": "H4Formal/GeneralPhysicalCounting.lean",
+      "original_sha256": "5469f665066acfce8a10448bf8cc32a138a161406e1d860499681be4bda5c1a5",
+      "derived_sha256": "152abc5789dbc64b669abcac79fe2bf7e8def1ee3d34e3b5431a3ff588e58e26",
+      "change_kind": "Imports only; every namespace declaration, theorem statement and proof body byte-identical.",
+      "preserved_segments": [
+        {
+          "declaration_body_sha256": "afd49d9021445f3244013b70a657a061ccaf424c1120edc40dfe4b314a090de7"
+        }
+      ]
+    },
+    {
+      "derived": "H4Formal/Host.lean",
+      "original": "H4Formal/Host.lean",
+      "original_sha256": "e43160afbcb49cf3981d8ebb5cb4a6a3fea8ba4665bba24c12cbb92cb062057d",
+      "derived_sha256": "e43160afbcb49cf3981d8ebb5cb4a6a3fea8ba4665bba24c12cbb92cb062057d",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/HostCompression.lean",
+      "original": "H4Formal/HostCompression.lean",
+      "original_sha256": "3f37334a2c4f48c6e8ccb3d56b872dc5b079187af53d9ba264fdaf882d609043",
+      "derived_sha256": "3f37334a2c4f48c6e8ccb3d56b872dc5b079187af53d9ba264fdaf882d609043",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/HostOrderCompression.lean",
+      "original": "H4Formal/HostOrderCompression.lean",
+      "original_sha256": "a29684a99f25bde5d4a7ab6e87207f49384e2d0b11646196402f9ef69befbc49",
+      "derived_sha256": "a29684a99f25bde5d4a7ab6e87207f49384e2d0b11646196402f9ef69befbc49",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/HostSizes.lean",
+      "original": "H4Formal/GlobalClaims.lean",
+      "original_sha256": "32ee514d6598a5c1e3b4acab1f82fcb419771b53865415bbe393060b5eec1013",
+      "derived_sha256": "9fde5ce44d64c22cceb08e13b42918c9d4279e8d8d498eb59daa77e7ba76be02",
+      "change_kind": "Extract only branchFactor, hostSideLength, canonicalRepairCellCount and the exact power identity; do not import unrelated native_decide regression theorems.",
+      "preserved_segments": [
+        {
+          "start": "def branchFactor",
+          "before": "def originalTypeCopyCount",
+          "original_start_line": 15,
+          "original_end_line": 20,
+          "segment_sha256": "056231f02a8f3f0bc4bdbf527cae281dbc6f5d03c206a59538debf625e2667a3"
+        },
+        {
+          "start": "theorem canonicalRepairCellCount_eq_power",
+          "before": "theorem hostSideLength_eq_construction",
+          "original_start_line": 55,
+          "original_end_line": 59,
+          "segment_sha256": "14db877bcf586fb170ed8e4093dcca56845755b152178dc0137cba88972c2ae4"
+        }
+      ]
+    },
+    {
+      "derived": "H4Formal/IndexedMatrixCore.lean",
+      "original": "H4Formal/IndexedMatrix.lean",
+      "original_sha256": "b9bd0c3f5c9d4fe87bef313a1b07014bcfe69fc04b539c6afe12640660b2d381",
+      "derived_sha256": "5a80a87979bfdce110efb3331aba7d995d7b4069024179a7144069f5ead576df",
+      "change_kind": "Retain numeric matrix definitions, generic indexing/cardinality/edit correspondence; omit theorem-specific exact count and exact repair integration.",
+      "preserved_segments": [
+        {
+          "original_start_line": 1,
+          "original_end_line": 123,
+          "retained_body_sha256": "9d5b3b60e6786ef8e460a4e94f830a2d3531068e3f33cbee573077c1f74df991"
+        }
+      ]
+    },
+    {
+      "derived": "H4Formal/LocalCompression.lean",
+      "original": "H4Formal/LocalCompression.lean",
+      "original_sha256": "98bc58dad199bc6175bf7c83f86be4178fb3cd756548b77281026c63edf0ff00",
+      "derived_sha256": "98bc58dad199bc6175bf7c83f86be4178fb3cd756548b77281026c63edf0ff00",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/MarkerPermutation.lean",
+      "original": "H4Formal/MarkerPermutation.lean",
+      "original_sha256": "fbd4407129eeff2e519d7dbe682e8a8d8efdcd0287118f64adc21335fa5896cb",
+      "derived_sha256": "ed87e5b6b372e60d6ebd06091341ed5e49b783021f7c0d94224a66de94a4d42f",
+      "change_kind": "Imports only; every namespace declaration, theorem statement and proof body byte-identical.",
+      "preserved_segments": [
+        {
+          "declaration_body_sha256": "326be6eb0c29e19c51c14ecc5f6c1ddf1d463a2535d3b6cdaefc4a74ebd76c31"
+        }
+      ]
+    },
+    {
+      "derived": "H4Formal/Pattern.lean",
+      "original": "H4Formal/Pattern.lean",
+      "original_sha256": "202f55f2cee339ed50180d0e88db1de58d1fd462cdb877e868f92269f53911fc",
+      "derived_sha256": "202f55f2cee339ed50180d0e88db1de58d1fd462cdb877e868f92269f53911fc",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/PhysicalHostCore.lean",
+      "original": "H4Formal/PhysicalHost.lean",
+      "original_sha256": "c248bac2fc8b6ad9c257d2298293512e9d76f1c8973fece3b6e2e6d71086c4d1",
+      "derived_sha256": "80c96eeba24971851f106df6c08c23bb5d61d33809e6b80a192e59b53d38b78b",
+      "change_kind": "Retain all physical host definitions, valid block and quotient correspondence declarations; omit the final two all-depth certificate-dependent conclusions.",
+      "preserved_segments": [
+        {
+          "original_start_line": 1,
+          "original_end_line": 156,
+          "retained_body_sha256": "9ab2d2dddc5c8131eb1a602f7bbd099bee54fb6927d450bf5a81a93d5a3050ca"
+        }
+      ]
+    },
+    {
+      "derived": "H4Formal/PhysicalOrder.lean",
+      "original": "H4Formal/PhysicalOrder.lean",
+      "original_sha256": "5d39a86b64b980553776969bdb1dc2c14456115926efe3b0b4301688f68822dd",
+      "derived_sha256": "90d21c7731d7f79d8d6de210faeb7bb2a2af7fc7b559424308c5fe3ac2c41e9a",
+      "change_kind": "Imports only; every namespace declaration, theorem statement and proof body byte-identical.",
+      "preserved_segments": [
+        {
+          "declaration_body_sha256": "66e14ada2b8a894662adb4161e5612445aae1d1a32b1f2d1c679d71d136750a4"
+        }
+      ]
+    },
+    {
+      "derived": "H4Formal/PhysicalRepresentatives.lean",
+      "original": "H4Formal/PhysicalRepresentatives.lean",
+      "original_sha256": "b513aff2007b12f3c1f727396fbb4696ea972b78cc26f80a61bad9835e6507f5",
+      "derived_sha256": "dd63208e4f4478cd316462bd046d0faecdbd7bb9d146c8f9ce813557f5da3a87",
+      "change_kind": "Imports only; every namespace declaration, theorem statement and proof body byte-identical.",
+      "preserved_segments": [
+        {
+          "declaration_body_sha256": "5508bc685698f366210e9bda6c2a4105e1fc121689d8a6cb37d20882fcd44808"
+        }
+      ]
+    },
+    {
+      "derived": "H4Formal/Preservation.lean",
+      "original": "H4Formal/Preservation.lean",
+      "original_sha256": "53e1a4238fdedd15efca12d9880f1c963390dee22a36e03d928664ddaee85526",
+      "derived_sha256": "53e1a4238fdedd15efca12d9880f1c963390dee22a36e03d928664ddaee85526",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/ProtectedPath.lean",
+      "original": "H4Formal/ProtectedPath.lean",
+      "original_sha256": "2a3dbd840c5e1992890c50037c4d17ab70ba5972d5a590556f998465f32945ae",
+      "derived_sha256": "2a3dbd840c5e1992890c50037c4d17ab70ba5972d5a590556f998465f32945ae",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/ProtectedSampling.lean",
+      "original": "H4Formal/ProtectedSampling.lean",
+      "original_sha256": "110c9b43b306591725070392f21a7738e2ee9a7d621e062f93b17d324b590b95",
+      "derived_sha256": "110c9b43b306591725070392f21a7738e2ee9a7d621e062f93b17d324b590b95",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/QuerySemantics.lean",
+      "original": "H4Formal/QuerySemantics.lean",
+      "original_sha256": "30fcb0b353a71b8fd18b803c7c8a66e4f8612ede14eaf5a56502fb2f0cc6b98d",
+      "derived_sha256": "30fcb0b353a71b8fd18b803c7c8a66e4f8612ede14eaf5a56502fb2f0cc6b98d",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/TerminalTypes.lean",
+      "original": "H4Formal/TerminalClassification.lean",
+      "original_sha256": "895d88ae06c35160ac8c02cf7b1dbba21e9d32c522c6de6538fe2bce5121a646",
+      "derived_sha256": "789cbf933d2b9634ff7d1ee326955d45c026dbca9fb70aa1be959bb52f17a263",
+      "change_kind": "Extract only the terminalMode and TerminalForm definitions, not certified classification.",
+      "preserved_segments": [
+        {
+          "start": "def terminalMode",
+          "before": "theorem block_eq_anchor_of_fields",
+          "original_start_line": 8,
+          "original_end_line": 21,
+          "segment_sha256": "4af8e6b77fa14b658d58f7686d5bf48e1c73e2a9da2de0b9505f446d7fb0ca16"
+        }
+      ]
+    },
+    {
+      "derived": "H4Formal/Transfer.lean",
+      "original": "H4Formal/Transfer.lean",
+      "original_sha256": "bfb9f311e04c13fb50fd2883defd172dee84fc42ef83b57f9b7e8f368cc3ab9d",
+      "derived_sha256": "bfb9f311e04c13fb50fd2883defd172dee84fc42ef83b57f9b7e8f368cc3ab9d",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/Trie.lean",
+      "original": "H4Formal/Trie.lean",
+      "original_sha256": "781b69e32563a29cbe5a6552fb8d51e16512bb0cf081ab2bb51dd7595f6747da",
+      "derived_sha256": "781b69e32563a29cbe5a6552fb8d51e16512bb0cf081ab2bb51dd7595f6747da",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    },
+    {
+      "derived": "H4Formal/WordOrder.lean",
+      "original": "H4Formal/WordOrder.lean",
+      "original_sha256": "e4bf003fa904e22c40eb188cfaf03602a9772f97da257372eee956c526573149",
+      "derived_sha256": "e4bf003fa904e22c40eb188cfaf03602a9772f97da257372eee956c526573149",
+      "change_kind": "exact_copy",
+      "preserved_segments": []
+    }
+  ]
+}

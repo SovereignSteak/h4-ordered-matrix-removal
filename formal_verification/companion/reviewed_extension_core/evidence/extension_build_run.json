@@ -1,0 +1,694 @@
+{
+  "status": "FRESH_DERIVED_EXTENSION_CORE_VERIFIED",
+  "started_at_utc": "2026-10-10T15:44:52.596759+00:00",
+  "scope": "34 certificate-free derived extension modules and top-level declaration audit",
+  "original_companion_modified": false,
+  "independence": "Fresh same-host sequential compile of derived core, not full companion or independently administered review.",
+  "source_sha256": {
+    "H4Formal/ActualRetention.lean": "1782e86ea291c54450c8e3e2ef50ee82698615f6567cf58469028e9e4599a158",
+    "H4Formal/BinaryWords.lean": "39421149a5de8005690cbc9ed25e63aa6e399f84124f3a1f8e2d53658199fb5a",
+    "H4Formal/Compression.lean": "055a561255373dbaebe4eab325b9f680548cc5293c052cffc7dcb90aa7e97f12",
+    "H4Formal/CompressionRelations.lean": "bb11ee7a40609bc2250168381f91efeb5bdda49f73c37a20008bf7d900b4717f",
+    "H4Formal/ConcreteCompression.lean": "aa45a0fa75d24986d7895dda98a2f10da726aea97487ea46182ee54186c312d2",
+    "H4Formal/ConcreteWordCompression.lean": "83017d75e79c7ed4305558f016afe93c15c96c46cf8a762d0869ab4050a2e205",
+    "H4Formal/CopyGadgets.lean": "ace857c694f686d0dd9b9130695db40524d6bc5051cbd8ff5a8f08d03ac14e14",
+    "H4Formal/EditForcing.lean": "f66921a6e75623705a2cdd4e4758635d9ab085a5a03010affa9b1018ad969daa",
+    "H4Formal/EncodedSemantics.lean": "55d7c34acfbe6fdf41499e16bc77020a51c46b1fa8ce89b31423ed9619a46927",
+    "H4Formal/FiniteMultiplicity.lean": "a362a488aaa82070d4cd06da3be15e912cc1c4aa2ed2dd7ce373164ebc168726",
+    "H4Formal/FourTuple.lean": "f46bfc3cd34f918b32a7ce455095e1f0d2e75e8cbfb7e1f04eec78ab31fa9740",
+    "H4Formal/GeneralCompression.lean": "9481a5712d2b59aac1a759600438e6aa6b888c948e933696b31cf4b2b5e1682d",
+    "H4Formal/GeneralPhysicalCompression.lean": "52f3b4d89a806fa1248f7d44b4d17136b7b4104bdcc01f795aabf6e245743ab5",
+    "H4Formal/GeneralPhysicalCounting.lean": "152abc5789dbc64b669abcac79fe2bf7e8def1ee3d34e3b5431a3ff588e58e26",
+    "H4Formal/Host.lean": "e43160afbcb49cf3981d8ebb5cb4a6a3fea8ba4665bba24c12cbb92cb062057d",
+    "H4Formal/HostCompression.lean": "3f37334a2c4f48c6e8ccb3d56b872dc5b079187af53d9ba264fdaf882d609043",
+    "H4Formal/HostOrderCompression.lean": "a29684a99f25bde5d4a7ab6e87207f49384e2d0b11646196402f9ef69befbc49",
+    "H4Formal/HostSizes.lean": "9fde5ce44d64c22cceb08e13b42918c9d4279e8d8d498eb59daa77e7ba76be02",
+    "H4Formal/IndexedMatrixCore.lean": "5a80a87979bfdce110efb3331aba7d995d7b4069024179a7144069f5ead576df",
+    "H4Formal/LocalCompression.lean": "98bc58dad199bc6175bf7c83f86be4178fb3cd756548b77281026c63edf0ff00",
+    "H4Formal/MarkerPermutation.lean": "ed87e5b6b372e60d6ebd06091341ed5e49b783021f7c0d94224a66de94a4d42f",
+    "H4Formal/Pattern.lean": "202f55f2cee339ed50180d0e88db1de58d1fd462cdb877e868f92269f53911fc",
+    "H4Formal/PhysicalHostCore.lean": "80c96eeba24971851f106df6c08c23bb5d61d33809e6b80a192e59b53d38b78b",
+    "H4Formal/PhysicalOrder.lean": "90d21c7731d7f79d8d6de210faeb7bb2a2af7fc7b559424308c5fe3ac2c41e9a",
+    "H4Formal/PhysicalRepresentatives.lean": "dd63208e4f4478cd316462bd046d0faecdbd7bb9d146c8f9ce813557f5da3a87",
+    "H4Formal/Preservation.lean": "53e1a4238fdedd15efca12d9880f1c963390dee22a36e03d928664ddaee85526",
+    "H4Formal/ProtectedPath.lean": "2a3dbd840c5e1992890c50037c4d17ab70ba5972d5a590556f998465f32945ae",
+    "H4Formal/ProtectedSampling.lean": "110c9b43b306591725070392f21a7738e2ee9a7d621e062f93b17d324b590b95",
+    "H4Formal/QuerySemantics.lean": "30fcb0b353a71b8fd18b803c7c8a66e4f8612ede14eaf5a56502fb2f0cc6b98d",
+    "H4Formal/TerminalTypes.lean": "789cbf933d2b9634ff7d1ee326955d45c026dbca9fb70aa1be959bb52f17a263",
+    "H4Formal/Transfer.lean": "bfb9f311e04c13fb50fd2883defd172dee84fc42ef83b57f9b7e8f368cc3ab9d",
+    "H4Formal/Trie.lean": "781b69e32563a29cbe5a6552fb8d51e16512bb0cf081ab2bb51dd7595f6747da",
+    "H4Formal/WordOrder.lean": "e4bf003fa904e22c40eb188cfaf03602a9772f97da257372eee956c526573149",
+    "H4Formal.lean": "a128b0125d56e491d2657079fd994399486e926feffe8f136bf86f2888dabac8",
+    "ExtensionAudit.lean": "b122de5a59d263d0609e145f74d5a4b473b33fd410645bda33b0f02c8ce8940d",
+    "lean-toolchain": "42779d67b81608af8a12aa4328d2ab47ca201925b3b2bd68369587b5340bb434",
+    "lakefile.toml": "c003c2317e2ad359effea084b2528a04dffff12c19dc450e785f448177648f01",
+    "lake-manifest.json": "af2d88a73ce1f00d6c3397b201b5509c0b3f4e9394a8f23f5b64528682b06d2d",
+    "scripts/build_and_audit.py": "d16952c462cc82548b54b6f4e4fe5f0520b67c290c162607cb6cc6ad7f545f30"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "--version"
+      ],
+      "started_at_utc": "2026-10-10T15:44:52.601569+00:00",
+      "log": "lean_version.log",
+      "finished_at_utc": "2026-10-10T15:44:52.789824+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/Compression.olean",
+        "H4Formal/Compression.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:44:53.082421+00:00",
+      "log": "01_H4Formal.Compression.log",
+      "finished_at_utc": "2026-10-10T15:44:57.316113+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/Pattern.olean",
+        "H4Formal/Pattern.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:44:57.317234+00:00",
+      "log": "02_H4Formal.Pattern.log",
+      "finished_at_utc": "2026-10-10T15:45:00.647073+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/Host.olean",
+        "H4Formal/Host.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:45:00.648167+00:00",
+      "log": "03_H4Formal.Host.log",
+      "finished_at_utc": "2026-10-10T15:45:04.979275+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/CompressionRelations.olean",
+        "H4Formal/CompressionRelations.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:45:04.980617+00:00",
+      "log": "04_H4Formal.CompressionRelations.log",
+      "finished_at_utc": "2026-10-10T15:45:08.495275+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/Transfer.olean",
+        "H4Formal/Transfer.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:45:08.496571+00:00",
+      "log": "05_H4Formal.Transfer.log",
+      "finished_at_utc": "2026-10-10T15:45:11.165101+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/Preservation.olean",
+        "H4Formal/Preservation.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:45:11.166461+00:00",
+      "log": "06_H4Formal.Preservation.log",
+      "finished_at_utc": "2026-10-10T15:45:13.925081+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/LocalCompression.olean",
+        "H4Formal/LocalCompression.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:45:13.926511+00:00",
+      "log": "07_H4Formal.LocalCompression.log",
+      "finished_at_utc": "2026-10-10T15:45:17.097801+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/ConcreteWordCompression.olean",
+        "H4Formal/ConcreteWordCompression.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:45:17.099558+00:00",
+      "log": "08_H4Formal.ConcreteWordCompression.log",
+      "finished_at_utc": "2026-10-10T15:45:23.087866+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/Trie.olean",
+        "H4Formal/Trie.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:45:23.089417+00:00",
+      "log": "09_H4Formal.Trie.log",
+      "finished_at_utc": "2026-10-10T15:45:26.597124+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/ConcreteCompression.olean",
+        "H4Formal/ConcreteCompression.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:45:26.598442+00:00",
+      "log": "10_H4Formal.ConcreteCompression.log",
+      "finished_at_utc": "2026-10-10T15:45:30.389133+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/ActualRetention.olean",
+        "H4Formal/ActualRetention.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:45:30.390808+00:00",
+      "log": "11_H4Formal.ActualRetention.log",
+      "finished_at_utc": "2026-10-10T15:45:37.763056+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/BinaryWords.olean",
+        "H4Formal/BinaryWords.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:45:37.764580+00:00",
+      "log": "12_H4Formal.BinaryWords.log",
+      "finished_at_utc": "2026-10-10T15:45:42.810597+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/QuerySemantics.olean",
+        "H4Formal/QuerySemantics.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:45:42.812221+00:00",
+      "log": "13_H4Formal.QuerySemantics.log",
+      "finished_at_utc": "2026-10-10T15:45:49.787523+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/EncodedSemantics.olean",
+        "H4Formal/EncodedSemantics.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:45:49.789325+00:00",
+      "log": "14_H4Formal.EncodedSemantics.log",
+      "finished_at_utc": "2026-10-10T15:45:55.712681+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/HostCompression.olean",
+        "H4Formal/HostCompression.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:45:55.714536+00:00",
+      "log": "15_H4Formal.HostCompression.log",
+      "finished_at_utc": "2026-10-10T15:46:01.975342+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/HostOrderCompression.olean",
+        "H4Formal/HostOrderCompression.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:46:01.977253+00:00",
+      "log": "16_H4Formal.HostOrderCompression.log",
+      "finished_at_utc": "2026-10-10T15:46:07.493158+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/GeneralCompression.olean",
+        "H4Formal/GeneralCompression.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:46:07.494995+00:00",
+      "log": "17_H4Formal.GeneralCompression.log",
+      "finished_at_utc": "2026-10-10T15:46:10.895731+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/HostSizes.olean",
+        "H4Formal/HostSizes.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:46:10.897374+00:00",
+      "log": "18_H4Formal.HostSizes.log",
+      "finished_at_utc": "2026-10-10T15:46:13.693730+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/PhysicalHostCore.olean",
+        "H4Formal/PhysicalHostCore.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:46:13.695725+00:00",
+      "log": "19_H4Formal.PhysicalHostCore.log",
+      "finished_at_utc": "2026-10-10T15:46:21.197151+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/WordOrder.olean",
+        "H4Formal/WordOrder.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:46:21.198849+00:00",
+      "log": "20_H4Formal.WordOrder.log",
+      "finished_at_utc": "2026-10-10T15:46:27.054982+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/PhysicalOrder.olean",
+        "H4Formal/PhysicalOrder.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:46:27.056660+00:00",
+      "log": "21_H4Formal.PhysicalOrder.log",
+      "finished_at_utc": "2026-10-10T15:46:38.785007+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/TerminalTypes.olean",
+        "H4Formal/TerminalTypes.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:46:38.786845+00:00",
+      "log": "22_H4Formal.TerminalTypes.log",
+      "finished_at_utc": "2026-10-10T15:46:41.403817+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/PhysicalRepresentatives.olean",
+        "H4Formal/PhysicalRepresentatives.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:46:41.405429+00:00",
+      "log": "23_H4Formal.PhysicalRepresentatives.log",
+      "finished_at_utc": "2026-10-10T15:46:50.493650+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/ProtectedSampling.olean",
+        "H4Formal/ProtectedSampling.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:46:50.495625+00:00",
+      "log": "24_H4Formal.ProtectedSampling.log",
+      "finished_at_utc": "2026-10-10T15:46:55.912307+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/ProtectedPath.olean",
+        "H4Formal/ProtectedPath.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:46:55.914137+00:00",
+      "log": "25_H4Formal.ProtectedPath.log",
+      "finished_at_utc": "2026-10-10T15:47:03.907798+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/FourTuple.olean",
+        "H4Formal/FourTuple.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:47:03.910473+00:00",
+      "log": "26_H4Formal.FourTuple.log",
+      "finished_at_utc": "2026-10-10T15:47:08.299526+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/CopyGadgets.olean",
+        "H4Formal/CopyGadgets.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:47:08.301459+00:00",
+      "log": "27_H4Formal.CopyGadgets.log",
+      "finished_at_utc": "2026-10-10T15:47:17.107042+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/EditForcing.olean",
+        "H4Formal/EditForcing.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:47:17.109215+00:00",
+      "log": "28_H4Formal.EditForcing.log",
+      "finished_at_utc": "2026-10-10T15:47:28.999104+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/IndexedMatrixCore.olean",
+        "H4Formal/IndexedMatrixCore.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:47:29.001389+00:00",
+      "log": "29_H4Formal.IndexedMatrixCore.log",
+      "finished_at_utc": "2026-10-10T15:47:35.213402+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/GeneralPhysicalCompression.olean",
+        "H4Formal/GeneralPhysicalCompression.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:47:35.215848+00:00",
+      "log": "30_H4Formal.GeneralPhysicalCompression.log",
+      "finished_at_utc": "2026-10-10T15:47:42.611275+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/MarkerPermutation.olean",
+        "H4Formal/MarkerPermutation.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:47:42.613417+00:00",
+      "log": "31_H4Formal.MarkerPermutation.log",
+      "finished_at_utc": "2026-10-10T15:47:48.158471+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/FiniteMultiplicity.olean",
+        "H4Formal/FiniteMultiplicity.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:47:48.160617+00:00",
+      "log": "32_H4Formal.FiniteMultiplicity.log",
+      "finished_at_utc": "2026-10-10T15:47:50.844571+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal/GeneralPhysicalCounting.olean",
+        "H4Formal/GeneralPhysicalCounting.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:47:50.846466+00:00",
+      "log": "33_H4Formal.GeneralPhysicalCounting.log",
+      "finished_at_utc": "2026-10-10T15:47:58.292917+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/H4Formal.olean",
+        "H4Formal.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:47:58.294915+00:00",
+      "log": "34_H4Formal.log",
+      "finished_at_utc": "2026-10-10T15:48:02.585934+00:00",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean/ExtensionAudit.olean",
+        "ExtensionAudit.lean"
+      ],
+      "started_at_utc": "2026-10-10T15:48:02.588048+00:00",
+      "log": "extension_audit.log",
+      "finished_at_utc": "2026-10-10T15:48:10.806873+00:00",
+      "exit_code": 0
+    }
+  ],
+  "lean": {
+    "path": "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+    "sha256": "8fadc3ed92cc9decb94c96ee9c0876e91e03a3a5e69138f32114f02789e2766c"
+  },
+  "dependencies": [
+    {
+      "name": "mathlib",
+      "revision": "f897ebcf72cd16f89ab4577d0c826cd14afaafc7",
+      "source": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/mathlib",
+      "library": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/mathlib/.lake/build/lib/lean"
+    },
+    {
+      "name": "plausible",
+      "revision": "dfd06ebfe8d0e8fa7faba9cb5e5a2e74e7bd2805",
+      "source": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/plausible",
+      "library": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/plausible/.lake/build/lib/lean"
+    },
+    {
+      "name": "LeanSearchClient",
+      "revision": "99657ad92e23804e279f77ea6dbdeebaa1317b98",
+      "source": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/LeanSearchClient",
+      "library": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/LeanSearchClient/.lake/build/lib/lean"
+    },
+    {
+      "name": "importGraph",
+      "revision": "d768126816be17600904726ca7976b185786e6b9",
+      "source": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/importGraph",
+      "library": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/importGraph/.lake/build/lib/lean"
+    },
+    {
+      "name": "proofwidgets",
+      "revision": "556caed0eadb7901e068131d1be208dd907d07a2",
+      "source": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/proofwidgets",
+      "library": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/proofwidgets/.lake/build/lib/lean"
+    },
+    {
+      "name": "aesop",
+      "revision": "725ac8cd67acd70a7beaf47c3725e23484c1ef50",
+      "source": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/aesop",
+      "library": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/aesop/.lake/build/lib/lean"
+    },
+    {
+      "name": "Qq",
+      "revision": "dea6a3361fa36d5a13f87333dc506ada582e025c",
+      "source": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/Qq",
+      "library": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/Qq/.lake/build/lib/lean"
+    },
+    {
+      "name": "batteries",
+      "revision": "8da40b72fece29b7d3fe3d768bac4c8910ce9bee",
+      "source": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/batteries",
+      "library": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/batteries/.lake/build/lib/lean"
+    },
+    {
+      "name": "Cli",
+      "revision": "91c18fa62838ad0ab7384c03c9684d99d306e1da",
+      "source": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/Cli",
+      "library": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/Cli/.lake/build/lib/lean"
+    }
+  ],
+  "preclean_oleans": 0,
+  "after_clean_oleans": 0,
+  "clean_finished_at_utc": "2026-10-10T15:44:53.069005+00:00",
+  "LEAN_PATH": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/companion/reviewed_extension_core/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/mathlib/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/plausible/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/importGraph/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/proofwidgets/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/aesop/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/Qq/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/batteries/.lake/build/lib/lean",
+  "build_order": [
+    "H4Formal.Compression",
+    "H4Formal.Pattern",
+    "H4Formal.Host",
+    "H4Formal.CompressionRelations",
+    "H4Formal.Transfer",
+    "H4Formal.Preservation",
+    "H4Formal.LocalCompression",
+    "H4Formal.ConcreteWordCompression",
+    "H4Formal.Trie",
+    "H4Formal.ConcreteCompression",
+    "H4Formal.ActualRetention",
+    "H4Formal.BinaryWords",
+    "H4Formal.QuerySemantics",
+    "H4Formal.EncodedSemantics",
+    "H4Formal.HostCompression",
+    "H4Formal.HostOrderCompression",
+    "H4Formal.GeneralCompression",
+    "H4Formal.HostSizes",
+    "H4Formal.PhysicalHostCore",
+    "H4Formal.WordOrder",
+    "H4Formal.PhysicalOrder",
+    "H4Formal.TerminalTypes",
+    "H4Formal.PhysicalRepresentatives",
+    "H4Formal.ProtectedSampling",
+    "H4Formal.ProtectedPath",
+    "H4Formal.FourTuple",
+    "H4Formal.CopyGadgets",
+    "H4Formal.EditForcing",
+    "H4Formal.IndexedMatrixCore",
+    "H4Formal.GeneralPhysicalCompression",
+    "H4Formal.MarkerPermutation",
+    "H4Formal.FiniteMultiplicity",
+    "H4Formal.GeneralPhysicalCounting",
+    "H4Formal"
+  ],
+  "project_modules": 34,
+  "finished_at_utc": "2026-10-10T15:48:10.818900+00:00",
+  "project_modules_freshly_compiled": 34,
+  "audit_module_compiled": true,
+  "compiled_artifacts_sha256": {
+    ".lake/build/lib/lean/ExtensionAudit.olean": "005ec96a0af474a80a9afb1a6924b6cefbf5dade72f2df5210ebc5247c03ece4",
+    ".lake/build/lib/lean/H4Formal/ActualRetention.olean": "5b5ad2a936f82873aa3293ea8ff1a35376a251ef2d8f422fd25e226bb9a94ba9",
+    ".lake/build/lib/lean/H4Formal/BinaryWords.olean": "42f2f4b725266bc189135f62d09c24fb4ce1e685069cc2b25dc59ce9d452e339",
+    ".lake/build/lib/lean/H4Formal/Compression.olean": "c1cb1de1d5da94ed100dcf2d2e545976837f792b9f8e00190f2672434f8ea7a5",
+    ".lake/build/lib/lean/H4Formal/CompressionRelations.olean": "889efda5069e22df581029bc71573b365f3dfb68620113f8af73c5347bf1c721",
+    ".lake/build/lib/lean/H4Formal/ConcreteCompression.olean": "d8755fc9b3db75d263fb2aa630cf95c65cda1e36ada66328547a2c884375ae7f",
+    ".lake/build/lib/lean/H4Formal/ConcreteWordCompression.olean": "401b1f5c03cadccf8ce56e105bc3046ad69edf1c4d36924dbbf9b4d059e1f0e9",
+    ".lake/build/lib/lean/H4Formal/CopyGadgets.olean": "c3420984369eab4b5b85aa44c7ebdf024348d65103c8f336592cf1bc600bce65",
+    ".lake/build/lib/lean/H4Formal/EditForcing.olean": "83ad311911db161bc8ab29fd00ccf23f6ff9f1f679887be520868f6fcd12fbad",
+    ".lake/build/lib/lean/H4Formal/EncodedSemantics.olean": "92b8bf9becba1243d046bb6d5fc41491f8e76c348468b10a18b6b3c6a9ebf242",
+    ".lake/build/lib/lean/H4Formal/FiniteMultiplicity.olean": "d9e91618260c856b0b8155eb70c548d60fd4dc69ad98795429f44efd37faa624",
+    ".lake/build/lib/lean/H4Formal/FourTuple.olean": "c66baf41cb9acc6fcb9b8bcf5d13074e65dce6fb62e8c2cdc761674b1eeccb8b",
+    ".lake/build/lib/lean/H4Formal/GeneralCompression.olean": "d68ea4506b448a540109b85f81eec55e0607b463795f774228af8e758a8fd647",
+    ".lake/build/lib/lean/H4Formal/GeneralPhysicalCompression.olean": "18deec1fa7aa3ae0fc45cf95cbfba037d57b95745e2fbe763433f00cbb1eadc4",
+    ".lake/build/lib/lean/H4Formal/GeneralPhysicalCounting.olean": "58795271620e1263be0170e69d07a9707c0cff3c825b9a23227bec7a5fe22cca",
+    ".lake/build/lib/lean/H4Formal/Host.olean": "98e3cd78663424ed04c855eab96d1f757d689debfb6fd327f5752c2a2a56a9d0",
+    ".lake/build/lib/lean/H4Formal/HostCompression.olean": "eca8fa3c99fbf7e0c86554ea85b7c7c4503a1837c1d69bdd8f4aefe89af13012",
+    ".lake/build/lib/lean/H4Formal/HostOrderCompression.olean": "8767c0d28abd701e713537694620f42c0b45c9f403996b0b57340812fd3e62c8",
+    ".lake/build/lib/lean/H4Formal/HostSizes.olean": "4088c40364b1e16bf12e18c4160b2bcdd5d7eb29c33d59c8d0fe938ebf4a83c9",
+    ".lake/build/lib/lean/H4Formal/IndexedMatrixCore.olean": "ef2a76bb91548508136fd1f44c707427a06899600fac89a682fc8279382d17a9",
+    ".lake/build/lib/lean/H4Formal/LocalCompression.olean": "af516b6fd58b360b84efbb9fd0fe703bde770cbda5cbf52ee38d93e2f0495119",
+    ".lake/build/lib/lean/H4Formal/MarkerPermutation.olean": "1377cd158f8bccbc50546e7b5bb6533494bbce83535efc1f120f7024a1a249a6",
+    ".lake/build/lib/lean/H4Formal/Pattern.olean": "5ef44907570c8294ff967c9442bb2e28d15a4b9961ca4c69b80170f9ac5c49c0",
+    ".lake/build/lib/lean/H4Formal/PhysicalHostCore.olean": "bf8e8406d1f2c3c155c1e1a4ca56ab21d146469a78c641d7284301911c02c01f",
+    ".lake/build/lib/lean/H4Formal/PhysicalOrder.olean": "f576dbfee52dd86809ac859b26c00cdec91a2e9fbf47a34aa12f1c25eafe7dcf",
+    ".lake/build/lib/lean/H4Formal/PhysicalRepresentatives.olean": "83705c47d13746bab162a4c8e917e6b20f51f07ff58496375d87a16fbc1eab47",
+    ".lake/build/lib/lean/H4Formal/Preservation.olean": "0b4624441ff62db6b212f68a8625b3339c8d5bcd80c99be4fe59677b69aeb23c",
+    ".lake/build/lib/lean/H4Formal/ProtectedPath.olean": "471ca6d5b9e5c0b863955a3ff0f013a0ef981fd1c5c1a993713ea19ae79bc980",
+    ".lake/build/lib/lean/H4Formal/ProtectedSampling.olean": "aa42038811d69dc869ded947291a2846c67dc5a0080852607d9aa70143d6ef6e",
+    ".lake/build/lib/lean/H4Formal/QuerySemantics.olean": "1a680fedea4cb2a58de5e221f5e00e9c27cdb60f79dfec4203f1bac2fe0c7cd9",
+    ".lake/build/lib/lean/H4Formal/TerminalTypes.olean": "df4249c1c780f38a1bb94d2741eb0fbcb0a82cfc0964433d37a1ada17d2a86bc",
+    ".lake/build/lib/lean/H4Formal/Transfer.olean": "ef423bc92194b6457770ed1601e9d304d857d53686bc65edccbd8710cf875a8a",
+    ".lake/build/lib/lean/H4Formal/Trie.olean": "04e0c00564dc604b66b6fbab190d0f4d8b8baa11aecb07bceb575cc5d0d52c35",
+    ".lake/build/lib/lean/H4Formal/WordOrder.olean": "4d2a76aae63e2bf4c3ba46fed87434298c439be606383e7e66151d239cbfc977",
+    ".lake/build/lib/lean/H4Formal.olean": "4244c8c935013fbbaaa55df99763e490fc9d558d63c80e8962ed3ff6b2343b80"
+  },
+  "audit_sha256": "427d481312d554b511c1e65b99de51fc1d52900d8035c5942de7724b14abe6d6",
+  "declarations_audited": 1570,
+  "theorems_audited": 991
+}

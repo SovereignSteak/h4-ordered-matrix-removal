@@ -1,0 +1,36 @@
+H4Formal/HostCompression.lean:71:24: warning: This simp argument is unused:
+  blockWords
+
+Hint: Omit it from the simp argument list.
+  simp [̵b̵l̵o̵c̵k̵W̵o̵r̵d̵s̵]̵ ̵at he
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/HostCompression.lean:72:19: warning: This simp argument is unused:
+  blockWords
+
+Hint: Omit it from the simp argument list.
+  simp [̵b̵l̵o̵c̵k̵W̵o̵r̵d̵s̵]̵ ̵at he
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/HostCompression.lean:85:24: warning: This simp argument is unused:
+  blockWords
+
+Hint: Omit it from the simp argument list.
+  simp [̵b̵l̵o̵c̵k̵W̵o̵r̵d̵s̵]̵ ̵at he
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/HostCompression.lean:86:19: warning: This simp argument is unused:
+  blockWords
+
+Hint: Omit it from the simp argument list.
+  simp [̵b̵l̵o̵c̵k̵W̵o̵r̵d̵s̵]̵ ̵at he
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/HostCompression.lean:210:44: warning: This simp argument is unused:
+  allowedMode_compress
+
+Hint: Omit it from the simp argument list.
+  simp only [validBlock, compressBlock, a̵l̵l̵o̵w̵e̵d̵M̵o̵d̵e̵_̵c̵o̵m̵p̵r̵e̵s̵s̵,̵ ̵compressMode, Bool.and_eq_true, decide_eq_true_eq,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Bool.or_eq_true, beq_iff_eq]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

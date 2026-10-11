@@ -1,0 +1,49 @@
+H4Formal/EncodedSemantics.lean:176:64: warning: This simp argument is unused:
+  hc'
+
+Hint: Omit it from the simp argument list.
+  simp [encodedEntry, encodedRole, encode, decode, hm', h̵c̵'̵,̵ ̵hs', hostValue]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/EncodedSemantics.lean:195:64: warning: This simp argument is unused:
+  hr'
+
+Hint: Omit it from the simp argument list.
+  simp [encodedEntry, encodedRole, encode, decode, hm', h̵r̵'̵,̵ ̵hs', hostValue]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/EncodedSemantics.lean:202:30: warning: This simp argument is unused:
+  encodedVariableValue
+
+Hint: Omit it from the simp argument list.
+  simp [encodedEntry, e̵n̵c̵o̵d̵e̵d̵V̵a̵r̵i̵a̵b̵l̵e̵V̵a̵l̵u̵e̵,̵ ̵encode, hostValue]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/EncodedSemantics.lean:214:30: warning: This simp argument is unused:
+  encodedRole
+
+Hint: Omit it from the simp argument list.
+  simp [encodedEntry, e̵n̵c̵o̵d̵e̵d̵R̵o̵l̵e̵,̵ ̵encode, decode, hostValue]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/EncodedSemantics.lean:214:51: warning: This simp argument is unused:
+  decode
+
+Hint: Omit it from the simp argument list.
+  simp [encodedEntry, encodedRole, encode, d̵e̵c̵o̵d̵e̵,̵ ̵hostValue]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/EncodedSemantics.lean:216:30: warning: This simp argument is unused:
+  encodedRole
+
+Hint: Omit it from the simp argument list.
+  simp [encodedEntry, e̵n̵c̵o̵d̵e̵d̵R̵o̵l̵e̵,̵ ̵encode, decode, hostValue]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/EncodedSemantics.lean:216:51: warning: This simp argument is unused:
+  decode
+
+Hint: Omit it from the simp argument list.
+  simp [encodedEntry, encodedRole, encode, d̵e̵c̵o̵d̵e̵,̵ ̵hostValue]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

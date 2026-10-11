@@ -1,0 +1,123 @@
+\section{Order and block structure in detail}\label{sec:structure}
+This section records elementary consequences of the host definition
+that are useful when interpreting the certificate classification.
+The binary word of a node $(d,p)$ consists of the first $d$ bits in
+the length-$h$ binary expansion of an appropriate leaf label.
+An internal signed node is represented by the corresponding word,
+together with its sign.  The leaf at depth $h$ has a single type.
+
+\begin{lemma}[Tree comparison by words]\label{lem:wordorder}
+Take two distinct variable blocks of the same axis. If their node
+words have an incomparable prefix, their order is determined by the
+first bit on which they differ. If one word is a proper prefix of
+the other, the ancestor precedes the descendant precisely when its
+sign is the opening sign for that axis. The opening signs are minus
+for rows and plus for columns. If the two words agree, the blocks
+are the two signs at one internal node, and the opening block precedes
+the closing block.
+\end{lemma}
+\begin{proof}
+At any internal vertex the recursive row list has the form
+\[
+ R_d^-(p),\quad \text{left subtree},\quad
+ \text{right subtree},\quad R_d^+(p),
+\]
+whereas the column list exchanges the two signed blocks. If the
+words separate into the two different child subtrees, the left
+subtree precedes the right regardless of the signs within either.
+If one word names an ancestor of the other, the ancestor's opening
+block occurs before the descendant's entire subtree and its closing
+block after it. Finally, equal words can name distinct blocks only
+at an internal node with opposite signs; the displayed recursive
+lists place the opening sign before the closing sign. These three
+cases exhaust pairs of distinct variable blocks.
+\end{proof}
+
+\begin{proposition}[A uniform quotient principle]\label{prop:uniformquotient}
+Let $F$ be an $s\times t$ binary matrix with no repeated row
+signature and no repeated column signature. Let $M$ be any finite
+block-constant ordered binary matrix whose row blocks and column
+blocks are nonempty consecutive intervals. Then
+\[
+ N_F(M)=\sum_{(r,c)\in\mathcal Q_F(M)}
+      \prod_{i=1}^{s}|R_{r_i}|\prod_{j=1}^{t}|C_{c_j}|,
+\]
+where $\mathcal Q_F(M)$ consists of the increasing row-block and
+column-block tuples realizing the entries of $F$ on the quotient.
+Moreover, $M$ is $F$-free if and only if its quotient has no such
+tuple.
+\end{proposition}
+\begin{proof}
+If two chosen physical rows belonged to the same block, then they
+would have identical entries on every chosen column, contradicting
+the distinctness of the corresponding rows of $F$. The column
+argument is symmetric. It follows that each physical copy projects
+to a unique quotient tuple with strictly increasing block indices.
+Conversely, any tuple of quotient blocks realizing $F$ admits a
+physical copy by choosing one position from each participating
+block. Every such choice preserves the order, because the blocks
+are intervals; it also preserves all entries, because entries are
+block-constant. The choices are independent and their number is the
+product of the participating block sizes. Summing over the quotient
+tuples gives the identity and its freeness consequence.
+\end{proof}
+
+There are two independent hypotheses in Proposition~\ref{prop:uniformquotient}.
+The consecutive-interval requirement is responsible for preservation
+of the ordered embedding, while distinct row and column signatures
+ensure that the selected type tuples are strictly increasing.
+For patterns with repeated signatures one may have several physical
+rows in the same type, and a multiplicity formula requires binomial
+factors and within-block order. The simple product formula suffices
+for $H_4$ and for the general twin-free patterns considered in
+Appendix~\ref{app:smallwitness}.
+
+\subsection{Exact support signatures}
+For a mode $t$ and its two marker groups, write
+$\rho_1(t),\rho_2(t)$ for row-role predicates and
+$\kappa_1(t),\kappa_2(t)$ for column-role predicates.
+The marker rows of group $g$ have entry one against a non-marker
+column exactly when $\kappa_g(t)$ holds there. Similarly, marker
+columns of group $g$ have entry one against a non-marker row
+exactly when $\rho_g(t)$ holds.  The corner of a single mode is
+$J_2-I_2$, while the corner between different modes is zero.
+The parity index in the $W$ modes is therefore a genuine structural
+datum. It separates the two candidate child branches using only
+one bit, and it is recovered from the parity of the terminal leaf.
+
+\begin{lemma}[Propagation frames realize the prescribed order]
+\label{lem:framesorder}
+At every depth $1\le i\le h$ and for every node $p_i$ with parent
+$p_{i-1}$, the four row and column pairs displayed in
+Section~\ref{sec:distance} are increasing tuples on their respective
+axes. Their marker restrictions and their incidences with the dummy
+blocks agree with the top twelve entries of $H_4$.
+\end{lemma}
+\begin{proof}
+The first two selected positions are the two groups of one marker
+mode, both before the variable and dummy positions. The order of
+parent and child among variable rows is ancestor--descendant for
+minus and descendant--ancestor for plus; among columns it is the
+reverse. The first column in a $V$ frame is the column dummy,
+which precedes the tree. The second row in a $W$ frame is the row
+dummy, which follows it. Consequently the four increasing row and
+column tuples are exactly those displayed in the forcing table.
+The marker corner is the off-diagonal matrix $J_2-I_2$.
+Membership in the two row roles gives the lower-left identity,
+and membership in the two column roles gives the upper-right
+identity. The dummy incidences are one by the entry definition.
+The corresponding body entries may change under edits, yielding
+precisely the implications shown in the forcing table.
+\end{proof}
+
+\subsection{Where the two signs meet}
+At depths below $h$, plus and minus designate different physical
+row and column blocks even when they carry the same node label.
+Their diagonal entries can therefore consistently have opposite
+values. At the leaf level there is only one block $R_h(p)$ and only
+one block $C_h(p)$; the selected offsets are both zero. Thus the
+positive and negative inductive requirements apply to the same
+physical matrix cell, not simply to two equal labels. The
+identification is the final step required by the edit-distance
+argument. It also explains why the protected selection must use
+one common leaf $z=a\oplus b$ on both axes.

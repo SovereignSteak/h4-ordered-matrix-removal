@@ -1,0 +1,105 @@
+H4Formal/QuerySemantics.lean:217:26: warning: This simp argument is unused:
+  encode
+
+Hint: Omit it from the simp argument list.
+  simp [validBlock, e̵n̵c̵o̵d̵e̵,̵ ̵validPos, signCode, hd, hpl] at hb ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:217:34: warning: This simp argument is unused:
+  validPos
+
+Hint: Omit it from the simp argument list.
+  simp [validBlock, encode, v̵a̵l̵i̵d̵P̵o̵s,̵ ̵s̵ignCode, hd, hpl] at hb ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:217:44: warning: This simp argument is unused:
+  signCode
+
+Hint: Omit it from the simp argument list.
+  simp [validBlock, encode, validPos, s̵i̵g̵n̵C̵o̵d̵e̵,̵ ̵hd, hpl] at hb ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:224:26: warning: This simp argument is unused:
+  encode
+
+Hint: Omit it from the simp argument list.
+  simp [validBlock, e̵n̵c̵o̵d̵e̵,̵ ̵validPos, signCode, hd, hml] at hb ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:224:34: warning: This simp argument is unused:
+  validPos
+
+Hint: Omit it from the simp argument list.
+  simp [validBlock, encode, v̵a̵l̵i̵d̵P̵o̵s,̵ ̵s̵ignCode, hd, hml] at hb ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:224:44: warning: This simp argument is unused:
+  signCode
+
+Hint: Omit it from the simp argument list.
+  simp [validBlock, encode, validPos, s̵i̵g̵n̵C̵o̵d̵e̵,̵ ̵hd, hml] at hb ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:233:26: warning: This simp argument is unused:
+  encode
+
+Hint: Omit it from the simp argument list.
+  simp [validBlock, e̵n̵c̵o̵d̵e̵,̵ ̵validPos, signCode, hd, hlp, hlm] at hb ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:233:34: warning: This simp argument is unused:
+  validPos
+
+Hint: Omit it from the simp argument list.
+  simp [validBlock, encode, v̵a̵l̵i̵d̵P̵o̵s,̵ ̵s̵ignCode, hd, hlp, hlm] at hb ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:233:44: warning: This simp argument is unused:
+  signCode
+
+Hint: Omit it from the simp argument list.
+  simp [validBlock, encode, validPos, s̵i̵g̵n̵C̵o̵d̵e̵,̵ ̵hd, hlp, hlm] at hb ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:234:10: warning: This simp argument is unused:
+  validBlock
+
+Hint: Omit it from the simp argument list.
+  simp [v̵a̵l̵i̵d̵B̵l̵o̵c̵k̵,̵ ̵encode, validPos]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:258:34: warning: This simp argument is unused:
+  validPos
+
+Hint: Omit it from the simp argument list.
+  simp_all [decode, encode, v̵a̵l̵i̵d̵P̵o̵s̵,̵ ̵modeFromCode, hmode, hlevel]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:258:58: warning: This simp argument is unused:
+  hmode
+
+Hint: Omit it from the simp argument list.
+  simp_all [decode, encode, validPos, modeFromCode, hm̵o̵d̵e̵,̵ ̵h̵level]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:258:65: warning: This simp argument is unused:
+  hlevel
+
+Hint: Omit it from the simp argument list.
+  simp_all [decode, encode, validPos, modeFromCode, hmode,̵ ̵h̵l̵e̵v̵e̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:270:48: warning: This simp argument is unused:
+  hsign
+
+Hint: Omit it from the simp argument list.
+  simp_all [decode, encode, validPos,̵ ̵h̵s̵i̵g̵n̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+H4Formal/QuerySemantics.lean:275:42: warning: This simp argument is unused:
+  validPos
+
+Hint: Omit it from the simp argument list.
+  simp_all [decode, encode,̵ ̵v̵a̵l̵i̵d̵P̵o̵s̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

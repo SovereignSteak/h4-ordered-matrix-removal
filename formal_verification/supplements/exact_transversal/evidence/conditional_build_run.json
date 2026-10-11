@@ -1,0 +1,129 @@
+{
+  "status": "CONDITIONAL_TRANSVERSAL_VERIFIED",
+  "mode": "conditional",
+  "started_at_utc": "2026-10-10T16:08:09.787300+00:00",
+  "source_sha256": {
+    "ExactTransversal.lean": "85bfa8e125a5f0ba68121a8c806bf342b8fe20669c18bf1b8ef3bb6cc15dbb89",
+    "AuditConditional.lean": "dc019b216d622fb4bda0c03ea4122e48390ca24b64892a7452bec71cd89b6ae8",
+    "scripts/build_and_audit.py": "f42b921d68e4b87feb9ae8722d2f21f0ac481e37dcb7b9c31a0a8b3b9865f2e3"
+  },
+  "primary_root": "/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission",
+  "lean_sha256": "8fadc3ed92cc9decb94c96ee9c0876e91e03a3a5e69138f32114f02789e2766c",
+  "commands": [
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_exact_transversal_work/.lake/build/lib/lean/ExactTransversal.olean",
+        "ExactTransversal.lean"
+      ],
+      "started_at_utc": "2026-10-10T16:08:09.938077+00:00",
+      "log": "conditional_core.log",
+      "exit_code": 0,
+      "finished_at_utc": "2026-10-10T16:08:14.086876+00:00"
+    },
+    {
+      "argv": [
+        "/data/.toolchains/lean-4.24.0-linux/bin/lean",
+        "-j1",
+        "-s65536",
+        "-o",
+        "/data/h4_exact_transversal_work/.lake/build/lib/lean/AuditConditional.olean",
+        "AuditConditional.lean"
+      ],
+      "started_at_utc": "2026-10-10T16:08:14.087402+00:00",
+      "log": "conditional_audit.log",
+      "exit_code": 0,
+      "finished_at_utc": "2026-10-10T16:08:23.723314+00:00"
+    }
+  ],
+  "scope": "Separate supplement; incoming 550 primary files unchanged",
+  "LEAN_PATH": "/data/h4_exact_transversal_work/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/mathlib/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/plausible/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/importGraph/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/proofwidgets/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/aesop/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/Qq/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/batteries/.lake/build/lib/lean:/data/h4_strict_upgrade_2026-10-10/submission/Wang_Zinan_H4_Independent_Submission/.lake/packages/Cli/.lake/build/lib/lean",
+  "lean_version": "Lean (version 4.24.0, x86_64-unknown-linux-gnu, commit 797c613eb9b6d4ec95db23e3e00af9ac6657f24b, Release)",
+  "finished_at_utc": "2026-10-10T16:08:23.791989+00:00",
+  "axiom_audit_sha256": "6b96bcbf3a995d9cc9d383c802e312320405b0351bb89cd533bcb60e0fd77c42",
+  "primary_imports": {
+    "H4Formal/Pattern.lean": {
+      "source_sha256": "8c2111374470bd443e0654867ffa93da4d321d420e58a067ee614e40569eb6c7",
+      "olean_sha256": "35bd6da9457b10d7b01d8b397423421ecb8f2fe892a666946e696ea4134a2abf"
+    },
+    "H4Formal/Host.lean": {
+      "source_sha256": "bc6d6e36303ff72936664974bbe759d6b72023bb67d4edff4a8cfb9e9d9c944b",
+      "olean_sha256": "200a5d799754f087819b9eb3e7564af99f8d735c734acc0cf4e90ef58d868e3c"
+    },
+    "H4Formal/Transfer.lean": {
+      "source_sha256": "caaf78276df037b8d4a652afddf4a8bb0b41400a0840032b526b874505e0e01d",
+      "olean_sha256": "7bedf0c6246872d320f03a23faab31dd5d991134d097fdd1ede5c49614eef504"
+    },
+    "H4Formal/ValidHost.lean": {
+      "source_sha256": "e2ef9cad6e92bf951a2bd91e1bfd333e22e97c4d5bc68ea99f4bfb5cf698e9ed",
+      "olean_sha256": "86aea538372f8ef9cb1252143b63de9e62d7f25db535c95323c39e315ca1bd14"
+    },
+    "H4Formal/Matrix.lean": {
+      "source_sha256": "448ab036a8985b40fba708a4f506ff1d06c5d2f1078d7f4951b543dae716f8f4",
+      "olean_sha256": "9caf356246eeada1d49802e3434d217bcd78875de09eaae00eb7f384458f1ce9"
+    },
+    "H4Formal/PhysicalHost.lean": {
+      "source_sha256": "d6518dcadc5d9b2ba92e9c26c870a9dae74835d213f4067894057f548be2631b",
+      "olean_sha256": "2229484d16e62a378afd7eb2c05cce5889d15de30bb0a17c7e3287e7a9a3859a"
+    },
+    "H4Formal/HostSize.lean": {
+      "source_sha256": "4815b0efad137558ee292d31fddcd65c8559c81eb601ba6f35779d278aca11cc",
+      "olean_sha256": "6ce99a31bbb437a2aeb237b5e7cb6f15ccd927ac3a7277b707bf5e25a2101ae1"
+    },
+    "H4Formal/ArithmeticHost.lean": {
+      "source_sha256": "6bfee3c954c161fac19ee6bddac7995999aefcad3c3da43415007e30fed1f41e",
+      "olean_sha256": "f6be8d7214fbafed62d576263f55c4c8eba61bf2ca0a279ddaefc014b1139290"
+    },
+    "H4Formal/PhysicalOrder.lean": {
+      "source_sha256": "41bcdeaa58f087471cc58ab07eb387dc87b83538760108074248b4538b3c0f6b",
+      "olean_sha256": "8f99f88cdc7a1478b2cd736b702940c4c404a13c044605b9e46bbef5f323ec02"
+    },
+    "H4Formal/CanonicalEdits.lean": {
+      "source_sha256": "1482a4311728b85f8829ae5a3049355b9c97ec904349ac5437c86be6f1670223",
+      "olean_sha256": "aed4e70ff53e45b1183a5abba97fe26c46525fed72d27b5659df67169ad3610a"
+    },
+    "H4Formal/StandardMatrix.lean": {
+      "source_sha256": "e6663a8ce921d9822b209f8bf695db0984e47abe587ca8e6db01120eff2a2018",
+      "olean_sha256": "c7c418ea471954a786185f03f5edf6765e1974b1f2aa1ca79113b20a38a72ea6"
+    },
+    "H4Formal/TerminalForms.lean": {
+      "source_sha256": "ae4a518329ead438c09ef93bac54e2cf71a554b65856fa7287bb75cbfde852ca",
+      "olean_sha256": "1b86b31ac6c69b3f250281bc711670e747c31cb328a67a0ef7b6c89338b38a05"
+    },
+    "H4Formal/TerminalCount.lean": {
+      "source_sha256": "7e9927b40c99f8f57e0d03b9d6f0dd5597ef4e2f40ac75e7b22ca364cac95268",
+      "olean_sha256": "339c2f80c4ecf75a1e0baf863a19d7b2ce569dd06287f21867225bba80e6af68"
+    },
+    "H4Formal/CopyFibres.lean": {
+      "source_sha256": "7893454db117703f7be05b81e88e5d0f2dde689854d17dfb27e064a1797835bb",
+      "olean_sha256": "57ba7d8d6043e45f6546f864e58cc8896a67c192016296377a98c43547629c7c"
+    },
+    "H4Formal/TerminalDecode.lean": {
+      "source_sha256": "85a62ed81015f68200e92e0e68df8a80bd7501b3d89a5d653af85513d22b1b67",
+      "olean_sha256": "43b1353b505c614ab097d67e097fddb106b73ed8a2396e66e438a848e6723f0e"
+    },
+    "H4Formal/GlobalCounting.lean": {
+      "source_sha256": "6a31f4e606f72a0fc527691ed551354856423cc695956f435d93d92a8f5601f0",
+      "olean_sha256": "35611902b871e9e7143e80e7ffb4f465c845144cfd1424616a8c05e74f80b999"
+    },
+    "H4Formal/Gadgets.lean": {
+      "source_sha256": "3cb95a7d9097805a77feb5bccaf41ed0f4501ad573fb2db43a0652587f14fdea",
+      "olean_sha256": "9522fad8ecd80840283f3190e90061e5dccbb4a78024d2653433950da3e76adf"
+    },
+    "H4Formal/FiniteAvoidance.lean": {
+      "source_sha256": "cf460fcdcd1df025400213e61609542f2b15de915037257d9824eea14f6a0646",
+      "olean_sha256": "5baa273b587e86a578e56d3a810c7486f631b9e467f7015338ec732cfdd0d265"
+    }
+  },
+  "compiled_artifacts_sha256": {
+    ".lake/build/lib/lean/ExactTransversal.olean": "445d62c2e4382740910af038ea6b065b0a3b2797864a039047295c6f11ec1467",
+    ".lake/build/lib/lean/AuditConditional.olean": "f8c14fc53303e3318cfb32a55c997189549a199e2821ce6dbb9ae04bb01c247a"
+  },
+  "declarations_audited": 47,
+  "theorems_audited": 30,
+  "exhaustion_discharged": false,
+  "primary_build_report_sha256": "c07a91acfe1c9027b8370002a0588c6fd198f7d21e0278711f519c2ae5592e8b"
+}

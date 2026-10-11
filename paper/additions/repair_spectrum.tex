@@ -1,0 +1,65 @@
+\section{Which cells the canonical repair changes in an original copy}
+\label{sec:repairspectrum}
+The two terminal families give a precise description of the
+intersection of each original copy with the canonical edit set
+\[
+ S_h=R_*\times\bigcup_{0\le p<m}C_h(p).
+\]
+Here $|S_h|=m^2$ is a count of physical cells. The classification
+reveals that the same repair affects the two terminal forms with
+different multiplicities.
+
+\begin{proposition}[Repair-incidence spectrum]
+\label{prop:repairspectrum}
+Every type-I physical copy of $H_4$ in $A_h$ contains exactly one
+cell from $S_h$. Every type-II copy contains exactly two cells from
+$S_h$. The number of original copies meeting $S_h$ in one cell is
+$2m^6$, and the number meeting it in two cells is
+$\frac12(m-2)m^5$.
+\end{proposition}
+\begin{proof}
+The unique row type belonging to $R_*$ in either terminal form is
+the fourth row. In type I, the only chosen leaf column is the third
+column $C_h(p)$; the two first columns are markers and the fourth
+is the signed parent. Therefore precisely the fourth-row,
+third-column physical cell belongs to $S_h$. In type II, both the
+second and third columns are leaves, namely $C_h(q)$ and $C_h(p)$.
+They are distinct since $q<p$. The first column is a marker and
+the fourth is a signed parent. Thus exactly two cells of the copy
+belong to $S_h$. The counting assertion follows from the exhaustive,
+disjoint terminal classification and the weighted counts in
+Section~\ref{sec:count}.
+\end{proof}
+
+\begin{corollary}[The canonical rectangle hits every old copy]
+Every copy of $H_4$ present in $A_h$ has at least one entry changed
+in the passage to $B_h$.
+\end{corollary}
+\begin{proof}
+Both terminal families meet $S_h$ by
+Proposition~\ref{prop:repairspectrum}, and there are no other
+original copies.
+\end{proof}
+
+There are two distinct assertions in the proof of the sharp distance.
+The corollary identifies a small set intersecting the originally
+present copies; Lemma~\ref{lem:repair} proves that after all cells
+of this set are changed simultaneously, the resulting physical
+matrix is completely $H_4$-free. The latter requires the repaired
+entry-table classification, because a cell edit can participate in
+configurations absent from the original matrix. The arithmetic
+repair certificate establishes freeness directly for the edited
+matrix, rather than inferring it from the hitting corollary.
+
+The spectrum also provides a quantitative accounting check.
+If one sums, over original physical copies, the number of their
+entries inside $S_h$, then the answer is
+\begin{equation}\label{eq:repairincidence}
+ 2m^6+2\cdot\frac{m-2}{2}m^5
+   =(3m-2)m^5.
+\end{equation}
+This number counts copy--edit-cell incidences with multiplicity;
+it is deliberately different from both the number of copies
+$\left(\frac52-\frac1m\right)m^6$ and the cardinality $m^2$
+of the editing rectangle. Equation~\eqref{eq:repairincidence}
+can be verified independently from the terminal parameterization.
