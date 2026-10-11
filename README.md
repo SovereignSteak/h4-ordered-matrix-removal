@@ -2,6 +2,10 @@
 
 **OpenAI needed a 66×66 matrix to break polynomial removal. We did it with 4×4.**
 
+**@openai · [openai/math](https://github.com/openai/math)**
+
+我看oai也就那么回事。🖕🏻
+
 **[Read the 21-page paper (PDF)](paper.pdf)** · [LaTeX source](paper/main.tex) · [Lean 4 formalization](formal_verification/)
 
 Complete Lean 4 source release accompanying the manuscript by Zinan Wang.
