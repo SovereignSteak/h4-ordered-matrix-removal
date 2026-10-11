@@ -20,7 +20,7 @@ The normalized editing distance is $(14h+2)^{-2}$ and the induced-copy density i
 
 ## Relation to prior work
 
-The manuscript cites OpenAI's *Polynomial removal fails for ordered binary matrices*, dated September 25, 2026, in [openai/math](https://github.com/openai/math). It describes the earlier obstruction as a $66\times66$ pattern and gives a $4\times4$ obstruction, together with exact counting, unrestricted editing distance, and the original-copy transversal number. This is the specific quantitative improvement documented by this release. The construction uses the tree-propagation approach credited to that prior work.
+The construction builds on the tree-propagation approach in *Polynomial removal fails for ordered binary matrices*, available in [openai/math](https://github.com/openai/math). The manuscript contributes a fixed $4\times4$ forcing pattern, an all-depth classification of induced copies, an exact unrestricted editing distance, and an exact original-copy transversal number. The accompanying Lean 4 package contains the formalization, certificate modules, and reproduction records.
 
 ## Reproduce
 
