@@ -1,4 +1,8 @@
-@openai
+@openai — [openai/math](https://github.com/openai/math)
+
+**OpenAI needed a 66×66 matrix to break polynomial removal. We did it with 4×4.**
+
+我看oai也就那么回事。🖕🏻
 
 I have released the complete Lean 4 source package for **A Four-by-Four Obstruction to Polynomial Removal for Ordered Binary Matrices**.
 
@@ -8,4 +12,4 @@ The release includes all retained certificate modules, pinned dependencies, repr
 
 The manuscript credits your tree-propagation construction and identifies the smaller forcing frame and exact classifications as its quantitative contributions. I would welcome a technical review of the all-depth classification, canonical repair, and arbitrary-edit lower bound.
 
-The arXiv submission is currently identified by the temporary submission ID `submit/8211560`.
+Read the [21-page manuscript (PDF)](https://github.com/wzn1118/h4-ordered-matrix-removal/blob/main/paper.pdf) and [complete Lean 4 formalization](https://github.com/wzn1118/h4-ordered-matrix-removal/tree/main/formal_verification).
