@@ -1,0 +1,52 @@
+name: Import complete research source
+on:
+  push:
+    paths:
+      - '.release-staging/**'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Verify archive and extract source
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, zipfile, sys
+          repo = Path.cwd()
+          pieces = sorted((repo / '.release-staging').glob('part-*'))
+          assert len(pieces) == 16, f"Expected 16 parts; got {len(pieces)}"
+          payload = b''.join(p.read_bytes() for p in pieces)
+          expected = '313bccc1db8f71e7d4f3f96c32cc9431397c31e6ebe0f19c0e8700849407c54a'
+          actual = hashlib.sha256(payload).hexdigest()
+          assert actual == expected, (actual, expected)
+          archive = repo / '.release-staging' / 'complete-release.zip'
+          archive.write_bytes(payload)
+          with zipfile.ZipFile(archive) as z:
+              files = [n for n in z.namelist() if not n.endswith('/')]
+              assert len(files) == 678, f"Expected 678 files, got {len(files)}"
+              assert len([n for n in files if n.endswith('.lean')]) == 589
+              assert all(not n.startswith('/') and '..' not in Path(n).parts for n in files)
+              assert z.testzip() is None
+              for member in z.infolist():
+                  assert not (member.external_attr >> 16) & 0o170000 == 0o120000, "No symbolic links allowed"
+              z.extractall(repo)
+          print(f"Restored {len(files)} files, including 589 Lean modules. SHA256: {actual}")
+          PY
+      - name: Commit fully unpacked sources
+        shell: bash
+        run: |
+          rm -rf .release-staging
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish complete H4 Lean 4 formal verification and manuscript source"
+            git push origin HEAD:main
+          fi
