@@ -1,10 +1,6 @@
 # A Four-by-Four Obstruction to Polynomial Removal for Ordered Binary Matrices
 
-**OpenAI needed a 66×66 matrix to break polynomial removal. We did it with 4×4.**
-
-**@openai · [openai/math](https://github.com/openai/math)**
-
-我看oai也就那么回事。🖕🏻
+This manuscript presents a fixed \(4\times4\) ordered binary pattern for which polynomial induced removal bounds fail, together with exact counting identities, unrestricted editing-distance bounds, and a Lean 4 verification package.
 
 **[Read the 21-page paper (PDF)](paper.pdf)** · [LaTeX source](paper/main.tex) · [Lean 4 formalization](formal_verification/)
 
