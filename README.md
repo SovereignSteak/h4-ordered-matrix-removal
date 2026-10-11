@@ -1,5 +1,9 @@
 # A Four-by-Four Obstruction to Polynomial Removal for Ordered Binary Matrices
 
+**OpenAI needed a 66×66 matrix to break polynomial removal. We did it with 4×4.**
+
+**[Read the 21-page paper (PDF)](paper.pdf)** · [LaTeX source](paper/main.tex) · [Lean 4 formalization](formal_verification/)
+
 Complete Lean 4 source release accompanying the manuscript by Zinan Wang.
 
 ## Results
@@ -37,7 +41,7 @@ The pinned dependencies are recorded in `lake-manifest.json`. The script builds 
 
 ## Manuscript
 
-`paper/main.tex` is the unmodified supplied manuscript. Compile from `paper/` with pdfLaTeX. The source currently identifies Zinan Wang as its author. arXiv submission metadata also names Xinhao Yang; the manuscript author line should be synchronized with the authors' agreed attribution before resubmission.
+[`paper.pdf`](paper.pdf) is the 21-page compiled manuscript built directly from the unmodified [`paper/main.tex`](paper/main.tex) with pdfLaTeX. To rebuild, run `latexmk -pdf main.tex` in `paper/`. The source currently identifies Zinan Wang as its author. arXiv submission metadata also names Xinhao Yang; the manuscript author line should be synchronized with the authors' agreed attribution before resubmission.
 
 ## Release contents
 
