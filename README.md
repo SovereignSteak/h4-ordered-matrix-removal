@@ -4,7 +4,7 @@ This manuscript presents a fixed \(4\times4\) ordered binary pattern for which p
 
 **[Read the 21-page paper (PDF)](paper.pdf)** · [LaTeX source](paper/main.tex) · [Lean 4 formalization](formal_verification/)
 
-Complete Lean 4 source release accompanying the manuscript by Zinan Wang.
+Authors: **Zinan Wang** and **Xinhao Yang** (University of Southern California, USC). The complete Lean 4 source release accompanies the joint manuscript.
 
 ## Results
 
@@ -41,7 +41,7 @@ The pinned dependencies are recorded in `lake-manifest.json`. The script builds 
 
 ## Manuscript
 
-[`paper.pdf`](paper.pdf) is the 21-page compiled manuscript built directly from the unmodified [`paper/main.tex`](paper/main.tex) with pdfLaTeX. To rebuild, run `latexmk -pdf main.tex` in `paper/`. The source currently identifies Zinan Wang as its author. arXiv submission metadata also names Xinhao Yang; the manuscript author line should be synchronized with the authors' agreed attribution before resubmission.
+[`paper.pdf`](paper.pdf) is the compiled manuscript generated from [`paper/main.tex`](paper/main.tex) using pdfLaTeX. The author line and PDF metadata list **Zinan Wang** and **Xinhao Yang (University of Southern California)**. To rebuild, run `latexmk -pdf main.tex` in `paper/` and copy the generated `paper/main.pdf` to the repository root as `paper.pdf`. Author changes in this GitHub repository do not automatically update the already-public arXiv version; any arXiv revision must be submitted separately.
 
 ## Release contents
 
