@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this manuscript or its verification files, please cite the article below."
+title: "A Four-by-Four Obstruction to Polynomial Removal for Ordered Binary Matrices"
+authors:
+  - family-names: Wang
+    given-names: Zinan
+  - family-names: Yang
+    given-names: Xinhao
+    affiliation: "University of Southern California"
+url: "https://arxiv.org/abs/2610.15370"
+repository-code: "https://github.com/wzn1118/h4-ordered-matrix-removal"
+preferred-citation:
+  type: article
+  title: "A Four-by-Four Obstruction to Polynomial Removal for Ordered Binary Matrices"
+  authors:
+    - family-names: Wang
+      given-names: Zinan
+    - family-names: Yang
+      given-names: Xinhao
+      affiliation: "University of Southern California"
+  year: 2026
+  url: "https://github.com/wzn1118/h4-ordered-matrix-removal/blob/main/paper.pdf"
