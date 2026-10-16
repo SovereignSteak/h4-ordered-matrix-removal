@@ -2,7 +2,7 @@
 
 This manuscript presents a fixed \(4\times4\) ordered binary pattern for which polynomial induced removal bounds fail, together with exact counting identities, unrestricted editing-distance bounds, and a Lean 4 verification package.
 
-**[Read the 21-page paper (PDF)](paper.pdf)** · [LaTeX source](paper/main.tex) · [Lean 4 formalization](formal_verification/)
+**[Read the 21-page paper (PDF)](paper.pdf)** · [LaTeX source](paper/main.tex) · [Lean 4 formalization](formal_verification/) · [Citation metadata](CITATION.cff)
 
 Authors: **Zinan Wang** and **Xinhao Yang** (University of Southern California, USC). The complete Lean 4 source release accompanies the joint manuscript.
 
