@@ -1,0 +1,39 @@
+name: Independent pinned H4 Lean audit
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL || true
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Checkout exact audited source
+        run: |
+          git init --quiet work/source
+          git -C work/source remote add origin https://github.com/wzn1118/h4-ordered-matrix-removal.git
+          git -C work/source fetch --quiet --depth=1 origin 8c503f7a7a0f42c53621dcd0bdaf753e2580aa3e
+          git -C work/source checkout --quiet --detach FETCH_HEAD
+          test "$(git -C work/source rev-parse HEAD)" = 8c503f7a7a0f42c53621dcd0bdaf753e2580aa3e
+      - name: Rebuild primary library and both supplements
+        working-directory: work/source/formal_verification
+        run: bash verify_all.sh
+      - name: Check pattern, quantifiers and axioms
+        working-directory: work/source/formal_verification
+        run: |
+          lake env lean "$GITHUB_WORKSPACE/.github/lean/AuditScope.lean" | tee audit_scope.out
+          grep -q 'AUDIT_SCOPE=passed' audit_scope.out
+          ! grep -q sorryAx audit_scope.out
+      - name: Replay capstone through Lean kernel
+        working-directory: work/source/formal_verification
+        run: lake env leanchecker -v H4Formal.GlobalTheorems
